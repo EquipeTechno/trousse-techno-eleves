@@ -470,6 +470,46 @@
         .kbd-tooltip canvas { width: 100%; height: auto; display: block; border-radius: 6px; }
         .kbd-tooltip-label { color: #6b6888; font-size: 0.72rem; text-align: center; margin-top: 6px; font-family: 'JetBrains Mono', monospace; }
 
+
+        /* ── DIFFICULTY FILTER ── */
+        .diff-pill {
+            cursor: pointer;
+            transition: all 0.2s ease;
+            user-select: none;
+        }
+        .diff-pill:hover { transform: translateY(-2px); }
+        .diff-pill.active-filter {
+            transform: scale(1.08);
+            box-shadow: 0 0 0 2px currentColor;
+        }
+        .diff-pill.filter-all {
+            border-color: rgba(255,255,255,0.35); color: rgba(255,255,255,0.85);
+            background: rgba(255,255,255,0.1);
+        }
+        .diff-pill.filter-all.active-filter {
+            background: rgba(255,255,255,0.2);
+            box-shadow: 0 0 0 2px rgba(255,255,255,0.5);
+        }
+        /* hidden-by-filter: card is hidden but its parent grid stays */
+        .card.hidden-filter,
+        .highlight-block.hidden-filter,
+        .digitale-block.hidden-filter,
+        .powertoys-block.hidden-filter,
+        .workflow.hidden-filter,
+        .tips-section.hidden-filter,
+        .links-block.hidden-filter,
+        .feedback-section.hidden-filter {
+            display: none !important;
+        }
+        /* section collapse when all cards hidden */
+        .section-block.all-hidden > .cards-grid { display: none; }
+        .section-block.all-hidden > .section-header,
+        .section-block.all-hidden > .section-desc { opacity: 0.35; pointer-events: none; }
+        .filter-empty-msg {
+            text-align: center; padding: 2rem; color: var(--text-dim);
+            font-size: 1rem; display: none;
+        }
+        .section-block.all-hidden .filter-empty-msg { display: block; }
         /* ── POWERTOYS BLOCK ── */
         .powertoys-block {
             background: linear-gradient(135deg, #1a1508 0%, #201c0a 100%);
@@ -507,11 +547,13 @@
         <p class="subtitle">Des outils, raccourcis et astuces pour réussir ton cégep avec la tech — de zéro à avancé.</p>
         <div class="hero-meta">Conçu par le service du développement pédagogique · Cégep Gérald-Godin</div>
 
-        <div class="difficulty-legend">
-            <div class="diff-pill base">🟢 De base</div>
-            <div class="diff-pill inter">🟡 Intermédiaire</div>
-            <div class="diff-pill adv">🔴 Avancé</div>
+        <div class="difficulty-legend" id="diff-filter">
+            <div class="diff-pill filter-all active-filter" onclick="filterDiff('all')" title="Tout afficher">✨ Tout afficher</div>
+            <div class="diff-pill base" onclick="filterDiff('base')" title="Afficher seulement les trucs de base">🟢 De base</div>
+            <div class="diff-pill inter" onclick="filterDiff('inter')" title="Afficher seulement les trucs intermédiaires">🟡 Intermédiaire</div>
+            <div class="diff-pill adv" onclick="filterDiff('adv')" title="Afficher seulement les trucs avancés">🔴 Avancé</div>
         </div>
+        <p style="font-size:0.78rem;opacity:0.55;margin-top:0.75rem;text-align:center;">Clique sur un niveau pour filtrer les astuces</p>
     </div>
 </div>
 
@@ -533,8 +575,8 @@
                 Suite M365 étudiante
             </a>
             <a class="toc-item" href="#moodle">
-                <img src="https://www.google.com/s2/favicons?domain=moodle.org&sz=16" alt="Moodle" style="width:16px;height:16px;">
-                Moodle &amp; Omnivox
+                <img src="https://play-lh.googleusercontent.com/y2JS5BQN_8g3WAjpohJRX3cThSQW_kHxDjyyAD2DpeGM12vkOX75Ie31GrhVVPZZRjI=w240-h480-rw" alt="Omnivox" style="width:16px;height:16px;border-radius:3px;">
+                Omnivox (Léa) &amp; Moodle
             </a>
             <a class="toc-item" href="#focus">🧘 Concentration &amp; gestion du temps</a>
             <a class="toc-item" href="#securite">🔒 Sécurité &amp; vie privée</a>
@@ -561,7 +603,7 @@
 
         <div class="cards-grid">
 
-            <div class="card">
+            <div class="card" data-diff="base">
                 <div class="diff-badge base">🟢 De base</div>
                 <div class="card-header">
                     <div class="card-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Microsoft_OneDrive_Icon_%282025_-_present%29.svg" style="width:2rem;height:2rem;" alt="OneDrive"></div>
@@ -577,7 +619,7 @@
                 </div>
             </div>
 
-            <div class="card">
+            <div class="card" data-diff="base">
                 <div class="diff-badge base">🟢 De base</div>
                 <div class="card-header">
                     <div class="card-icon">📄</div>
@@ -594,7 +636,7 @@
                 </div>
             </div>
 
-            <div class="card">
+            <div class="card" data-diff="base">
                 <div class="diff-badge base">🟢 De base</div>
                 <div class="card-header">
                     <div class="card-icon">📋</div>
@@ -609,7 +651,7 @@
                 </div>
             </div>
 
-            <div class="card">
+            <div class="card" data-diff="base">
                 <div class="diff-badge base">🟢 De base</div>
                 <div class="card-header">
                     <div class="card-icon">📸</div>
@@ -624,7 +666,7 @@
                 </div>
             </div>
 
-            <div class="card">
+            <div class="card" data-diff="base">
                 <div class="diff-badge base">🟢 De base</div>
                 <div class="card-header">
                     <div class="card-icon">🔤</div>
@@ -639,7 +681,7 @@
                 </div>
             </div>
 
-            <div class="card">
+            <div class="card" data-diff="base">
                 <div class="diff-badge base">🟢 De base</div>
                 <div class="card-header">
                     <div class="card-icon">🎤</div>
@@ -651,7 +693,7 @@
                 <p class="card-description">Dicte du texte n'importe où dans Windows : Word, Moodle, Teams, un formulaire web. Pratique pour prendre des notes rapidement ou rédiger une ébauche sans toucher le clavier. Fonctionne en français.</p>
             </div>
 
-            <div class="card">
+            <div class="card" data-diff="inter">
                 <div class="diff-badge inter">🟡 Intermédiaire</div>
                 <div class="card-header">
                     <div class="card-icon">💬</div>
@@ -666,7 +708,7 @@
                 </div>
             </div>
 
-            <div class="card">
+            <div class="card" data-diff="inter">
                 <div class="diff-badge inter">🟡 Intermédiaire</div>
                 <div class="card-header">
                     <div class="card-icon">🪟</div>
@@ -681,7 +723,7 @@
                 </div>
             </div>
 
-            <div class="card">
+            <div class="card" data-diff="inter">
                 <div class="diff-badge inter">🟡 Intermédiaire</div>
                 <div class="card-header">
                     <div class="card-icon">🗂️</div>
@@ -717,7 +759,7 @@
 
         <div class="cards-grid">
 
-            <div class="card">
+            <div class="card" data-diff="base">
                 <div class="diff-badge base">🟢 De base</div>
                 <div class="card-header">
                     <div class="card-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/3/34/Microsoft_OneNote_Icon_%282025_-_present%29.svg" alt="OneNote" style="width:2rem;height:2rem;"></div>
@@ -730,7 +772,7 @@
                 </div>
             </div>
 
-            <div class="card">
+            <div class="card" data-diff="base">
                 <div class="diff-badge base">🟢 De base</div>
                 <div class="card-header">
                     <div class="card-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6e/Microsoft_To-Do_icon.svg" alt="To Do" style="width:2rem;height:2rem;"></div>
@@ -743,7 +785,7 @@
                 </div>
             </div>
 
-            <div class="card">
+            <div class="card" data-diff="base">
                 <div class="diff-badge base">🟢 De base</div>
                 <div class="card-header">
                     <div class="card-icon"><img src="https://upload.wikimedia.org/wikipedia/fr/6/66/Logo_Microsoft_Teams_%282025%29.svg" alt="Teams" style="width:2rem;height:2rem;"></div>
@@ -756,7 +798,7 @@
                 </div>
             </div>
 
-            <div class="card">
+            <div class="card" data-diff="inter">
                 <div class="diff-badge inter">🟡 Intermédiaire</div>
                 <div class="card-header">
                     <div class="card-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/e/e8/Microsoft_Office_Word_%282025%E2%80%93present%29.svg" alt="Word" style="width:2rem;height:2rem;"></div>
@@ -771,7 +813,7 @@
                 </div>
             </div>
 
-            <div class="card">
+            <div class="card" data-diff="inter">
                 <div class="diff-badge inter">🟡 Intermédiaire</div>
                 <div class="card-header">
                     <div class="card-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Microsoft_OneDrive_Icon_%282025_-_present%29.svg" alt="OneDrive" style="width:2rem;height:2rem;"></div>
@@ -783,7 +825,7 @@
                 </div>
             </div>
 
-            <div class="card">
+            <div class="card" data-diff="inter">
                 <div class="diff-badge inter">🟡 Intermédiaire</div>
                 <div class="card-header">
                     <div class="card-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/e/e8/Microsoft_Office_Word_%282025%E2%80%93present%29.svg" alt="Word" style="width:2rem;height:2rem;"></div>
@@ -795,7 +837,7 @@
                 </div>
             </div>
 
-            <div class="card">
+            <div class="card" data-diff="inter">
                 <div class="diff-badge inter">🟡 Intermédiaire</div>
                 <div class="card-header">
                     <div class="card-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Microsoft_OneDrive_Icon_%282025_-_present%29.svg" alt="OneDrive" style="width:2rem;height:2rem;"></div>
@@ -807,7 +849,7 @@
                 </div>
             </div>
 
-            <div class="card">
+            <div class="card" data-diff="inter">
                 <div class="diff-badge inter">🟡 Intermédiaire</div>
                 <div class="card-header">
                     <div class="card-icon">
@@ -822,7 +864,7 @@
                 </div>
             </div>
 
-            <div class="card">
+            <div class="card" data-diff="adv">
                 <div class="diff-badge adv">🔴 Avancé</div>
                 <div class="card-header">
                     <div class="card-icon"><img src="https://upload.wikimedia.org/wikipedia/fr/0/02/Microsoft_365_Copilot.svg" alt="Copilot" style="width:2rem;height:2rem;"></div>
@@ -845,7 +887,7 @@
     ============================================= -->
     <div class="highlight-block antidote-block" style="margin-bottom:3rem;">
         <div style="display:flex;align-items:center;gap:1.5rem;margin-bottom:1.5rem;flex-wrap:wrap;">
-            <div style="font-size:3rem;">🔮</div>
+            <img src="https://www.druide.com/user/themes/druide/build/images/accueil/fiole.png" alt="Antidote" style="width:60px;height:60px;object-fit:contain;" onerror="this.style.display='none'">
             <div>
                 <h2 style="font-family:'Syne',sans-serif;font-size:2rem;color:#c864ff;margin-bottom:0.25rem;">Antidote — ton correcteur professionnel</h2>
                 <p style="color:#9b50cc;font-size:1.05rem;">Correcteur, dictionnaire et guide linguistique — disponible au Cégep</p>
@@ -865,7 +907,7 @@
                 <p style="color:#9b50cc;font-size:0.92rem;line-height:1.6;">Antidote s'intègre directement dans Word, et une extension permet de corriger dans les navigateurs. Un clic depuis Word suffit à lancer la correction complète du document.</p>
             </div>
         </div>
-        <button class="btn" style="background:rgba(200,100,255,0.2);color:#c864ff;border:1px solid rgba(200,100,255,0.3);font-weight:600;" onclick="alert('Antidote est disponible sur les ordinateurs des laboratoires et bibliothèques du Cégep.\n\nPour l\'utiliser sur ton portable :\n• Vérifie si une licence étudiante est disponible via le Service informatique du Cégep\n• Sinon, utilise les postes de la bibliothèque pour tes corrections importantes\n\nDans Word avec Antidote installé :\nOnglet Antidote → Corriger (ou Shift+F7 si configuré ainsi)')">Accès et licences</button>
+        <button class="btn" style="background:rgba(200,100,255,0.2);color:#c864ff;border:1px solid rgba(200,100,255,0.3);font-weight:600;" onclick="alert('Antidote est disponible sur les ordinateurs des laboratoires et de la bibliothèque du Cégep.\n\nPour accéder à Antidote :\n• Utilise les postes de la bibliothèque ou des laboratoires pour les corrections importantes\n• Demande au comptoir de la bibliothèque si une licence étudiante est disponible\n\nDans Word avec Antidote installé :\nOnglet Antidote → Corriger (ou Shift+F7 si configuré ainsi)')">Où accéder à Antidote?</button>
     </div>
 
 
@@ -876,14 +918,14 @@
         <div class="section-header">
             <div class="section-icon">🎓</div>
             <div>
-                <h2>Moodle &amp; Omnivox</h2>
+                <h2>Omnivox (Léa) &amp; Moodle</h2>
             </div>
         </div>
-        <p class="section-desc">Moodle est ta plateforme de cours en ligne. Omnivox gère ton dossier étudiant. Voici comment naviguer efficacement dans ces deux outils essentiels.</p>
+        <p class="section-desc">Omnivox (Léa) est ton portail étudiant officiel — agenda, notes, horaire, MIO. Moodle est une plateforme que certains profs utilisent pour partager des ressources de cours. Voici comment tirer le meilleur de ces deux outils.</p>
 
         <div class="cards-grid">
 
-            <div class="card">
+            <div class="card" data-diff="base">
                 <div class="diff-badge base">🟢 De base</div>
                 <div class="card-header">
                     <div class="card-icon"><img src="https://www.google.com/s2/favicons?domain=moodle.org&sz=32" alt="Moodle" style="width:2rem;height:2rem;border-radius:6px;"></div>
@@ -896,7 +938,7 @@
                 </div>
             </div>
 
-            <div class="card">
+            <div class="card" data-diff="base">
                 <div class="diff-badge base">🟢 De base</div>
                 <div class="card-header">
                     <div class="card-icon">📅</div>
@@ -908,7 +950,7 @@
                 </div>
             </div>
 
-            <div class="card">
+            <div class="card" data-diff="base">
                 <div class="diff-badge base">🟢 De base</div>
                 <div class="card-header">
                     <div class="card-icon"><img src="https://play-lh.googleusercontent.com/y2JS5BQN_8g3WAjpohJRX3cThSQW_kHxDjyyAD2DpeGM12vkOX75Ie31GrhVVPZZRjI=w240-h480-rw" alt="Omnivox" style="width:2rem;height:2rem;border-radius:6px;"></div>
@@ -921,7 +963,7 @@
                 </div>
             </div>
 
-            <div class="card">
+            <div class="card" data-diff="inter">
                 <div class="diff-badge inter">🟡 Intermédiaire</div>
                 <div class="card-header">
                     <div class="card-icon"><img src="https://www.google.com/s2/favicons?domain=moodle.org&sz=32" alt="Moodle" style="width:2rem;height:2rem;border-radius:6px;"></div>
@@ -933,7 +975,7 @@
                 </div>
             </div>
 
-            <div class="card">
+            <div class="card" data-diff="inter">
                 <div class="diff-badge inter">🟡 Intermédiaire</div>
                 <div class="card-header">
                     <div class="card-icon">📖</div>
@@ -945,7 +987,7 @@
                 </div>
             </div>
 
-            <div class="card">
+            <div class="card" data-diff="inter">
                 <div class="diff-badge inter">🟡 Intermédiaire</div>
                 <div class="card-header">
                     <div class="card-icon"><img src="https://play-lh.googleusercontent.com/y2JS5BQN_8g3WAjpohJRX3cThSQW_kHxDjyyAD2DpeGM12vkOX75Ie31GrhVVPZZRjI=w240-h480-rw" alt="Omnivox" style="width:2rem;height:2rem;border-radius:6px;"></div>
@@ -974,20 +1016,20 @@
 
         <div class="cards-grid">
 
-            <div class="card">
+            <div class="card" data-diff="base">
                 <div class="diff-badge base">🟢 De base</div>
                 <div class="card-header">
                     <div class="card-icon">⏱️</div>
-                    <div><h3>Sessions de concentration Pomodoro</h3></div>
+                    <div><h3>Sessions de concentration</h3></div>
                 </div>
-                <p class="card-description">L'application Horloge de Windows 11 inclut un assistant de concentration : sessions de travail avec minuteur, pauses intégrées et musique relaxante optionnelle. La méthode Pomodoro (25 min travail, 5 min pause) est scientifiquement prouvée pour améliorer la productivité.</p>
+                <p class="card-description">L'application Horloge de Windows 11 inclut un assistant de concentration : des sessions de travail avec minuteur, pauses intégrées et musique relaxante optionnelle. Configure la durée de tes sessions et de tes pauses selon tes besoins, et Windows réduit automatiquement les notifications pendant que tu travailles.</p>
                 <div class="card-actions">
                     <button class="btn btn-primary" onclick="window.open('ms-clock:')">Sessions de concentration</button>
-                    <button class="btn btn-secondary" onclick="alert('Horloge Windows 11 → onglet « Sessions de concentration »\n\nConfigure :\n• Durée de session (25 min = Pomodoro classique)\n• Durée des pauses (5 min courtes, 15-30 min longues)\n• Musique de fond Spotify (si connecté)\n\nPendant la session, les notifications sont automatiquement réduites.\n\nConseil : fais 4 Pomodoros → grande pause → recommence.')">Comment ça marche?</button>
+                    <button class="btn btn-secondary" onclick="alert('Horloge Windows 11 → onglet « Sessions de concentration »\n\nConfigure :\n• Durée de la session de travail\n• Durée des pauses courtes et longues\n• Musique de fond Spotify (si connecté)\n\nPendant la session, les notifications sont automatiquement réduites.\n\nAstuce : alterne les blocs de travail et les pauses selon ton rythme personnel.')">Comment ça marche?</button>
                 </div>
             </div>
 
-            <div class="card">
+            <div class="card" data-diff="base">
                 <div class="diff-badge base">🟢 De base</div>
                 <div class="card-header">
                     <div class="card-icon">🔕</div>
@@ -1002,7 +1044,7 @@
                 </div>
             </div>
 
-            <div class="card">
+            <div class="card" data-diff="base">
                 <div class="diff-badge base">🟢 De base</div>
                 <div class="card-header">
                     <div class="card-icon">🌙</div>
@@ -1014,7 +1056,7 @@
                 </div>
             </div>
 
-            <div class="card">
+            <div class="card" data-diff="inter">
                 <div class="diff-badge inter">🟡 Intermédiaire</div>
                 <div class="card-header">
                     <div class="card-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/e/e8/Microsoft_Office_Word_%282025%E2%80%93present%29.svg" alt="Word" style="width:2rem;height:2rem;"></div>
@@ -1026,7 +1068,7 @@
                 </div>
             </div>
 
-            <div class="card">
+            <div class="card" data-diff="inter">
                 <div class="diff-badge inter">🟡 Intermédiaire</div>
                 <div class="card-header">
                     <div class="card-icon">🗂️</div>
@@ -1038,7 +1080,7 @@
                 </div>
             </div>
 
-            <div class="card">
+            <div class="card" data-diff="adv">
                 <div class="diff-badge adv">🔴 Avancé</div>
                 <div class="card-header">
                     <div class="card-icon">📊</div>
@@ -1067,7 +1109,7 @@
 
         <div class="cards-grid">
 
-            <div class="card">
+            <div class="card" data-diff="base">
                 <div class="diff-badge base">🟢 De base</div>
                 <div class="card-header">
                     <div class="card-icon">🔑</div>
@@ -1079,7 +1121,7 @@
                 </div>
             </div>
 
-            <div class="card">
+            <div class="card" data-diff="base">
                 <div class="diff-badge base">🟢 De base</div>
                 <div class="card-header">
                     <div class="card-icon">🔐</div>
@@ -1092,7 +1134,7 @@
                 </div>
             </div>
 
-            <div class="card">
+            <div class="card" data-diff="base">
                 <div class="diff-badge base">🟢 De base</div>
                 <div class="card-header">
                     <div class="card-icon">🖥️</div>
@@ -1104,7 +1146,7 @@
                 <p class="card-description">Que tu sois en laboratoire ou à la bibliothèque, Win + L verrouille instantanément l'écran. Ta session reste ouverte, tes fichiers sont intacts — personne ne peut y accéder. Réflexe essentiel avant de quitter un poste même pour deux minutes.</p>
             </div>
 
-            <div class="card">
+            <div class="card" data-diff="base">
                 <div class="diff-badge base">🟢 De base</div>
                 <div class="card-header">
                     <div class="card-icon">🛡️</div>
@@ -1116,7 +1158,7 @@
                 </div>
             </div>
 
-            <div class="card">
+            <div class="card" data-diff="inter">
                 <div class="diff-badge inter">🟡 Intermédiaire</div>
                 <div class="card-header">
                     <div class="card-icon">🔎</div>
@@ -1129,7 +1171,7 @@
                 </div>
             </div>
 
-            <div class="card">
+            <div class="card" data-diff="inter">
                 <div class="diff-badge inter">🟡 Intermédiaire</div>
                 <div class="card-header">
                     <div class="card-icon">👤</div>
@@ -1141,7 +1183,7 @@
                 </div>
             </div>
 
-            <div class="card">
+            <div class="card" data-diff="inter">
                 <div class="diff-badge inter">🟡 Intermédiaire</div>
                 <div class="card-header">
                     <div class="card-icon"><img src="https://upload.wikimedia.org/wikipedia/fr/0/02/Microsoft_365_Copilot.svg" alt="M365" style="width:2rem;height:2rem;"></div>
@@ -1153,7 +1195,7 @@
                 </div>
             </div>
 
-            <div class="card">
+            <div class="card" data-diff="adv">
                 <div class="diff-badge adv">🔴 Avancé</div>
                 <div class="card-header">
                     <div class="card-icon">🧊</div>
@@ -1182,7 +1224,7 @@
 
         <div class="cards-grid">
 
-            <div class="card">
+            <div class="card" data-diff="base">
                 <div class="diff-badge base">🟢 De base</div>
                 <div class="card-header">
                     <div class="card-icon"><img src="https://upload.wikimedia.org/wikipedia/fr/0/02/Microsoft_365_Copilot.svg" alt="M365" style="width:2rem;height:2rem;"></div>
@@ -1195,7 +1237,7 @@
                 </div>
             </div>
 
-            <div class="card">
+            <div class="card" data-diff="inter">
                 <div class="diff-badge inter">🟡 Intermédiaire</div>
                 <div class="card-header">
                     <div class="card-icon">
@@ -1210,7 +1252,7 @@
                 </div>
             </div>
 
-            <div class="card">
+            <div class="card" data-diff="base">
                 <div class="diff-badge base">🟢 De base</div>
                 <div class="card-header">
                     <div class="card-icon">📚</div>
@@ -1222,7 +1264,7 @@
                 </div>
             </div>
 
-            <div class="card">
+            <div class="card" data-diff="inter">
                 <div class="diff-badge inter">🟡 Intermédiaire</div>
                 <div class="card-header">
                     <div class="card-icon">🎨</div>
@@ -1234,7 +1276,7 @@
                 </div>
             </div>
 
-            <div class="card">
+            <div class="card" data-diff="inter">
                 <div class="diff-badge inter">🟡 Intermédiaire</div>
                 <div class="card-header">
                     <div class="card-icon">💻</div>
@@ -1246,7 +1288,7 @@
                 </div>
             </div>
 
-            <div class="card">
+            <div class="card" data-diff="inter">
                 <div class="diff-badge inter">🟡 Intermédiaire</div>
                 <div class="card-header">
                     <div class="card-icon">📰</div>
@@ -1349,7 +1391,7 @@
 
         <div class="cards-grid">
 
-            <div class="card">
+            <div class="card" data-diff="adv">
                 <div class="diff-badge adv">🔴 Avancé</div>
                 <div class="card-header">
                     <div class="card-icon">📚</div>
@@ -1362,7 +1404,7 @@
                 </div>
             </div>
 
-            <div class="card">
+            <div class="card" data-diff="adv">
                 <div class="diff-badge adv">🔴 Avancé</div>
                 <div class="card-header">
                     <div class="card-icon">✨</div>
@@ -1377,7 +1419,7 @@
                 </div>
             </div>
 
-            <div class="card">
+            <div class="card" data-diff="adv">
                 <div class="diff-badge adv">🔴 Avancé</div>
                 <div class="card-header">
                     <div class="card-icon">🎥</div>
@@ -1392,7 +1434,7 @@
                 </div>
             </div>
 
-            <div class="card">
+            <div class="card" data-diff="adv">
                 <div class="diff-badge adv">🔴 Avancé</div>
                 <div class="card-header">
                     <div class="card-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Visual_Studio_Code_1.35_icon.svg" alt="VS Code" style="width:2rem;height:2rem;"></div>
@@ -1405,7 +1447,7 @@
                 </div>
             </div>
 
-            <div class="card">
+            <div class="card" data-diff="adv">
                 <div class="diff-badge adv">🔴 Avancé</div>
                 <div class="card-header">
                     <div class="card-icon">📊</div>
@@ -1417,7 +1459,7 @@
                 </div>
             </div>
 
-            <div class="card">
+            <div class="card" data-diff="adv">
                 <div class="diff-badge adv">🔴 Avancé</div>
                 <div class="card-header">
                     <div class="card-icon">🔗</div>
@@ -1448,11 +1490,11 @@
             </div>
             <div class="powertoys-inner-box">
                 <h3 style="color:#f7c948;margin-bottom:0.85rem;font-family:'Syne',sans-serif;">📦 Installation</h3>
-                <p style="color:#b89a30;margin-bottom:1rem;line-height:1.7;">PowerToys est disponible gratuitement sur tous les portables du Cégep Gérald-Godin.</p>
+                <p style="color:#b89a30;margin-bottom:1rem;line-height:1.7;">PowerToys est un outil gratuit de Microsoft, téléchargeable en quelques minutes.</p>
                 <div style="display:grid;gap:1rem;">
                     <div>
                         <strong style="color:#f7c948;">Option 1 : Centre logiciel du Cégep (Recommandé)</strong><br>
-                        <button class="btn" style="background:#b89a30;color:#1a1508;margin-top:0.5rem;font-weight:700;" onclick="window.location.href='softwarecenter:'">Ouvrir Centre logiciel</button>
+                        <a href="https://github.com/microsoft/PowerToys/releases" target="_blank" class="btn" style="background:#b89a30;color:#1a1508;font-weight:700;text-decoration:none;">Télécharger depuis GitHub</a>
                     </div>
                     <div>
                         <strong style="color:#f7c948;">Option 2 : GitHub officiel Microsoft</strong><br>
@@ -1666,20 +1708,20 @@
                 <div class="step-number">1</div>
                 <div class="step-content">
                     <h3>Dimanche soir — prépare ta semaine</h3>
-                    <p>Ouvre To Do et liste toutes les tâches de la semaine (lectures, devoirs, remises, examens). Assigne une date à chacune. Consulte Moodle et MIO pour les annonces récentes. 10 minutes — pas plus.</p>
+                    <p>Ouvre To Do et liste toutes les tâches de la semaine (lectures, devoirs, remises, examens). Assigne une date à chacune. Consulte MIO (Omnivox) pour les annonces récentes. 10 minutes — pas plus.</p>
                 </div>
             </div>
             <div class="workflow-step">
                 <div class="step-number">2</div>
                 <div class="step-content">
-                    <h3>Avant chaque cours — 5 minutes</h3>
-                    <p>Consulte Moodle pour les nouveaux fichiers ou messages du prof. Ouvre OneDrive et OneNote pour avoir tes notes de la dernière fois. Active Ne Pas Déranger (Win + N) pendant le cours.</p>
+                    <h3>Début de semaine — fais le tour de tes plateformes</h3>
+                    <p>Consulte Léa (Omnivox) pour ton horaire et tes notes officielles. Lis tes MIO (Omnivox) pour les messages de tes profs et du secrétariat. Vérifie Teams si ton équipe ou un prof l'utilise. Consulte Moodle si certains cours y déposent des ressources.</p>
                 </div>
             </div>
             <div class="workflow-step">
                 <div class="step-number">3</div>
                 <div class="step-content">
-                    <h3>Pendant les travaux — blocs Pomodoro</h3>
+                    <h3>Pendant les travaux — blocs de concentration</h3>
                     <p>Lance une session de concentration depuis l'Horloge Windows. Travaille en mode Focus dans Word. Utilise le presse-papiers étendu (Win + V) pour centraliser tes citations et références. Sauvegarde sur OneDrive dès que tu ouvres le fichier.</p>
                 </div>
             </div>
@@ -1865,7 +1907,81 @@ document.addEventListener('DOMContentLoaded',()=>{
         el.addEventListener('mouseenter',()=>showTooltip(el,raw,keys));
         el.addEventListener('mouseleave',hideTooltip);
     });
+
+    // Inject empty-state messages in each section's cards-grid
+    document.querySelectorAll('.section-block').forEach(section => {
+        const grid = section.querySelector('.cards-grid');
+        if (grid) {
+            const msg = document.createElement('p');
+            msg.className = 'filter-empty-msg';
+            msg.textContent = 'Aucune astuce pour ce niveau dans cette section.';
+            grid.after(msg);
+        }
+    });
 });
+
+/* ── Difficulty filter ── */
+let currentFilter = 'all';
+
+function filterDiff(level) {
+    currentFilter = level;
+
+    // Update pill active state
+    document.querySelectorAll('#diff-filter .diff-pill').forEach(pill => {
+        pill.classList.remove('active-filter');
+    });
+    const map = { all: 'filter-all', base: 'base', inter: 'inter', adv: 'adv' };
+    const activePill = document.querySelector(`#diff-filter .diff-pill.${map[level]}`);
+    if (activePill) activePill.classList.add('active-filter');
+
+    if (level === 'all') {
+        // Show everything
+        document.querySelectorAll('.card[data-diff]').forEach(c => c.classList.remove('hidden-filter'));
+        document.querySelectorAll('.section-block').forEach(s => s.classList.remove('all-hidden'));
+        // Show all special blocks
+        document.querySelectorAll('.highlight-block, .digitale-block, .powertoys-block, .workflow, .tips-section, .links-block, .feedback-section').forEach(b => b.classList.remove('hidden-filter'));
+        return;
+    }
+
+    // Hide cards that don't match
+    document.querySelectorAll('.card[data-diff]').forEach(card => {
+        if (card.dataset.diff === level) {
+            card.classList.remove('hidden-filter');
+        } else {
+            card.classList.add('hidden-filter');
+        }
+    });
+
+    // Check each section: if all cards hidden, add class
+    document.querySelectorAll('.section-block').forEach(section => {
+        const cards = section.querySelectorAll('.card[data-diff]');
+        const visibleCards = section.querySelectorAll('.card[data-diff]:not(.hidden-filter)');
+        if (cards.length > 0 && visibleCards.length === 0) {
+            section.classList.add('all-hidden');
+        } else {
+            section.classList.remove('all-hidden');
+        }
+    });
+
+    // Special blocks (antidote, digitale, powertoys, workflow, shortcuts, links, feedback)
+    // Only show on 'all' or advanced for special blocks — hide on base/inter/adv filter
+    // Antidote: intermediate+
+    const antidoteBlock = document.querySelector('.antidote-block');
+    if (antidoteBlock) antidoteBlock.classList.toggle('hidden-filter', level === 'base');
+
+    // La Digitale block: base
+    const digitaleBlock = document.querySelector('.digitale-block');
+    if (digitaleBlock) digitaleBlock.classList.toggle('hidden-filter', level === 'adv');
+
+    // PowerToys: inter+
+    const ptBlock = document.querySelector('.powertoys-block');
+    if (ptBlock) ptBlock.classList.toggle('hidden-filter', level === 'base');
+
+    // Workflow (semaine type): always show (general)
+    // Shortcuts section: always show
+    // Links: always show
+    // Feedback: always show
+}
 </script>
 
 </body>
