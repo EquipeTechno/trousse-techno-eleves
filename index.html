@@ -1,1 +1,1872 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trousse techno - Étudiants · Cégep Gérald-Godin</title>
+    <link rel="icon" type="image/svg+xml" href="https://upload.wikimedia.org/wikipedia/fr/7/73/Logo-C%C3%A9gep_G%C3%A9rald-Godin.svg">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* ── Reset & Root ── */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
+        :root {
+            --brand:      #6c3bff;
+            --brand-mid:  #8f5fff;
+            --brand-glow: rgba(108,59,255,0.18);
+            --accent:     #ff6b35;
+            --accent2:    #00d4a8;
+            --accent3:    #f7c948;
+            --bg:         #0f0e17;
+            --bg-card:    #17162a;
+            --bg-card2:   #1c1b32;
+            --surface:    #232240;
+            --text:       #e8e6ff;
+            --text-mid:   #a09cbf;
+            --text-dim:   #6b6888;
+            --border:     rgba(108,59,255,0.25);
+            --border-soft: rgba(255,255,255,0.07);
+            --green:      #00d4a8;
+            --amber:      #f7c948;
+            --red:        #ff4d6d;
+            --blue:       #4da6ff;
+            --rose:       #ff6b8a;
+
+            /* difficulty */
+            --base-color:  #00d4a8;
+            --inter-color: #f7c948;
+            --adv-color:   #ff6b35;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.65;
+            overflow-x: hidden;
+        }
+
+        /* ── Dark mode override (light mode) ── */
+        body.light-mode {
+            --bg:         #f4f2ff;
+            --bg-card:    #ffffff;
+            --bg-card2:   #f0eeff;
+            --surface:    #e8e4ff;
+            --text:       #1a1630;
+            --text-mid:   #4a4470;
+            --text-dim:   #9490b8;
+            --border:     rgba(108,59,255,0.22);
+            --border-soft: rgba(108,59,255,0.1);
+        }
+        body.light-mode .hero { background: linear-gradient(135deg, #3d1fa8 0%, #6c3bff 60%, #9b59f7 100%); }
+        body.light-mode .card { box-shadow: 0 2px 12px rgba(108,59,255,0.08); }
+        body.light-mode .card:hover { box-shadow: 0 12px 32px rgba(108,59,255,0.18); }
+        body.light-mode .toc { border-color: var(--border); }
+        body.light-mode .tips-section { background: #fff; border-color: var(--border); }
+        body.light-mode .tip-item { background: var(--bg-card2); border-color: var(--border); }
+        body.light-mode .section-block { border-color: var(--border-soft); }
+
+        /* ── THEME TOGGLE ── */
+        .theme-toggle {
+            position: fixed; top: 18px; right: 18px; z-index: 1000;
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: 50px; padding: 10px 18px;
+            cursor: pointer; font-weight: 600; font-size: 0.85rem;
+            display: flex; align-items: center; gap: 7px;
+            box-shadow: 0 4px 20px rgba(108,59,255,0.25);
+            transition: all 0.3s ease; color: var(--text);
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        .theme-toggle:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(108,59,255,0.35); }
+
+        /* ── HERO ── */
+        .hero {
+            background: linear-gradient(135deg, #1a0a4a 0%, #3d1fa8 50%, #6c3bff 100%);
+            color: white; padding: 3rem 2rem 2.5rem;
+            text-align: center; position: relative; overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute; inset: 0;
+            background:
+                radial-gradient(ellipse 60% 40% at 80% 20%, rgba(255,107,53,0.12) 0%, transparent 60%),
+                radial-gradient(ellipse 40% 50% at 10% 80%, rgba(0,212,168,0.1) 0%, transparent 60%);
+        }
+        .hero::after {
+            content: '';
+            position: absolute; inset: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        .hero-content { position: relative; max-width: 900px; margin: 0 auto; }
+        .hero-eyebrow {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 50px; padding: 6px 18px; font-size: 0.82rem;
+            font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+            margin-bottom: 1.25rem; backdrop-filter: blur(8px);
+        }
+        h1 {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(2.2rem, 5vw, 3.5rem);
+            font-weight: 800; line-height: 1.1;
+            margin-bottom: 0.75rem; letter-spacing: -0.02em;
+        }
+        h1 span { color: #ffd166; }
+        .subtitle { font-size: 1.1rem; opacity: 0.88; font-weight: 400; max-width: 600px; margin: 0 auto 1.5rem; }
+        .hero-meta {
+            display: inline-block; margin-top: 0.5rem;
+            padding: 0.55rem 1.25rem;
+            border: 1px solid rgba(255,255,255,0.25); border-radius: 8px;
+            background: rgba(255,255,255,0.07); font-size: 0.85rem; opacity: 0.82;
+        }
+
+        /* ── DIFFICULTY LEGEND ── */
+        .difficulty-legend {
+            display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center;
+            margin: 2rem auto 0; max-width: 600px;
+        }
+        .diff-pill {
+            display: flex; align-items: center; gap: 6px;
+            padding: 6px 16px; border-radius: 50px;
+            font-size: 0.82rem; font-weight: 600; letter-spacing: 0.03em;
+            border: 1.5px solid; backdrop-filter: blur(6px);
+        }
+        .diff-pill.base   { border-color: var(--base-color);  color: var(--base-color);  background: rgba(0,212,168,0.1); }
+        .diff-pill.inter  { border-color: var(--inter-color); color: var(--inter-color); background: rgba(247,201,72,0.1); }
+        .diff-pill.adv    { border-color: var(--adv-color);   color: var(--adv-color);   background: rgba(255,107,53,0.1); }
+
+        /* ── CONTAINER ── */
+        .container { max-width: 1220px; margin: 0 auto; padding: 3rem 2rem; }
+
+        /* ── INTRO ── */
+        .intro { text-align: center; max-width: 780px; margin: 0 auto 3.5rem; }
+        .intro h2 { font-family: 'Syne', sans-serif; font-size: 1.9rem; font-weight: 800; color: var(--text); margin-bottom: 0.9rem; }
+        .intro h2 em { color: var(--brand-mid); font-style: normal; }
+        .intro p { font-size: 1.05rem; color: var(--text-mid); line-height: 1.8; }
+
+        /* ── TOC ── */
+        .toc {
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: 20px; padding: 2rem;
+            margin-bottom: 3.5rem;
+            box-shadow: 0 4px 24px rgba(108,59,255,0.1);
+        }
+        .toc h3 { font-family: 'Syne', sans-serif; font-size: 1.3rem; margin-bottom: 1.2rem; color: var(--text); }
+        .toc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 0.5rem; }
+        .toc-item {
+            display: flex; align-items: center; gap: 0.6rem;
+            padding: 0.65rem 0.85rem; border-radius: 10px;
+            text-decoration: none; color: var(--text-mid);
+            border: 1px solid transparent; font-size: 0.88rem; font-weight: 500;
+            transition: all 0.2s ease;
+        }
+        .toc-item:hover { background: var(--surface); border-color: var(--border); color: var(--brand-mid); }
+
+        /* ── SECTION BLOCK ── */
+        .section-block { margin-bottom: 4.5rem; scroll-margin-top: 80px; }
+        .section-header {
+            display: flex; align-items: center; gap: 1.25rem;
+            margin-bottom: 2rem; padding-bottom: 1.25rem;
+            border-bottom: 2px solid var(--border-soft);
+        }
+        .section-icon {
+            width: 58px; height: 58px; border-radius: 14px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.8rem; flex-shrink: 0; position: relative;
+        }
+        .section-icon::after {
+            content: '';
+            position: absolute; inset: -4px; border-radius: 18px;
+            opacity: 0.3; z-index: -1;
+        }
+        .section-header h2 {
+            font-family: 'Syne', sans-serif;
+            font-size: 2rem; font-weight: 800; color: var(--text);
+        }
+        .section-desc { font-size: 1rem; color: var(--text-mid); margin-bottom: 2rem; line-height: 1.75; }
+
+        /* Section colors */
+        .s-essentiels .section-icon { background: linear-gradient(135deg, #6c3bff, #8f5fff); }
+        .s-essentiels .section-header { border-bottom-color: rgba(108,59,255,0.3); }
+        .s-essentiels .btn-primary { background: #6c3bff; }
+        .s-essentiels .btn-primary:hover { background: #5a2fe0; }
+
+        .s-m365 .section-icon { background: linear-gradient(135deg, #0078d4, #2196F3); }
+        .s-m365 .section-header { border-bottom-color: rgba(0,120,212,0.3); }
+        .s-m365 .btn-primary { background: #0078d4; }
+        .s-m365 .btn-primary:hover { background: #005fa3; }
+
+        .s-moodle .section-icon { background: linear-gradient(135deg, #e66000, #ff8c00); }
+        .s-moodle .section-header { border-bottom-color: rgba(230,96,0,0.3); }
+        .s-moodle .btn-primary { background: #e66000; }
+        .s-moodle .btn-primary:hover { background: #cc5500; }
+
+        .s-focus .section-icon { background: linear-gradient(135deg, #00d4a8, #00b89a); }
+        .s-focus .section-header { border-bottom-color: rgba(0,212,168,0.3); }
+        .s-focus .btn-primary { background: #00b89a; }
+        .s-focus .btn-primary:hover { background: #009e84; }
+
+        .s-securite .section-icon { background: linear-gradient(135deg, #ff4d6d, #e03050); }
+        .s-securite .section-header { border-bottom-color: rgba(255,77,109,0.3); }
+        .s-securite .btn-primary { background: #ff4d6d; }
+        .s-securite .btn-primary:hover { background: #e03050; }
+
+        .s-logiciels .section-icon { background: linear-gradient(135deg, #f7c948, #e8a800); }
+        .s-logiciels .section-header { border-bottom-color: rgba(247,201,72,0.3); }
+        .s-logiciels .btn-primary { background: #d69e00; color: #1a1630; }
+        .s-logiciels .btn-primary:hover { background: #bf8e00; color: #1a1630; }
+
+        .s-avance .section-icon { background: linear-gradient(135deg, #ff6b35, #e55020); }
+        .s-avance .section-header { border-bottom-color: rgba(255,107,53,0.3); }
+        .s-avance .btn-primary { background: #ff6b35; }
+        .s-avance .btn-primary:hover { background: #e55020; }
+
+        /* ── CARDS GRID ── */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+            gap: 1.5rem;
+        }
+
+        /* ── CARD ── */
+        .card {
+            background: var(--bg-card); border-radius: 16px;
+            padding: 1.75rem; border: 1px solid var(--border-soft);
+            transition: all 0.3s ease; position: relative; overflow: hidden;
+        }
+        .card::before {
+            content: '';
+            position: absolute; top: 0; left: 0; right: 0; height: 2px;
+            background: linear-gradient(90deg, transparent, var(--card-accent, #6c3bff), transparent);
+            opacity: 0; transition: opacity 0.3s;
+        }
+        .card:hover { transform: translateY(-5px); border-color: var(--border); }
+        .card:hover::before { opacity: 1; }
+
+        .card-header { display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 1rem; }
+        .card-icon { font-size: 2rem; flex-shrink: 0; }
+        .card h3 { font-family: 'Syne', sans-serif; font-size: 1.25rem; font-weight: 700; color: var(--text); margin-bottom: 0.3rem; }
+        .card-description { color: var(--text-mid); font-size: 0.93rem; line-height: 1.65; margin-bottom: 1.25rem; }
+        .card-actions { display: flex; flex-direction: column; gap: 0.5rem; }
+
+        /* ── DIFFICULTY BADGE on card ── */
+        .diff-badge {
+            display: inline-flex; align-items: center; gap: 4px;
+            padding: 3px 10px; border-radius: 50px;
+            font-size: 0.72rem; font-weight: 700; letter-spacing: 0.05em;
+            text-transform: uppercase; margin-bottom: 0.6rem; border: 1px solid;
+        }
+        .diff-badge.base   { color: var(--base-color);  border-color: rgba(0,212,168,0.4);  background: rgba(0,212,168,0.08); }
+        .diff-badge.inter  { color: var(--inter-color); border-color: rgba(247,201,72,0.4);  background: rgba(247,201,72,0.08); }
+        .diff-badge.adv    { color: var(--adv-color);   border-color: rgba(255,107,53,0.4);  background: rgba(255,107,53,0.08); }
+
+        /* ── BUTTONS ── */
+        .btn {
+            padding: 0.7rem 1.2rem; border-radius: 10px; font-weight: 600;
+            text-decoration: none; display: inline-block; text-align: center;
+            transition: all 0.2s ease; cursor: pointer; border: none;
+            font-size: 0.9rem; font-family: 'Space Grotesk', sans-serif;
+        }
+        .btn-primary { background: var(--brand); color: white; }
+        .btn-primary:hover { transform: translateY(-2px); filter: brightness(1.1); }
+        .btn-secondary {
+            background: var(--surface); color: var(--text);
+            border: 1px solid var(--border);
+        }
+        .btn-secondary:hover { border-color: var(--brand-mid); color: var(--brand-mid); }
+
+        /* ── SHORTCUT TAG ── */
+        .shortcut-tag {
+            display: inline-block;
+            background: linear-gradient(135deg, #00d4a8, #00b89a);
+            color: #0f0e17; padding: 0.3rem 0.7rem; border-radius: 6px;
+            font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;
+            font-weight: 600; margin-bottom: 0.65rem;
+        }
+
+        /* ── BADGE ── */
+        .badge {
+            display: inline-block; font-size: 0.72rem; font-weight: 700;
+            padding: 0.2rem 0.55rem; border-radius: 4px; margin-left: 0.4rem;
+            vertical-align: middle;
+        }
+        .badge-new { background: rgba(0,212,168,0.2); color: var(--green); border: 1px solid rgba(0,212,168,0.3); }
+        .badge-tip { background: rgba(247,201,72,0.2); color: var(--amber); border: 1px solid rgba(247,201,72,0.3); }
+        .badge-free { background: rgba(108,59,255,0.2); color: var(--brand-mid); border: 1px solid var(--border); }
+
+        /* ── BACK TO TOC ── */
+        .back-to-toc { display: flex; justify-content: center; margin-top: 2rem; }
+        .back-to-toc a {
+            display: inline-flex; align-items: center; gap: 0.4rem;
+            font-size: 0.8rem; color: var(--text-dim);
+            text-decoration: none; padding: 0.35rem 1rem;
+            border: 1px solid var(--border-soft); border-radius: 20px;
+            transition: all 0.2s; font-family: 'Space Grotesk', sans-serif;
+        }
+        .back-to-toc a:hover { color: var(--brand-mid); border-color: var(--brand); }
+
+        /* ── TIPS SECTION ── */
+        .tips-section {
+            background: var(--bg-card); border-radius: 20px; padding: 2.5rem;
+            margin-top: 3rem; border: 1px solid var(--border);
+            scroll-margin-top: 80px;
+        }
+        .tips-section h2 { font-family: 'Syne', sans-serif; font-size: 1.8rem; margin-bottom: 1.5rem; }
+        .tip-subhead {
+            font-family: 'Syne', sans-serif; font-size: 1.25rem;
+            margin: 2rem 0 0.85rem; padding-left: 0.85rem;
+            border-left: 3px solid var(--brand-mid); color: var(--text);
+        }
+        .tip-item {
+            background: var(--bg-card2); padding: 1rem 1.2rem;
+            border-radius: 10px; margin-bottom: 0.6rem;
+            display: flex; gap: 1rem; align-items: center;
+            border: 1px solid var(--border-soft);
+            transition: border-color 0.2s;
+        }
+        .tip-item:hover { border-color: var(--border); }
+        .tip-shortcut {
+            background: linear-gradient(135deg, #00d4a8, #00b89a);
+            color: #0f0e17; padding: 0.5rem 0.9rem;
+            border-radius: 8px; font-family: 'JetBrains Mono', monospace;
+            font-weight: 700; font-size: 0.82rem;
+            min-width: 165px; text-align: center; flex-shrink: 0;
+        }
+        .tip-description { color: var(--text-mid); font-size: 0.92rem; }
+
+        /* ── WORKFLOW / CHECKLIST ── */
+        .workflow {
+            background: linear-gradient(135deg, rgba(108,59,255,0.15) 0%, rgba(143,95,255,0.08) 100%);
+            border-radius: 20px; padding: 2.5rem; margin-top: 3rem;
+            border: 1px solid var(--border);
+            scroll-margin-top: 80px;
+        }
+        .workflow h2 { font-family: 'Syne', sans-serif; font-size: 1.8rem; margin-bottom: 1.5rem; color: var(--brand-mid); }
+        .workflow-steps { display: grid; gap: 1.5rem; }
+        .workflow-step { display: flex; gap: 1.25rem; align-items: flex-start; }
+        .step-number {
+            background: var(--brand); color: white;
+            width: 38px; height: 38px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 700; font-size: 0.95rem; flex-shrink: 0;
+            box-shadow: 0 4px 12px rgba(108,59,255,0.4);
+        }
+        .step-content h3 { font-weight: 700; margin-bottom: 0.4rem; color: var(--text); }
+        .step-content p { color: var(--text-mid); font-size: 0.93rem; line-height: 1.6; }
+
+        /* ── FEATURED HIGHLIGHT BLOCK ── */
+        .highlight-block {
+            border-radius: 20px; padding: 2.5rem; margin-bottom: 3rem;
+            border: 1px solid; position: relative; overflow: hidden;
+        }
+        .highlight-block::before {
+            content: '';
+            position: absolute; top: -40%; right: -10%;
+            width: 300px; height: 300px; border-radius: 50%;
+            opacity: 0.08; filter: blur(60px);
+        }
+
+        /* ── AZURE BLOCK ── */
+        .azure-block {
+            background: linear-gradient(135deg, #0d1b2a 0%, #112233 100%);
+            border-color: rgba(0,120,212,0.4);
+        }
+        .azure-block::before { background: #0078d4; }
+        .azure-block h2 { font-family: 'Syne', sans-serif; font-size: 2rem; color: #4da6ff; margin-bottom: 0.5rem; }
+
+        /* ── ANTIDOTE BLOCK ── */
+        .antidote-block {
+            background: linear-gradient(135deg, #1a1220 0%, #221530 100%);
+            border-color: rgba(200,100,255,0.3);
+        }
+        .antidote-block h2 { font-family: 'Syne', sans-serif; font-size: 2rem; color: #c864ff; margin-bottom: 0.5rem; }
+
+        /* ── DIGITALE BLOCK ── */
+        .digitale-block {
+            background: linear-gradient(135deg, #0a2020 0%, #0f2d2d 100%);
+            border-radius: 20px; padding: 2.5rem; margin-top: 3rem; margin-bottom: 3rem;
+            border: 1px solid rgba(0,212,168,0.3);
+        }
+        .digitale-block h2 { font-family: 'Syne', sans-serif; font-size: 2rem; color: var(--green); margin-bottom: 0.5rem; }
+        .digitale-tile {
+            background: rgba(0,212,168,0.06); padding: 1.2rem;
+            border-radius: 10px; border: 1px solid rgba(0,212,168,0.15);
+        }
+        .digitale-open-btn {
+            display: inline-flex; align-items: center; justify-content: center;
+            text-decoration: none; font-size: 1rem; line-height: 1;
+            padding: 0.3rem 0.5rem; border-radius: 50%;
+            background: rgba(0,212,168,0.12); border: 1px solid rgba(0,212,168,0.3);
+            color: var(--green);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .digitale-open-btn:hover { transform: translateY(-2px); box-shadow: 0 5px 14px rgba(0,212,168,0.3); }
+        .digitale-name-link, .digitale-name-link:hover { text-decoration: none; color: inherit; }
+
+        /* ── LINKS BLOCK ── */
+        .links-block {
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: 20px; padding: 2rem; margin-top: 3rem;
+            scroll-margin-top: 80px;
+        }
+        .links-block h2 { font-family: 'Syne', sans-serif; font-size: 1.8rem; margin-bottom: 0.5rem; }
+        .links-block p { color: var(--text-mid); margin-bottom: 1.5rem; }
+        .links-grid { display: flex; flex-wrap: wrap; gap: 0.65rem; }
+        .link-chip {
+            display: inline-flex; align-items: center; gap: 0.4rem;
+            padding: 0.55rem 1rem; border-radius: 10px;
+            background: var(--surface); border: 1px solid var(--border-soft);
+            text-decoration: none; color: var(--text);
+            font-size: 0.88rem; font-weight: 500;
+            transition: all 0.2s ease; white-space: nowrap;
+        }
+        .link-chip:hover { border-color: var(--brand-mid); color: var(--brand-mid); transform: translateY(-2px); }
+
+        /* ── FEEDBACK SECTION ── */
+        .feedback-section {
+            background: linear-gradient(135deg, rgba(0,212,168,0.08) 0%, rgba(108,59,255,0.06) 100%);
+            border-radius: 20px; padding: 2.5rem; margin-top: 3rem; margin-bottom: 2rem;
+            border: 1px solid var(--border);
+        }
+        .feedback-title { font-family: 'Syne', sans-serif; font-size: 1.7rem; margin-bottom: 0.85rem; color: var(--text); }
+        .feedback-text { color: var(--text-mid); font-size: 1rem; line-height: 1.75; margin-bottom: 1.5rem; }
+        .feedback-btn {
+            display: inline-flex; align-items: center; gap: 0.65rem;
+            background: linear-gradient(135deg, #6c3bff, #8f5fff);
+            color: white; padding: 0.9rem 1.75rem; border-radius: 12px;
+            font-size: 1rem; font-weight: 600; text-decoration: none; border: none;
+            cursor: pointer; font-family: 'Space Grotesk', sans-serif;
+            box-shadow: 0 4px 18px rgba(108,59,255,0.35);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .feedback-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(108,59,255,0.45); }
+
+        /* ── INNER TILES ── */
+        .inner-tile {
+            background: var(--bg-card2); border-radius: 12px; padding: 1.5rem;
+            border: 1px solid var(--border-soft);
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            .cards-grid { grid-template-columns: 1fr; }
+            .tip-item { flex-direction: column; align-items: flex-start; }
+            .tip-shortcut { min-width: auto; }
+            .toc-grid { grid-template-columns: 1fr 1fr; }
+            .section-header h2 { font-size: 1.5rem; }
+        }
+
+        /* ── KEYBOARD TOOLTIP ── */
+        .kbd-tooltip {
+            position: absolute; z-index: 9999;
+            background: #0f0e17; border: 1px solid rgba(108,59,255,0.4);
+            border-radius: 12px; padding: 10px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+            pointer-events: none; opacity: 0; transform: translateY(6px);
+            transition: opacity 0.15s ease, transform 0.15s ease; width: 300px;
+        }
+        .kbd-tooltip.visible { opacity: 1; transform: translateY(0); }
+        .kbd-tooltip canvas { width: 100%; height: auto; display: block; border-radius: 6px; }
+        .kbd-tooltip-label { color: #6b6888; font-size: 0.72rem; text-align: center; margin-top: 6px; font-family: 'JetBrains Mono', monospace; }
+
+        /* ── POWERTOYS BLOCK ── */
+        .powertoys-block {
+            background: linear-gradient(135deg, #1a1508 0%, #201c0a 100%);
+            border-radius: 20px; padding: 2.5rem; margin-bottom: 3rem;
+            border: 1px solid rgba(247,201,72,0.3);
+            box-shadow: 0 8px 24px rgba(247,201,72,0.06);
+        }
+        .powertoys-tile {
+            background: rgba(247,201,72,0.05); padding: 1.25rem;
+            border-radius: 10px; border: 1px solid rgba(247,201,72,0.15);
+        }
+        .powertoys-inner-box {
+            background: rgba(0,0,0,0.3); border-radius: 12px;
+            padding: 1.5rem; margin-bottom: 1.5rem;
+            border: 1px solid rgba(247,201,72,0.15);
+        }
+    </style>
+</head>
+<body>
+
+<button class="theme-toggle" onclick="toggleTheme()">
+    <span id="theme-icon">☀️</span>
+    <span id="theme-text">Mode clair</span>
+</button>
+
+<!-- HERO -->
+<div class="hero">
+    <div class="hero-content">
+        <div class="hero-eyebrow">
+            <img src="https://upload.wikimedia.org/wikipedia/fr/7/73/Logo-C%C3%A9gep_G%C3%A9rald-Godin.svg"
+                 alt="Cégep Gérald-Godin" style="height:20px;filter:brightness(0) invert(1);">
+            Cégep Gérald-Godin
+        </div>
+        <h1>Trousse techno<br><span>pour les étudiants</span></h1>
+        <p class="subtitle">Des outils, raccourcis et astuces pour réussir ton cégep avec la tech — de zéro à avancé.</p>
+        <div class="hero-meta">Conçu par le service du développement pédagogique · Cégep Gérald-Godin</div>
+
+        <div class="difficulty-legend">
+            <div class="diff-pill base">🟢 De base</div>
+            <div class="diff-pill inter">🟡 Intermédiaire</div>
+            <div class="diff-pill adv">🔴 Avancé</div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+
+    <!-- INTRO -->
+    <div class="intro">
+        <h2>Travaille plus vite, <em>retiens mieux</em>, stresse moins</h2>
+        <p>Cette trousse regroupe les meilleurs outils et trucs que tu peux utiliser dès aujourd'hui — que tu sois en première session ou en fin de programme. Chaque astuce est classée par niveau de difficulté. Commence où tu veux!</p>
+    </div>
+
+    <!-- TABLE DES MATIÈRES -->
+    <div class="toc" id="toc">
+        <h3>📋 Contenu de la trousse</h3>
+        <div class="toc-grid">
+            <a class="toc-item" href="#essentiels">🚀 Essentiels à connaître</a>
+            <a class="toc-item" href="#m365">
+                <img src="https://upload.wikimedia.org/wikipedia/fr/0/02/Microsoft_365_Copilot.svg" alt="M365" style="width:16px;height:16px;">
+                Suite M365 étudiante
+            </a>
+            <a class="toc-item" href="#moodle">
+                <img src="https://www.google.com/s2/favicons?domain=moodle.org&sz=16" alt="Moodle" style="width:16px;height:16px;">
+                Moodle &amp; Omnivox
+            </a>
+            <a class="toc-item" href="#focus">🧘 Concentration &amp; gestion du temps</a>
+            <a class="toc-item" href="#securite">🔒 Sécurité &amp; vie privée</a>
+            <a class="toc-item" href="#logiciels">🎓 Logiciels &amp; licences étudiantes</a>
+            <a class="toc-item" href="#avance">⚡ Trucs avancés</a>
+            <a class="toc-item" href="#shortcuts-section">⌨️ Raccourcis essentiels</a>
+            <a class="toc-item" href="#quicklinks">🔗 Liens rapides GG</a>
+            <a class="toc-item" href="#journee-section">📅 Semaine type qui cartonne</a>
+        </div>
+    </div>
+
+
+    <!-- ============================================
+         SECTION 1 : Essentiels
+    ============================================= -->
+    <section id="essentiels" class="section-block s-essentiels">
+        <div class="section-header">
+            <div class="section-icon">🚀</div>
+            <div>
+                <h2>Essentiels à connaître</h2>
+            </div>
+        </div>
+        <p class="section-desc">Ces outils et réflexes de base font toute la différence dès ta première session. Si tu n'en connais qu'une partie, commence ici.</p>
+
+        <div class="cards-grid">
+
+            <div class="card">
+                <div class="diff-badge base">🟢 De base</div>
+                <div class="card-header">
+                    <div class="card-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Microsoft_OneDrive_Icon_%282025_-_present%29.svg" style="width:2rem;height:2rem;" alt="OneDrive"></div>
+                    <div>
+                        <h3>Sauvegarde automatique — ne perds plus jamais un travail</h3>
+                        <span class="shortcut-tag">OneDrive</span>
+                    </div>
+                </div>
+                <p class="card-description">Enregistre tes fichiers Word, Excel et PowerPoint sur OneDrive : la sauvegarde automatique s'active et tu ne perdras plus ton travail si l'ordinateur plante. Accès depuis n'importe quel appareil, à la maison comme au cégep.</p>
+                <div class="card-actions">
+                    <a href="https://cgodin.qc.ca/onedrive" target="_blank" class="btn btn-primary">Ouvrir OneDrive</a>
+                    <button class="btn btn-secondary" onclick="alert('Dans Word/Excel/PowerPoint :\nFichier → Enregistrer une copie → OneDrive - Cégep\n\nLa sauvegarde automatique s\'active (bouton en haut à gauche).\n\nTon fichier est maintenant accessible depuis n\'importe quel appareil : ordinateur, tablette, téléphone.')">Comment faire?</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="diff-badge base">🟢 De base</div>
+                <div class="card-header">
+                    <div class="card-icon">📄</div>
+                    <div>
+                        <h3>Créer un document instantanément</h3>
+                        <span class="badge badge-tip">Astuce rapide</span>
+                    </div>
+                </div>
+                <p class="card-description">Tape directement dans ta barre d'adresse : <strong>word.new</strong>, <strong>excel.new</strong> ou <strong>powerpoint.new</strong> pour créer un document M365 en une seconde. Le fichier s'enregistre automatiquement dans ton OneDrive.</p>
+                <div class="card-actions">
+                    <a href="https://word.new" target="_blank" class="btn btn-primary" style="display:inline-flex;align-items:center;gap:6px;"><img src="https://upload.wikimedia.org/wikipedia/commons/e/e8/Microsoft_Office_Word_%282025%E2%80%93present%29.svg" alt="W" style="width:14px;height:14px;"> word.new</a>
+                    <a href="https://excel.new" target="_blank" class="btn btn-primary" style="background:#217346;display:inline-flex;align-items:center;gap:6px;"><img src="https://upload.wikimedia.org/wikipedia/commons/6/60/Microsoft_Office_Excel_%282025%E2%80%93present%29.svg" alt="X" style="width:14px;height:14px;"> excel.new</a>
+                    <a href="https://powerpoint.new" target="_blank" class="btn btn-primary" style="background:#c43e1c;display:inline-flex;align-items:center;gap:6px;"><img src="https://upload.wikimedia.org/wikipedia/commons/d/df/Microsoft_Office_PowerPoint_%282025%E2%80%93present%29.svg" alt="P" style="width:14px;height:14px;"> powerpoint.new</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="diff-badge base">🟢 De base</div>
+                <div class="card-header">
+                    <div class="card-icon">📋</div>
+                    <div>
+                        <h3>Presse-papiers étendu — copie multiples</h3>
+                        <span class="shortcut-tag">Win + V</span>
+                    </div>
+                </div>
+                <p class="card-description">Win + V ouvre l'historique de tout ce que tu as copié récemment — utile pour coller des extraits de plusieurs sources sans revenir en arrière à chaque fois. Épingle les éléments fréquents (citations, formules, URLs).</p>
+                <div class="card-actions">
+                    <button class="btn btn-primary" onclick="window.open('ms-settings:clipboard')">Activer l'historique</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="diff-badge base">🟢 De base</div>
+                <div class="card-header">
+                    <div class="card-icon">📸</div>
+                    <div>
+                        <h3>Capture d'écran ciblée</h3>
+                        <span class="shortcut-tag">Win + MAJ + S</span>
+                    </div>
+                </div>
+                <p class="card-description">Sélectionne une zone précise de l'écran pour capturer un graphique, un tableau ou un énoncé. La capture est copiée pour coller directement dans Word ou Teams. Plus besoin de recadrer après.</p>
+                <div class="card-actions">
+                    <button class="btn btn-secondary" onclick="alert('Win + MAJ + S → sélectionne la zone\n\nModes :\n• Zone rectangulaire (défaut)\n• Forme libre\n• Fenêtre entière\n• Plein écran\n\nClic sur la notification → annotation, rogner, copier, enregistrer.')">Voir les options</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="diff-badge base">🟢 De base</div>
+                <div class="card-header">
+                    <div class="card-icon">🔤</div>
+                    <div>
+                        <h3>Extraire du texte d'une image</h3>
+                        <span class="shortcut-tag">Win + MAJ + T</span>
+                    </div>
+                </div>
+                <p class="card-description">Tu as pris une photo d'un tableau blanc, d'une diapo ou d'un schéma? L'Outil Capture peut extraire le texte directement. Capture la zone → clique sur l'icône <strong>T</strong> → colle dans Word. Fini de retaper à la main!</p>
+                <div class="card-actions">
+                    <button class="btn btn-secondary" onclick="alert('Win + MAJ + T → sélectionne la zone contenant le texte\n→ Clique la notification\n→ Dans l\'aperçu, clique « Copier le texte » (icône T)\n→ Ctrl + V pour coller dans Word, Teams ou partout\n\nFonctionne sur :\n• Photos de tableaux blancs\n• Captures d\'écran de PDF non copiables\n• Images de texte reçues par MIO')">Comment faire?</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="diff-badge base">🟢 De base</div>
+                <div class="card-header">
+                    <div class="card-icon">🎤</div>
+                    <div>
+                        <h3>Dictée vocale</h3>
+                        <span class="shortcut-tag">Win + H</span>
+                    </div>
+                </div>
+                <p class="card-description">Dicte du texte n'importe où dans Windows : Word, Moodle, Teams, un formulaire web. Pratique pour prendre des notes rapidement ou rédiger une ébauche sans toucher le clavier. Fonctionne en français.</p>
+            </div>
+
+            <div class="card">
+                <div class="diff-badge inter">🟡 Intermédiaire</div>
+                <div class="card-header">
+                    <div class="card-icon">💬</div>
+                    <div>
+                        <h3>Sous-titres en direct</h3>
+                        <span class="shortcut-tag">Ctrl + Win + L</span>
+                    </div>
+                </div>
+                <p class="card-description">Windows 11 peut sous-titrer en temps réel tout ce qui se dit sur ton ordinateur : cours Teams, vidéos, balados, appels. Tout se passe localement — aucun audio n'est envoyé en ligne. Idéal si tu as du mal à suivre un professeur qui parle vite ou un cours en anglais.</p>
+                <div class="card-actions">
+                    <button class="btn btn-primary" onclick="window.open('ms-settings:easeofaccess-closedcaptioning')">Activer les sous-titres</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="diff-badge inter">🟡 Intermédiaire</div>
+                <div class="card-header">
+                    <div class="card-icon">🪟</div>
+                    <div>
+                        <h3>Disposition des fenêtres</h3>
+                        <span class="shortcut-tag">Win + Z</span>
+                    </div>
+                </div>
+                <p class="card-description">Survole le bouton de maximisation d'une fenêtre pour voir les dispositions disponibles. Win + Z ouvre le menu. Parfait pour avoir ton cours Teams et ton Word côte à côte sans manipuler manuellement chaque fenêtre.</p>
+                <div class="card-actions">
+                    <button class="btn btn-secondary" onclick="alert('Survole le bouton □ (maximiser) d\'une fenêtre\n→ Choisis une disposition dans le menu\n\nOu : Win + Z pour ouvrir le menu\nWin + ← / → pour ancrer rapidement à gauche ou à droite\nWin + ↑ pour maximiser')">Plus d'infos</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="diff-badge inter">🟡 Intermédiaire</div>
+                <div class="card-header">
+                    <div class="card-icon">🗂️</div>
+                    <div>
+                        <h3>Bureaux virtuels — un par cours</h3>
+                        <span class="shortcut-tag">Win + Ctrl + D</span>
+                    </div>
+                </div>
+                <p class="card-description">Crée un bureau par matière : un pour Biologie avec ses docs ouverts, un pour Philo, un pour les recherches. Bascule entre eux avec Win + Ctrl + ← / →. Chaque bureau a ses propres fenêtres — idéal pour garder le focus.</p>
+                <div class="card-actions">
+                    <button class="btn btn-secondary" onclick="alert('Win + Tab → Nouveau bureau (en haut)\nWin + Ctrl + D = créer un bureau\nWin + Ctrl + ← / → = naviguer entre bureaux\nWin + Ctrl + F4 = fermer le bureau actif')">Voir raccourcis</button>
+                </div>
+            </div>
+
+        </div>
+        <div class="back-to-toc"><a href="#toc">↑ Retour au menu</a></div>
+    </section>
+
+
+    <!-- ============================================
+         SECTION 2 : Suite M365
+    ============================================= -->
+    <section id="m365" class="section-block s-m365">
+        <div class="section-header">
+            <div class="section-icon">
+                <img src="https://upload.wikimedia.org/wikipedia/fr/0/02/Microsoft_365_Copilot.svg" alt="M365" style="width:2rem;height:2rem;">
+            </div>
+            <div>
+                <h2>Suite M365 — ton bureau numérique</h2>
+            </div>
+        </div>
+        <p class="section-desc">Tu as accès à Microsoft 365 gratuitement via le Cégep. Word, Excel, PowerPoint, Teams, OneDrive, OneNote, To Do, Clipchamp — tout est là. Voici comment en tirer le maximum.</p>
+
+        <div class="cards-grid">
+
+            <div class="card">
+                <div class="diff-badge base">🟢 De base</div>
+                <div class="card-header">
+                    <div class="card-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/3/34/Microsoft_OneNote_Icon_%282025_-_present%29.svg" alt="OneNote" style="width:2rem;height:2rem;"></div>
+                    <div><h3>OneNote — ton cahier numérique</h3></div>
+                </div>
+                <p class="card-description">Crée un bloc-notes par session avec une section par cours. Colle des captures d'écran de diapos, écris des notes, enregistre des enregistrements audio. Tout se synchronise sur OneDrive et s'ouvre sur ton téléphone. Fini de rater des notes parce que ton portable était déchargé.</p>
+                <div class="card-actions">
+                    <a href="https://cgodin.qc.ca/onenote" target="_blank" class="btn btn-primary">Ouvrir OneNote</a>
+                    <button class="btn btn-secondary" onclick="alert('Organisation recommandée :\nBloc-notes : Session A-2025\n→ Section : Biologie\n→ Section : Philosophie\n→ Section : Mathématiques\n\nDans chaque section, une page par cours ou par semaine.\n\nAstuce : Win + MAJ + S pour capturer une diapo, puis Ctrl + V dans OneNote.')">Astuce organisation</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="diff-badge base">🟢 De base</div>
+                <div class="card-header">
+                    <div class="card-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6e/Microsoft_To-Do_icon.svg" alt="To Do" style="width:2rem;height:2rem;"></div>
+                    <div><h3>Microsoft To Do — ne rien oublier</h3></div>
+                </div>
+                <p class="card-description">Garde toutes tes tâches, devoirs et remises dans une seule app. Crée une liste par cours, définis des échéances, reçois des rappels. Sur mobile, ajoute une tâche en deux secondes sans te chercher. Synchronisé avec Outlook automatiquement.</p>
+                <div class="card-actions">
+                    <a href="ms-todo:" class="btn btn-primary" onclick="event.preventDefault();window.open('ms-todo:')">Ouvrir To Do</a>
+                    <button class="btn btn-secondary" onclick="alert('Astuce : crée une liste « Remises de la semaine » et une liste par cours.\n\nSur mobile : note les devoirs donnés en cours directement dans To Do → plus besoin de mémoriser.\n\nCtrl + P dans To Do pour imprimer ta liste avant une rencontre avec ton prof.')">Astuce devoirs</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="diff-badge base">🟢 De base</div>
+                <div class="card-header">
+                    <div class="card-icon"><img src="https://upload.wikimedia.org/wikipedia/fr/6/66/Logo_Microsoft_Teams_%282025%29.svg" alt="Teams" style="width:2rem;height:2rem;"></div>
+                    <div><h3>Teams — cours en ligne et collaboration</h3></div>
+                </div>
+                <p class="card-description">Tes profs t'invitent parfois à rejoindre une équipe Teams. Consulte les fichiers partagés, participe aux discussions, pose des questions dans les canaux. Sur mobile, active les notifications pour ne pas manquer un message important de ton équipe ou de ton prof.</p>
+                <div class="card-actions">
+                    <a href="https://cgodin.qc.ca/teams" target="_blank" class="btn btn-primary">Ouvrir Teams</a>
+                    <button class="btn btn-secondary" onclick="alert('Astuce Teams :\n\n• Épingle les équipes actives (clic droit → Épingler) pour les avoir en haut\n• Utilise @mention pour notifier un coéquipier précis\n• Dans un fichier Teams → tu peux coéditer en temps réel avec tes coéquipiers\n• Ctrl + F pour chercher dans les messages d\'un canal\n• Active les notifications par canal pour ne pas tout recevoir')">Trucs Teams</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="diff-badge inter">🟡 Intermédiaire</div>
+                <div class="card-header">
+                    <div class="card-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/e/e8/Microsoft_Office_Word_%282025%E2%80%93present%29.svg" alt="Word" style="width:2rem;height:2rem;"></div>
+                    <div>
+                        <h3>Commentaires dans Word avec @mention</h3>
+                        <span class="shortcut-tag">Ctrl + Alt + M</span>
+                    </div>
+                </div>
+                <p class="card-description">En travail d'équipe, utilise les commentaires pour laisser des notes à tes coéquipiers directement dans le document. Tape <strong>@prénom</strong> pour notifier une personne précise — elle recevra un courriel avec le lien. Plus besoin de s'envoyer 15 versions du fichier.</p>
+                <div class="card-actions">
+                    <button class="btn btn-secondary" onclick="alert('Ctrl + Alt + M = insérer un commentaire\n\nDans le commentaire, tape @prénom pour notifier un coéquipier\n→ Il recevra une notification avec le lien vers le document\n\nFini de travailler sur rapport_final_vrai_v3.docx 😄')">Comment faire?</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="diff-badge inter">🟡 Intermédiaire</div>
+                <div class="card-header">
+                    <div class="card-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Microsoft_OneDrive_Icon_%282025_-_present%29.svg" alt="OneDrive" style="width:2rem;height:2rem;"></div>
+                    <div><h3>Historique de versions — retour en arrière</h3></div>
+                </div>
+                <p class="card-description">Tous les fichiers sur OneDrive conservent automatiquement un historique de versions. Tu as supprimé du contenu par erreur? Tu veux voir comment était ton travail il y a deux jours? Reviens à n'importe quelle version antérieure en quelques clics.</p>
+                <div class="card-actions">
+                    <button class="btn btn-secondary" onclick="alert('Dans OneDrive (web) :\nClic droit sur le fichier → Historique des versions\n→ Clique une version pour la prévisualiser\n→ Restaurer pour revenir à cette version\n\nDans Word / Excel / PowerPoint (fichier sur OneDrive) :\nFichier → Informations → Historique des versions\n\nOneDrive conserve jusqu\'à 500 versions.')">Comment accéder?</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="diff-badge inter">🟡 Intermédiaire</div>
+                <div class="card-header">
+                    <div class="card-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/e/e8/Microsoft_Office_Word_%282025%E2%80%93present%29.svg" alt="Word" style="width:2rem;height:2rem;"></div>
+                    <div><h3>Coécriture en temps réel</h3><span class="badge badge-tip">Travaux d'équipe</span></div>
+                </div>
+                <p class="card-description">Toi et tes coéquipiers pouvez modifier le même fichier Word, Excel ou PowerPoint <em>en même temps</em>! Vous voyez les modifications de l'autre en direct. Le fichier doit être sur OneDrive. Plus besoin de «&nbsp;c'est mon tour, envoie-moi le fichier&nbsp;».</p>
+                <div class="card-actions">
+                    <button class="btn btn-secondary" onclick="alert('Pour coéditer un document :\n\n1. Enregistre le fichier sur OneDrive\n   Fichier → Enregistrer une copie → OneDrive\n\n2. Partage-le avec tes coéquipiers\n   Bouton Partager en haut à droite\n\n3. Modifiez en même temps!\n   Chaque personne a son curseur coloré')">Comment faire?</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="diff-badge inter">🟡 Intermédiaire</div>
+                <div class="card-header">
+                    <div class="card-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Microsoft_OneDrive_Icon_%282025_-_present%29.svg" alt="OneDrive" style="width:2rem;height:2rem;"></div>
+                    <div><h3>Numériser un document avec OneDrive</h3></div>
+                </div>
+                <p class="card-description">L'app OneDrive sur iOS et Android inclut un scanner de documents. Photographie n'importe quelle page papier et elle est automatiquement convertie en PDF lisible et enregistrée dans ton OneDrive — accessible depuis ton ordinateur en quelques secondes. Idéal pour numériser un examen ou des notes manuscrites.</p>
+                <div class="card-actions">
+                    <button class="btn btn-secondary" onclick="alert('Sur ton téléphone :\n1. Ouvre l\'app OneDrive\n2. Tape le + (ajouter)\n3. Choisis « Scanner »\n4. Photographie le document\n→ Il apparaît automatiquement en PDF dans ton OneDrive\n\nFonctionne aussi pour les tableaux blancs et les notes manuscrites!')">Plus d'infos</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="diff-badge inter">🟡 Intermédiaire</div>
+                <div class="card-header">
+                    <div class="card-icon">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/8/86/Microsoft_Clipchamp_logo.svg" alt="Clipchamp" style="width:2rem;height:2rem;" onerror="this.parentElement.textContent='🎬'">
+                    </div>
+                    <div><h3>Clipchamp — montage vidéo simple</h3><span class="badge badge-new">Inclus M365</span></div>
+                </div>
+                <p class="card-description">Clipchamp est un éditeur vidéo gratuit intégré à Windows et M365. Parfait pour les travaux qui demandent une présentation vidéo, un montage ou une capsule explicative. Découpe, ajoute des titres, de la musique, des sous-titres automatiques. Exporte en HD.</p>
+                <div class="card-actions">
+                    <button class="btn btn-primary" onclick="window.open('clipchamp:')">Ouvrir Clipchamp</button>
+                    <button class="btn btn-secondary" onclick="alert('Clipchamp est déjà installé sur ton portable Windows.\nCherche « Clipchamp » dans le menu Démarrer.\n\nFonctionnalités utiles :\n• Découpe et assemblage de clips\n• Titres et transitions\n• Sous-titres automatiques (reconnaissance vocale)\n• Fond vert (chroma key)\n• Export jusqu\'en 1080p\n\nAlternative en ligne : clipchamp.com')">Fonctionnalités</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="diff-badge adv">🔴 Avancé</div>
+                <div class="card-header">
+                    <div class="card-icon"><img src="https://upload.wikimedia.org/wikipedia/fr/0/02/Microsoft_365_Copilot.svg" alt="Copilot" style="width:2rem;height:2rem;"></div>
+                    <div><h3>M365 Copilot — IA sécurisée du Cégep</h3><span class="badge badge-new">IA</span></div>
+                </div>
+                <p class="card-description">Copilot est l'IA intégrée à la suite M365 du Cégep. Tes données ne servent <em>jamais</em> à entraîner l'IA. Utilise-le pour résumer des documents, générer des ébauches, expliquer un concept, poser des questions sur un texte. C'est l'équivalent sécurisé de ChatGPT — dans l'environnement du Cégep.</p>
+                <div class="card-actions">
+                    <a href="https://m365.cloud.microsoft/chat/" target="_blank" class="btn btn-primary">Ouvrir M365 Copilot</a>
+                    <button class="btn btn-secondary" onclick="alert('Exemples d\'utilisation :\n\n• « Résume ce texte en 5 points »\n• « Explique-moi le concept de mitose comme si j\'avais 15 ans »\n• « Donne-moi un plan pour une dissertation sur... »\n• « Quelles erreurs vois-tu dans mon texte ci-dessous? »\n\n⚠️ Rappel : Copilot aide, mais c\'est TON travail qui est évalué. Valide toujours les informations générées.')">Exemples d'utilisation</button>
+                </div>
+            </div>
+
+        </div>
+        <div class="back-to-toc"><a href="#toc">↑ Retour au menu</a></div>
+    </section>
+
+
+    <!-- ============================================
+         ANTIDOTE BLOCK
+    ============================================= -->
+    <div class="highlight-block antidote-block" style="margin-bottom:3rem;">
+        <div style="display:flex;align-items:center;gap:1.5rem;margin-bottom:1.5rem;flex-wrap:wrap;">
+            <div style="font-size:3rem;">🔮</div>
+            <div>
+                <h2 style="font-family:'Syne',sans-serif;font-size:2rem;color:#c864ff;margin-bottom:0.25rem;">Antidote — ton correcteur professionnel</h2>
+                <p style="color:#9b50cc;font-size:1.05rem;">Correcteur, dictionnaire et guide linguistique — disponible au Cégep</p>
+            </div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.25rem;margin-bottom:1.5rem;">
+            <div class="inner-tile" style="border-color:rgba(200,100,255,0.2);background:rgba(200,100,255,0.05);">
+                <strong style="color:#c864ff;display:block;margin-bottom:0.5rem;">✅ Correction intelligente</strong>
+                <p style="color:#9b50cc;font-size:0.92rem;line-height:1.6;">Antidote détecte les erreurs de grammaire, d'orthographe, de syntaxe et de ponctuation. Il explique <em>pourquoi</em> c'est une erreur — pas juste de souligner en rouge.</p>
+            </div>
+            <div class="inner-tile" style="border-color:rgba(200,100,255,0.2);background:rgba(200,100,255,0.05);">
+                <strong style="color:#c864ff;display:block;margin-bottom:0.5rem;">📖 Dictionnaire et synonymes</strong>
+                <p style="color:#9b50cc;font-size:0.92rem;line-height:1.6;">Cherche des synonymes, des définitions, des cooccurrences (quels mots vont souvent ensemble), et des exemples tirés de vrais textes. Idéal pour enrichir ton vocabulaire dans les dissertations.</p>
+            </div>
+            <div class="inner-tile" style="border-color:rgba(200,100,255,0.2);background:rgba(200,100,255,0.05);">
+                <strong style="color:#c864ff;display:block;margin-bottom:0.5rem;">🔗 Intégration Word et navigateur</strong>
+                <p style="color:#9b50cc;font-size:0.92rem;line-height:1.6;">Antidote s'intègre directement dans Word, et une extension permet de corriger dans les navigateurs. Un clic depuis Word suffit à lancer la correction complète du document.</p>
+            </div>
+        </div>
+        <button class="btn" style="background:rgba(200,100,255,0.2);color:#c864ff;border:1px solid rgba(200,100,255,0.3);font-weight:600;" onclick="alert('Antidote est disponible sur les ordinateurs des laboratoires et bibliothèques du Cégep.\n\nPour l\'utiliser sur ton portable :\n• Vérifie si une licence étudiante est disponible via le Service informatique du Cégep\n• Sinon, utilise les postes de la bibliothèque pour tes corrections importantes\n\nDans Word avec Antidote installé :\nOnglet Antidote → Corriger (ou Shift+F7 si configuré ainsi)')">Accès et licences</button>
+    </div>
+
+
+    <!-- ============================================
+         SECTION 3 : Moodle & Omnivox
+    ============================================= -->
+    <section id="moodle" class="section-block s-moodle">
+        <div class="section-header">
+            <div class="section-icon">🎓</div>
+            <div>
+                <h2>Moodle &amp; Omnivox</h2>
+            </div>
+        </div>
+        <p class="section-desc">Moodle est ta plateforme de cours en ligne. Omnivox gère ton dossier étudiant. Voici comment naviguer efficacement dans ces deux outils essentiels.</p>
+
+        <div class="cards-grid">
+
+            <div class="card">
+                <div class="diff-badge base">🟢 De base</div>
+                <div class="card-header">
+                    <div class="card-icon"><img src="https://www.google.com/s2/favicons?domain=moodle.org&sz=32" alt="Moodle" style="width:2rem;height:2rem;border-radius:6px;"></div>
+                    <div><h3>Activer les notifications Moodle</h3></div>
+                </div>
+                <p class="card-description">Moodle peut t'envoyer un courriel ou une notification mobile quand un prof publie un message, ajoute une ressource ou donne une rétroaction sur un travail. Configure ça dès la première semaine — tu ne rateras plus les annonces importantes.</p>
+                <div class="card-actions">
+                    <a href="https://cgodin.qc.ca/moodle" target="_blank" class="btn btn-primary">Ouvrir Moodle</a>
+                    <button class="btn btn-secondary" onclick="alert('Dans Moodle :\nClique sur ton avatar (en haut à droite) → Préférences → Notifications\n\nActive les canaux pour :\n• Annonces de cours\n• Messages privés\n• Commentaires sur les travaux\n• Forum de discussion\n\nInstalle aussi l\'app Moodle sur mobile pour les notifications push.')">Configurer</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="diff-badge base">🟢 De base</div>
+                <div class="card-header">
+                    <div class="card-icon">📅</div>
+                    <div><h3>Tableau de bord Moodle — vue calendrier</h3></div>
+                </div>
+                <p class="card-description">Le tableau de bord de Moodle montre une vue calendrier de toutes tes remises et activités à venir — pour tous tes cours en même temps. Utilise le bloc «&nbsp;Prochaines échéances&nbsp;» pour voir ce qui arrive cette semaine.</p>
+                <div class="card-actions">
+                    <button class="btn btn-secondary" onclick="alert('Dans Moodle → tableau de bord :\n\n• Bloc « Prochaines échéances » → liste des remises imminentes\n• Calendrier → vue mensuelle de toutes les activités\n• Activités récentes → ce qui a été ajouté par tes profs\n\nAstuce : exporte le calendrier Moodle dans Outlook pour avoir tout au même endroit.\nDans Moodle → Calendrier → Exporter le calendrier → Copie l\'URL iCal → Outlook → Ajouter un calendrier → À partir d\'Internet')">Trucs tableau de bord</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="diff-badge base">🟢 De base</div>
+                <div class="card-header">
+                    <div class="card-icon"><img src="https://play-lh.googleusercontent.com/y2JS5BQN_8g3WAjpohJRX3cThSQW_kHxDjyyAD2DpeGM12vkOX75Ie31GrhVVPZZRjI=w240-h480-rw" alt="Omnivox" style="width:2rem;height:2rem;border-radius:6px;"></div>
+                    <div><h3>MIO — messagerie institutionnelle</h3></div>
+                </div>
+                <p class="card-description">MIO (dans Omnivox) est la messagerie officielle du Cégep. Tes profs et le secrétariat t'y contactent. Consulte-le régulièrement — plusieurs informations importantes (horaires, résultats, convocations) passent seulement par MIO.</p>
+                <div class="card-actions">
+                    <a href="https://cgodin.qc.ca/omnivox" target="_blank" class="btn btn-primary">Ouvrir Omnivox</a>
+                    <button class="btn btn-secondary" onclick="alert('Astuce MIO :\nLors de la rédaction d\'un MIO, utilise les Textes rapides pour insérer des formules fréquentes en un clic.\n\nPour sauvegarder un texte rapide :\nRédige un message → sélectionne le texte → icône Textes rapides → Sauvegarder la sélection\n\nInstalle l\'app Omnivox sur mobile pour recevoir les MIO en notification push.')">Trucs MIO</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="diff-badge inter">🟡 Intermédiaire</div>
+                <div class="card-header">
+                    <div class="card-icon"><img src="https://www.google.com/s2/favicons?domain=moodle.org&sz=32" alt="Moodle" style="width:2rem;height:2rem;border-radius:6px;"></div>
+                    <div><h3>Installer un site Moodle comme application</h3></div>
+                </div>
+                <p class="card-description">Transforme Moodle en application native sur ton ordinateur et ton téléphone. Elle apparaît dans le menu Démarrer, peut être épinglée à la barre des tâches et s'ouvre dans une fenêtre dédiée. Plus rapide d'accès qu'un onglet noyé dans 20 autres.</p>
+                <div class="card-actions">
+                    <button class="btn btn-secondary" onclick="alert('Pour installer Moodle comme application dans Edge :\n\n1. Ouvre Moodle dans Edge\n2. Clique sur ··· (menu) → Outils supplémentaires → Applications\n3. → Installer ce site en tant qu\'application\n4. Clique Installer\n\nL\'application apparaît dans le menu Démarrer et peut être épinglée à la barre des tâches.')">Comment faire?</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="diff-badge inter">🟡 Intermédiaire</div>
+                <div class="card-header">
+                    <div class="card-icon">📖</div>
+                    <div><h3>Lecteur immersif pour les cours en ligne</h3><span class="shortcut-tag">F9</span></div>
+                </div>
+                <p class="card-description">Dans Edge, le Lecteur immersif (F9) élimine publicités et menus pour ne laisser que le texte d'une page Moodle, d'un article ou d'une page de cours. Il peut aussi <strong>lire le contenu à voix haute</strong> mot par mot. Pratique pour réviser les notes de cours.</p>
+                <div class="card-actions">
+                    <button class="btn btn-secondary" onclick="alert('Dans Edge, ouvre une page de cours Moodle\n→ Appuie sur F9 ou cherche l\'icône livre dans la barre d\'adresse\n\nFonctions dans le lecteur :\n• Lecture à voix haute (voix et vitesse réglables)\n• Taille et espacement du texte\n• Thèmes de couleur (réduit la fatigue)\n• Dictionnaire intégré (double-clique un mot)')">Plus d'infos</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="diff-badge inter">🟡 Intermédiaire</div>
+                <div class="card-header">
+                    <div class="card-icon"><img src="https://play-lh.googleusercontent.com/y2JS5BQN_8g3WAjpohJRX3cThSQW_kHxDjyyAD2DpeGM12vkOX75Ie31GrhVVPZZRjI=w240-h480-rw" alt="Omnivox" style="width:2rem;height:2rem;border-radius:6px;"></div>
+                    <div><h3>Relevé de notes et horaire dans Omnivox</h3></div>
+                </div>
+                <p class="card-description">Omnivox centralise ton dossier étudiant : relevés de notes par cours, horaire officiel, absences, plans de cours, déclarations. Consulte-le régulièrement et télécharge ton relevé de notes officiel quand tu en as besoin (bourses, transferts, employeurs).</p>
+                <div class="card-actions">
+                    <a href="https://cgodin.qc.ca/omnivox" target="_blank" class="btn btn-primary">Ouvrir Omnivox</a>
+                </div>
+            </div>
+
+        </div>
+        <div class="back-to-toc"><a href="#toc">↑ Retour au menu</a></div>
+    </section>
+
+
+    <!-- ============================================
+         SECTION 4 : Focus & Concentration
+    ============================================= -->
+    <section id="focus" class="section-block s-focus">
+        <div class="section-header">
+            <div class="section-icon">🧘</div>
+            <div><h2>Concentration &amp; gestion du temps</h2></div>
+        </div>
+        <p class="section-desc">La distraction est l'ennemi numéro un de la réussite scolaire. Ces outils t'aident à créer des blocs de travail réels, à mieux gérer ton énergie et à déconnecter sainement.</p>
+
+        <div class="cards-grid">
+
+            <div class="card">
+                <div class="diff-badge base">🟢 De base</div>
+                <div class="card-header">
+                    <div class="card-icon">⏱️</div>
+                    <div><h3>Sessions de concentration Pomodoro</h3></div>
+                </div>
+                <p class="card-description">L'application Horloge de Windows 11 inclut un assistant de concentration : sessions de travail avec minuteur, pauses intégrées et musique relaxante optionnelle. La méthode Pomodoro (25 min travail, 5 min pause) est scientifiquement prouvée pour améliorer la productivité.</p>
+                <div class="card-actions">
+                    <button class="btn btn-primary" onclick="window.open('ms-clock:')">Sessions de concentration</button>
+                    <button class="btn btn-secondary" onclick="alert('Horloge Windows 11 → onglet « Sessions de concentration »\n\nConfigure :\n• Durée de session (25 min = Pomodoro classique)\n• Durée des pauses (5 min courtes, 15-30 min longues)\n• Musique de fond Spotify (si connecté)\n\nPendant la session, les notifications sont automatiquement réduites.\n\nConseil : fais 4 Pomodoros → grande pause → recommence.')">Comment ça marche?</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="diff-badge base">🟢 De base</div>
+                <div class="card-header">
+                    <div class="card-icon">🔕</div>
+                    <div>
+                        <h3>Ne Pas Déranger — bloque tout</h3>
+                        <span class="shortcut-tag">Win + N</span>
+                    </div>
+                </div>
+                <p class="card-description">Quand tu dois te concentrer, les notifications de Teams, de jeux et des réseaux sociaux sont ton pire ennemi. Win + N → active «&nbsp;Ne pas déranger&nbsp;» pour bloquer <em>toutes</em> les notifications pendant ton bloc de travail. Tu les retrouveras au centre de notifications quand tu seras prêt(e).</p>
+                <div class="card-actions">
+                    <button class="btn btn-primary" onclick="window.open('ms-settings:notifications')">Paramètres notifications</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="diff-badge base">🟢 De base</div>
+                <div class="card-header">
+                    <div class="card-icon">🌙</div>
+                    <div><h3>Éclairage nocturne — dors mieux</h3></div>
+                </div>
+                <p class="card-description">L'éclairage nocturne réduit la lumière bleue émise par l'écran le soir. Étudier jusqu'à minuit est souvent inévitable au cégep — autant réduire l'impact sur ton sommeil. Programme-le pour qu'il s'active automatiquement au coucher du soleil.</p>
+                <div class="card-actions">
+                    <button class="btn btn-primary" onclick="window.open('ms-settings:nightlight')">Activer l'éclairage nocturne</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="diff-badge inter">🟡 Intermédiaire</div>
+                <div class="card-header">
+                    <div class="card-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/e/e8/Microsoft_Office_Word_%282025%E2%80%93present%29.svg" alt="Word" style="width:2rem;height:2rem;"></div>
+                    <div><h3>Mode Focus dans Word — rédaction sans distraction</h3></div>
+                </div>
+                <p class="card-description">Le mode Focus masque tous les rubans, barres d'outils et menus pour ne laisser que le texte. Parfait pour rédiger une dissertation ou un rapport sans interruption visuelle. Appuie sur Échap pour revenir à la vue normale.</p>
+                <div class="card-actions">
+                    <button class="btn btn-secondary" onclick="alert('Dans Word :\nAffichage → Focus\n\nOu : clique le bouton « Focus » dans la barre de statut en bas à droite de Word.\n\nÉchap pour quitter le mode Focus.\n\nCombine avec Ne Pas Déranger (Win + N) pour une session de rédaction sans aucune interruption.')">Comment activer?</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="diff-badge inter">🟡 Intermédiaire</div>
+                <div class="card-header">
+                    <div class="card-icon">🗂️</div>
+                    <div><h3>Planification hebdomadaire avec To Do</h3><span class="badge badge-tip">Méthode</span></div>
+                </div>
+                <p class="card-description">Chaque dimanche soir, ouvre To Do et liste toutes les tâches de la semaine (lectures, devoirs, révisions, remises). Assigne une date à chacune. Le lundi matin, tu commences la semaine avec un plan clair — plus de «&nbsp;j'avais oublié ce devoir&nbsp;».</p>
+                <div class="card-actions">
+                    <button class="btn btn-secondary" onclick="alert('Système recommandé dans To Do :\n\n• Liste « Remises semaine » → toutes les remises imminentes\n• Liste « Lectures à faire » → suivi des lectures assignées\n• Liste par cours → tâches spécifiques à chaque matière\n\nFonction « Ma journée » → chaque matin, choisis 3 tâches prioritaires et ajoute-les à ta journée.\n\nSur mobile : note les devoirs donnés en cours en temps réel.')">Voir la méthode</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="diff-badge adv">🔴 Avancé</div>
+                <div class="card-header">
+                    <div class="card-icon">📊</div>
+                    <div><h3>Exporte ton calendrier Moodle dans Outlook</h3></div>
+                </div>
+                <p class="card-description">Importe toutes tes échéances Moodle dans ton calendrier Outlook pour avoir tout au même endroit : cours, remises, examens, activités. Le calendrier se met à jour automatiquement quand ton prof ajoute une activité.</p>
+                <div class="card-actions">
+                    <button class="btn btn-secondary" onclick="alert('Pour importer le calendrier Moodle dans Outlook :\n\n1. Dans Moodle → Calendrier (colonne de droite) → clic sur « Exporter le calendrier »\n2. Choisis : Tous les événements · Tous les cours · 60 prochains jours (ou plus)\n3. Clique « Obtenir l\'URL du calendrier » → copie l\'URL iCal\n\n4. Dans Outlook → calendrier → Ajouter un calendrier\n   → À partir d\'Internet → colle l\'URL\n   → Nomme-le « Moodle » → Importer\n\nLes événements Moodle apparaissent maintenant dans ton calendrier Outlook et se mettent à jour automatiquement!')">Comment faire?</button>
+                </div>
+            </div>
+
+        </div>
+        <div class="back-to-toc"><a href="#toc">↑ Retour au menu</a></div>
+    </section>
+
+
+    <!-- ============================================
+         SECTION 5 : Sécurité & Vie privée
+    ============================================= -->
+    <section id="securite" class="section-block s-securite">
+        <div class="section-header">
+            <div class="section-icon">🔒</div>
+            <div><h2>Sécurité &amp; Vie privée</h2></div>
+        </div>
+        <p class="section-desc">Au cégep tu gères des comptes, des documents personnels et des données sensibles. Ces réflexes simples te protègent des risques réels.</p>
+
+        <div class="cards-grid">
+
+            <div class="card">
+                <div class="diff-badge base">🟢 De base</div>
+                <div class="card-header">
+                    <div class="card-icon">🔑</div>
+                    <div><h3>Réinitialiser ton mot de passe GG</h3></div>
+                </div>
+                <p class="card-description">Mot de passe oublié ou expiré? Tu peux le réinitialiser toi-même en quelques minutes depuis n'importe quel appareil — sans appeler le soutien technique ni attendre.</p>
+                <div class="card-actions">
+                    <a href="https://cgodin.qc.ca/motdepasse" target="_blank" class="btn btn-primary">Réinitialiser mon mot de passe</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="diff-badge base">🟢 De base</div>
+                <div class="card-header">
+                    <div class="card-icon">🔐</div>
+                    <div><h3>Gestionnaire de mots de passe</h3><span class="badge badge-free">Gratuit</span></div>
+                </div>
+                <p class="card-description">Au cégep tu crées des dizaines de comptes. Un mot de passe fort et unique pour chaque site, sans avoir à tous les retenir? C'est le rôle d'un gestionnaire. <strong>Bitwarden</strong> est gratuit, open source et très complet. <strong>Proton Pass</strong> est une alternative solide axée sur la confidentialité.</p>
+                <div class="card-actions">
+                    <a href="https://bitwarden.com/" target="_blank" class="btn btn-primary" style="background:#175ddc;">Bitwarden (gratuit)</a>
+                    <a href="https://proton.me/pass" target="_blank" class="btn btn-secondary">Proton Pass</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="diff-badge base">🟢 De base</div>
+                <div class="card-header">
+                    <div class="card-icon">🖥️</div>
+                    <div>
+                        <h3>Verrouille l'écran avant de quitter</h3>
+                        <span class="shortcut-tag">Win + L</span>
+                    </div>
+                </div>
+                <p class="card-description">Que tu sois en laboratoire ou à la bibliothèque, Win + L verrouille instantanément l'écran. Ta session reste ouverte, tes fichiers sont intacts — personne ne peut y accéder. Réflexe essentiel avant de quitter un poste même pour deux minutes.</p>
+            </div>
+
+            <div class="card">
+                <div class="diff-badge base">🟢 De base</div>
+                <div class="card-header">
+                    <div class="card-icon">🛡️</div>
+                    <div><h3>Bloqueur de publicités — protection essentielle</h3></div>
+                </div>
+                <p class="card-description">Un bloqueur de publicités ne sert pas seulement à éviter les annonces — il te protège contre les <strong>publicités malveillantes</strong> qui peuvent infecter ton ordinateur en étant simplement affichées. <strong>uBlock Origin</strong> est l'extension recommandée : gratuite, légère, efficace.</p>
+                <div class="card-actions">
+                    <a href="https://microsoftedge.microsoft.com/addons/detail/ublock-origin/odfafepnkmbhccpbejgmiehpchacaeak" target="_blank" class="btn btn-primary">Installer pour Edge</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="diff-badge inter">🟡 Intermédiaire</div>
+                <div class="card-header">
+                    <div class="card-icon">🔎</div>
+                    <div><h3>Analyser un lien suspect — avant de cliquer</h3></div>
+                </div>
+                <p class="card-description">Tu reçois un lien par MIO, courriel ou Teams qui semble louche? Ne clique pas tout de suite. Copie-le et analyse-le avec un des outils gratuits ci-dessous — tu sauras en quelques secondes si c'est dangereux. Les faux concours et les faux colis sont des classiques.</p>
+                <div class="card-actions">
+                    <a href="https://www.virustotal.com/gui/home/url" target="_blank" class="btn btn-primary">VirusTotal</a>
+                    <a href="https://urlscan.io/" target="_blank" class="btn btn-secondary">urlscan.io</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="diff-badge inter">🟡 Intermédiaire</div>
+                <div class="card-header">
+                    <div class="card-icon">👤</div>
+                    <div><h3>Profil Edge séparé pour le Cégep</h3></div>
+                </div>
+                <p class="card-description">Crée un profil «&nbsp;Cégep&nbsp;» et un profil «&nbsp;Personnel&nbsp;» dans Edge. Favoris, historique, extensions et mots de passe restent complètement séparés. Quand tu travailles sur un labo public, tu ne mélanges pas ta navigation personnelle avec tes comptes scolaires.</p>
+                <div class="card-actions">
+                    <a href="https://support.microsoft.com/fr-fr/microsoft-edge/se-connecter-et-cr%C3%A9er-plusieurs-profils-dans-microsoft-edge-df94e622-2061-49ae-ad1d-6f0e43ce6435" target="_blank" class="btn btn-primary">Guide Profils Edge</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="diff-badge inter">🟡 Intermédiaire</div>
+                <div class="card-header">
+                    <div class="card-icon"><img src="https://upload.wikimedia.org/wikipedia/fr/0/02/Microsoft_365_Copilot.svg" alt="M365" style="width:2rem;height:2rem;"></div>
+                    <div><h3>IA institutionnelle vs IA publique — la différence</h3><span class="badge badge-new">Important</span></div>
+                </div>
+                <p class="card-description">ChatGPT, Gemini et d'autres IA publiques peuvent <strong>utiliser tes données pour entraîner leurs modèles</strong>. M365 Copilot du Cégep ne le fait <em>jamais</em> — tes textes, tes fichiers et tes conversations restent dans l'environnement sécurisé du Cégep. Pour les travaux scolaires, préfère M365 Copilot.</p>
+                <div class="card-actions">
+                    <a href="https://m365.cloud.microsoft/chat/" target="_blank" class="btn btn-primary">Ouvrir M365 Copilot</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="diff-badge adv">🔴 Avancé</div>
+                <div class="card-header">
+                    <div class="card-icon">🧊</div>
+                    <div><h3>Windows Sandbox — tester sans risque</h3></div>
+                </div>
+                <p class="card-description">Windows Sandbox est un environnement isolé et temporaire intégré à Windows 11. Tu peux y tester des logiciels téléchargés ou ouvrir des fichiers d'origine inconnue sans risquer ton système principal. Quand tu fermes la fenêtre, tout est effacé automatiquement.</p>
+                <div class="card-actions">
+                    <button class="btn btn-secondary" onclick="alert('Pour activer Windows Sandbox :\n\nMéthode 1 : Cherche « Activer ou désactiver des fonctionnalités Windows » dans le menu Démarrer\n→ Coche « Bac à sable Windows »\n→ Redémarre\n\nMéthode 2 : Demande au soutien informatique du Cégep d\'activer Sandbox sur ton portable.\n\nUtilisation :\nOuvre « Windows Sandbox » depuis le menu Démarrer\n→ Teste ce que tu veux à l\'intérieur\n→ Ferme la fenêtre → tout est effacé')">Comment activer?</button>
+                </div>
+            </div>
+
+        </div>
+        <div class="back-to-toc"><a href="#toc">↑ Retour au menu</a></div>
+    </section>
+
+
+    <!-- ============================================
+         SECTION 6 : Logiciels & Licences
+    ============================================= -->
+    <section id="logiciels" class="section-block s-logiciels">
+        <div class="section-header">
+            <div class="section-icon">🎓</div>
+            <div><h2>Logiciels &amp; Licences étudiantes</h2></div>
+        </div>
+        <p class="section-desc">En tant qu'étudiant(e) du Cégep, tu as accès à des logiciels professionnels gratuitement ou à prix réduit. Voici les ressources à connaître.</p>
+
+        <div class="cards-grid">
+
+            <div class="card">
+                <div class="diff-badge base">🟢 De base</div>
+                <div class="card-header">
+                    <div class="card-icon"><img src="https://upload.wikimedia.org/wikipedia/fr/0/02/Microsoft_365_Copilot.svg" alt="M365" style="width:2rem;height:2rem;"></div>
+                    <div><h3>Microsoft 365 — gratuit pour les étudiants</h3></div>
+                </div>
+                <p class="card-description">En tant qu'étudiant(e) du Cégep Gérald-Godin, tu as accès à la suite complète Microsoft 365 gratuitement. Word, Excel, PowerPoint, Teams, OneDrive (1 To!), OneNote, Clipchamp et bien plus — sur jusqu'à 5 appareils.</p>
+                <div class="card-actions">
+                    <a href="https://cgodin.qc.ca/m365" target="_blank" class="btn btn-primary">Accéder à M365</a>
+                    <button class="btn btn-secondary" onclick="alert('Pour installer les applications Office sur ton propre ordinateur :\n\n1. Va sur office365.com et connecte-toi avec ton compte @cgodin.qc.ca\n2. Clique « Installer les applications Office » (en haut à droite)\n3. Télécharge et installe\n\nTu peux installer Office sur :\n• Ton ordinateur personnel (PC ou Mac)\n• Ton téléphone iOS ou Android\n• Jusqu\'à 5 appareils simultanément')">Installer sur mon ordi</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="diff-badge inter">🟡 Intermédiaire</div>
+                <div class="card-header">
+                    <div class="card-icon">
+                        <img src="https://azureforeducation.microsoft.com/img/AzureEduHub/azure_fy20.png" alt="Azure" style="width:2rem;height:2rem;" onerror="this.parentElement.textContent='☁️'">
+                    </div>
+                    <div><h3>Azure Education — licences étudiantes STEM</h3><span class="badge badge-new">STEM</span></div>
+                </div>
+                <p class="card-description">Si tu es dans un programme de sciences, d'informatique ou de technologie, Azure Education te donne accès à des <strong>ISO et clés de produits Windows</strong>, à des crédits cloud Azure, et à des outils de développement — totalement gratuit avec ton adresse courriel institutionnelle @cgodin.qc.ca.</p>
+                <div class="card-actions">
+                    <a href="https://azureforeducation.microsoft.com/devtools" target="_blank" class="btn btn-primary">Azure Education</a>
+                    <button class="btn btn-secondary" onclick="alert('Pour accéder à Azure Education Dev Tools :\n\n1. Va sur azureforeducation.microsoft.com/devtools\n2. Connecte-toi avec ton adresse @cgodin.qc.ca\n3. Accepte les conditions d\'utilisation\n4. Cherche le logiciel que tu veux\n→ Télécharge l\'ISO et la clé de produit\n\nDisponible notamment :\n• Windows 10/11 (ISO + clé)\n• Windows Server\n• Visual Studio (IDE)\n• Outils de développement Microsoft\n\n⚠️ Licences réservées à usage éducatif.')">Comment accéder?</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="diff-badge base">🟢 De base</div>
+                <div class="card-header">
+                    <div class="card-icon">📚</div>
+                    <div><h3>Logiciels disponibles dans les laboratoires</h3></div>
+                </div>
+                <p class="card-description">Tu as besoin de savoir si un logiciel particulier (SPSS, AutoCAD, Photoshop, MATLAB, etc.) est disponible dans un labo informatique avant ton cours ou pour travailler sur un devoir? La page d'aide techno liste tous les logiciels par laboratoire.</p>
+                <div class="card-actions">
+                    <a href="https://cgodin365.sharepoint.com/sites/QG/SitePages/Aidetechno.aspx" target="_blank" class="btn btn-primary">Voir les logiciels par labo</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="diff-badge inter">🟡 Intermédiaire</div>
+                <div class="card-header">
+                    <div class="card-icon">🎨</div>
+                    <div><h3>Canva Education — design gratuit</h3><span class="badge badge-free">Gratuit</span></div>
+                </div>
+                <p class="card-description">Canva offre son plan Pro gratuitement aux étudiant(e)s. Présentations, infographies, affiches, vidéos, CV — des centaines de modèles professionnels prêts à personnaliser. Bien plus beau qu'un PowerPoint de base, et sans courbe d'apprentissage.</p>
+                <div class="card-actions">
+                    <a href="https://www.canva.com/education/" target="_blank" class="btn btn-primary">Canva Éducation</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="diff-badge inter">🟡 Intermédiaire</div>
+                <div class="card-header">
+                    <div class="card-icon">💻</div>
+                    <div><h3>GitHub Student Developer Pack</h3><span class="badge badge-free">Gratuit</span></div>
+                </div>
+                <p class="card-description">Si tu touches à l'informatique, le GitHub Student Pack t'offre des dizaines d'outils professionnels gratuits : hébergement web, noms de domaine, outils IA de codage (GitHub Copilot), cours en ligne, crédits cloud. Vaut plusieurs centaines de dollars par an.</p>
+                <div class="card-actions">
+                    <a href="https://education.github.com/pack" target="_blank" class="btn btn-primary">GitHub Student Pack</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="diff-badge inter">🟡 Intermédiaire</div>
+                <div class="card-header">
+                    <div class="card-icon">📰</div>
+                    <div><h3>Bibliothèque numérique — accès gratuit</h3></div>
+                </div>
+                <p class="card-description">La bibliothèque du Cégep te donne accès à des bases de données de journaux scientifiques, d'articles de presse, d'encyclopédies et de ressources qui coûtent normalement des centaines de dollars par année. Indispensable pour les travaux de recherche.</p>
+                <div class="card-actions">
+                    <a href="https://cgodin.qc.ca/koha" target="_blank" class="btn btn-primary">Bibliothèque GG</a>
+                    <button class="btn btn-secondary" onclick="alert('Ressources disponibles via la bibliothèque :\n\n• Bases de données d\'articles scientifiques (EBSCOhost, etc.)\n• Journaux et magazines numériques\n• Encyclopédies spécialisées\n• Dictionnaires de référence\n• Livres numériques (ebooks)\n\nConnecte-toi avec ton code étudiant pour accéder depuis chez toi aussi.')">Ressources disponibles</button>
+                </div>
+            </div>
+
+        </div>
+        <div class="back-to-toc"><a href="#toc">↑ Retour au menu</a></div>
+    </section>
+
+
+    <!-- ============================================
+         LA DIGITALE
+    ============================================= -->
+    <div class="digitale-block" id="digitale-section" style="scroll-margin-top:80px;">
+        <div style="display:flex;align-items:center;gap:1.5rem;margin-bottom:1.5rem;flex-wrap:wrap;">
+            <img src="https://ladigitale.dev/blog/bl-themes/mediumish/img/logo.png" alt="La Digitale" style="width:3rem;height:3rem;">
+            <div>
+                <h2>La Digitale — outils libres pour l'école</h2>
+                <p style="color:#00b89a;font-size:1rem;"><a href="https://ladigitale.dev/" target="_blank" style="color:#00d4a8;font-weight:600;text-decoration:underline;">ladigitale.dev</a> — gratuit, sans compte, sans pub, conçu pour l'éducation.</p>
+            </div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem;">
+            <div class="digitale-tile">
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:0.5rem;">
+                    <a href="https://ladigitale.dev/digirecord/" target="_blank" class="digitale-name-link"><strong style="color:#00d4a8;display:flex;align-items:center;gap:0.4rem;"><span style="font-size:1.4rem;">🎙️</span><span>Digirecord</span></strong></a>
+                    <a href="https://ladigitale.dev/digirecord/" target="_blank" class="digitale-open-btn">➚</a>
+                </div>
+                <p style="font-size:0.88rem;margin-top:0.4rem;color:#00b89a;">Enregistre et partage des fichiers audio — parfait pour les présentations orales.</p>
+            </div>
+            <div class="digitale-tile">
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:0.5rem;">
+                    <a href="https://ladigitale.dev/digispeech/" target="_blank" class="digitale-name-link"><strong style="color:#00d4a8;display:flex;align-items:center;gap:0.4rem;"><span style="font-size:1.4rem;">🗣️</span><span>Digispeech</span></strong></a>
+                    <a href="https://ladigitale.dev/digispeech/" target="_blank" class="digitale-open-btn">➚</a>
+                </div>
+                <p style="font-size:0.88rem;margin-top:0.4rem;color:#00b89a;">Génère un fichier audio à partir d'un texte — utile pour réécouter tes notes.</p>
+            </div>
+            <div class="digitale-tile">
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:0.5rem;">
+                    <a href="https://ladigitale.dev/digicut/" target="_blank" class="digitale-name-link"><strong style="color:#00d4a8;display:flex;align-items:center;gap:0.4rem;"><span style="font-size:1.4rem;">✂️</span><span>Digicut</span></strong></a>
+                    <a href="https://ladigitale.dev/digicut/" target="_blank" class="digitale-open-btn">➚</a>
+                </div>
+                <p style="font-size:0.88rem;margin-top:0.4rem;color:#00b89a;">Découpe un extrait d'une vidéo ou d'un fichier audio en quelques secondes.</p>
+            </div>
+            <div class="digitale-tile">
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:0.5rem;">
+                    <a href="https://digipdf.app/" target="_blank" class="digitale-name-link"><strong style="color:#00d4a8;display:flex;align-items:center;gap:0.4rem;"><span style="font-size:1.4rem;">📄</span><span>DigiPDF</span></strong></a>
+                    <a href="https://digipdf.app/" target="_blank" class="digitale-open-btn">➚</a>
+                </div>
+                <p style="font-size:0.88rem;margin-top:0.4rem;color:#00b89a;">Outils PDF gratuits : fusionner, diviser, compresser, convertir.</p>
+            </div>
+            <div class="digitale-tile">
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:0.5rem;">
+                    <a href="https://ladigitale.dev/digiremovebg/" target="_blank" class="digitale-name-link"><strong style="color:#00d4a8;display:flex;align-items:center;gap:0.4rem;"><span style="font-size:1.4rem;">🖼️</span><span>DigiremoveBG</span></strong></a>
+                    <a href="https://ladigitale.dev/digiremovebg/" target="_blank" class="digitale-open-btn">➚</a>
+                </div>
+                <p style="font-size:0.88rem;margin-top:0.4rem;color:#00b89a;">Supprime le fond d'une image — pour tes présentations et travaux visuels.</p>
+            </div>
+            <div class="digitale-tile">
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:0.5rem;">
+                    <a href="https://ladigitale.dev/digidesign/" target="_blank" class="digitale-name-link"><strong style="color:#00d4a8;display:flex;align-items:center;gap:0.4rem;"><span style="font-size:1.4rem;">🎨</span><span>Digidesign</span></strong></a>
+                    <a href="https://ladigitale.dev/digidesign/" target="_blank" class="digitale-open-btn">➚</a>
+                </div>
+                <p style="font-size:0.88rem;margin-top:0.4rem;color:#00b89a;">Crée des compositions graphiques — alternative à Canva, sans compte.</p>
+            </div>
+            <div class="digitale-tile">
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:0.5rem;">
+                    <a href="https://ladigitale.dev/digicode/" target="_blank" class="digitale-name-link"><strong style="color:#00d4a8;display:flex;align-items:center;gap:0.4rem;"><span style="font-size:1.4rem;">🧑‍💻</span><span>Digicode</span></strong></a>
+                    <a href="https://ladigitale.dev/digicode/" target="_blank" class="digitale-open-btn">➚</a>
+                </div>
+                <p style="font-size:0.88rem;margin-top:0.4rem;color:#00b89a;">Crée des codes QR pour partager facilement des liens.</p>
+            </div>
+            <div class="digitale-tile">
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:0.5rem;">
+                    <a href="https://ladigitale.dev/digitranscode/" target="_blank" class="digitale-name-link"><strong style="color:#00d4a8;display:flex;align-items:center;gap:0.4rem;"><span style="font-size:1.4rem;">🔁</span><span>Digitranscode</span></strong></a>
+                    <a href="https://ladigitale.dev/digitranscode/" target="_blank" class="digitale-open-btn">➚</a>
+                </div>
+                <p style="font-size:0.88rem;margin-top:0.4rem;color:#00b89a;">Convertit des fichiers audio et vidéo dans différents formats.</p>
+            </div>
+        </div>
+        <div class="back-to-toc" style="margin-top:1.5rem;"><a href="#toc">↑ Retour au menu</a></div>
+    </div>
+
+
+    <!-- ============================================
+         SECTION 7 : Trucs Avancés
+    ============================================= -->
+    <section id="avance" class="section-block s-avance">
+        <div class="section-header">
+            <div class="section-icon">⚡</div>
+            <div><h2>Trucs avancés — passe au niveau supérieur</h2></div>
+        </div>
+        <p class="section-desc">Pour les étudiants qui veulent aller plus loin : automatisation, travail multi-écrans, outils de référence bibliographique et développement.</p>
+
+        <div class="cards-grid">
+
+            <div class="card">
+                <div class="diff-badge adv">🔴 Avancé</div>
+                <div class="card-header">
+                    <div class="card-icon">📚</div>
+                    <div><h3>Zotero — références bibliographiques automatiques</h3><span class="badge badge-free">Gratuit</span></div>
+                </div>
+                <p class="card-description">Zotero est un gestionnaire de bibliographie gratuit et open source. Il collecte automatiquement les informations de tes sources depuis le web, génère tes bibliographies en APA, MLA, Chicago et autres formats en un clic, et s'intègre dans Word. Fini de formater tes bibliographies à la main!</p>
+                <div class="card-actions">
+                    <a href="https://www.zotero.org/" target="_blank" class="btn btn-primary">Télécharger Zotero</a>
+                    <button class="btn btn-secondary" onclick="alert('Comment démarrer avec Zotero :\n\n1. Télécharge Zotero sur zotero.org\n2. Installe le connecteur Zotero dans Edge ou Chrome\n3. Navigue vers un article, un livre ou une page web\n   → Clique le bouton Zotero dans la barre d\'adresse\n   → La référence est sauvegardée automatiquement\n\n4. Dans Word :\n   Onglet Zotero → Insert Citation → cherche ta source\n   → Insert Bibliography pour générer la bibliographie\n\nFormats disponibles : APA 7e éd., MLA, Chicago, Vancouver, et des centaines d\'autres.')">Comment démarrer?</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="diff-badge adv">🔴 Avancé</div>
+                <div class="card-header">
+                    <div class="card-icon">✨</div>
+                    <div>
+                        <h3>Clics visuels PowerToys — démos impeccables</h3>
+                        <span class="shortcut-tag">Win + MAJ + H</span>
+                    </div>
+                </div>
+                <p class="card-description">Quand tu fais une présentation ou un tutoriel vidéo, les Clics visuels de PowerToys affichent des cercles colorés à chaque clic de souris. Les spectateurs savent exactement où tu cliques. Idéal pour les démos techniques, les tutoriels vidéo et les présentations Clipchamp.</p>
+                <div class="card-actions">
+                    <button class="btn btn-secondary" onclick="document.getElementById('powertoys-section').scrollIntoView({behavior:'smooth'})">Voir section PowerToys ↓</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="diff-badge adv">🔴 Avancé</div>
+                <div class="card-header">
+                    <div class="card-icon">🎥</div>
+                    <div>
+                        <h3>Enregistrement vidéo de l'écran</h3>
+                        <span class="shortcut-tag">Win + MAJ + R</span>
+                    </div>
+                </div>
+                <p class="card-description">Enregistre ton écran directement depuis Windows pour créer un tutoriel, documenter un bug ou préparer une présentation vidéo. La vidéo est enregistrée en MP4 dans ton dossier Vidéos. Active ou désactive le micro à la volée pendant l'enregistrement.</p>
+                <div class="card-actions">
+                    <button class="btn btn-secondary" onclick="alert('Win + MAJ + R = démarrer l\'enregistrement\n\nUne barre d\'outils apparaît en haut de l\'écran :\n• Pause / Reprendre\n• Arrêter\n• Activer/désactiver le micro\n\nLe fichier MP4 est enregistré dans Vidéos → Captures\n\nAstuce : Utilise Clipchamp ensuite pour monter et ajouter des titres à ton enregistrement!')">Plus d'infos</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="diff-badge adv">🔴 Avancé</div>
+                <div class="card-header">
+                    <div class="card-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Visual_Studio_Code_1.35_icon.svg" alt="VS Code" style="width:2rem;height:2rem;"></div>
+                    <div><h3>VS Code — éditeur de code</h3><span class="badge badge-free">Gratuit</span></div>
+                </div>
+                <p class="card-description">Si tu touches à la programmation (Python, JavaScript, HTML, etc.), VS Code est l'éditeur de référence. Coloration syntaxique, débogage intégré, extensions pour tous les langages, terminal intégré. Disponible gratuitement et sur tous les systèmes.</p>
+                <div class="card-actions">
+                    <a href="https://code.visualstudio.com/" target="_blank" class="btn btn-primary">Télécharger VS Code</a>
+                    <button class="btn btn-secondary" onclick="alert('Extensions utiles pour les étudiants :\n\n• Prettier — formatage automatique du code\n• Python — support complet pour Python\n• Live Share — collaboration en temps réel sur du code\n• GitHub Copilot — IA pour le code (gratuit avec GitHub Student Pack)\n• Spanish/French Language Pack — interface en français\n\nVS Code est disponible en ligne : vscode.dev (sans installation)')">Extensions utiles</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="diff-badge adv">🔴 Avancé</div>
+                <div class="card-header">
+                    <div class="card-icon">📊</div>
+                    <div><h3>Tableaux croisés dynamiques Excel</h3><span class="badge badge-tip">Stats &amp; données</span></div>
+                </div>
+                <p class="card-description">Les tableaux croisés dynamiques te permettent d'analyser et de résumer de grandes quantités de données en quelques clics — sans une seule formule. Essentiel pour les travaux de statistiques, de marketing ou de sciences sociales. Excel les propose directement depuis «&nbsp;Insérer&nbsp;».</p>
+                <div class="card-actions">
+                    <a href="https://support.microsoft.com/fr-fr/office/cr%C3%A9er-un-tableau-crois%C3%A9-dynamique-pour-analyser-des-donn%C3%A9es-de-feuille-de-calcul-a9a84538-bfe9-40a9-a8e9-f99134456576" target="_blank" class="btn btn-primary">Guide Microsoft</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="diff-badge adv">🔴 Avancé</div>
+                <div class="card-header">
+                    <div class="card-icon">🔗</div>
+                    <div><h3>Partage de fichiers volumineux — sans courriel</h3></div>
+                </div>
+                <p class="card-description">Pour partager un fichier trop lourd pour un courriel (vidéo, dossier de projet, etc.), utilise la <strong>Demande de fichiers OneDrive</strong> ou partage directement via un lien OneDrive. La personne externe peut déposer ou télécharger sans avoir de compte Microsoft.</p>
+                <div class="card-actions">
+                    <button class="btn btn-secondary" onclick="alert('Partager un fichier via OneDrive :\n\n1. Clic droit sur le fichier dans OneDrive → Partager\n2. Choisis les permissions :\n   • Modifier → la personne peut éditer\n   • Afficher → lecture seule\n3. Partage le lien par courriel ou copie-le\n\nPour recevoir des fichiers (Demande de fichiers) :\n1. Dans OneDrive web → ouvre le dossier de destination\n2. Nouveau → Demander des fichiers\n3. Partage le lien → la personne dépose sans voir tes autres fichiers\n\nAlternative gratuite : wetransfer.com pour les gros fichiers ponctuels (2 Go gratuit).')">Comment faire?</button>
+                </div>
+            </div>
+
+        </div>
+        <div class="back-to-toc"><a href="#toc">↑ Retour au menu</a></div>
+    </section>
+
+
+    <!-- ============================================
+         POWERTOYS BLOCK
+    ============================================= -->
+    <section id="powertoys-section" style="scroll-margin-top:80px;margin-bottom:4rem;">
+        <div class="powertoys-block">
+            <div style="display:flex;align-items:center;gap:1.5rem;margin-bottom:1.5rem;">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/2/2b/2020_PowerToys_Icon.svg" alt="PowerToys" style="width:60px;height:60px;">
+                <div>
+                    <h2 style="font-family:'Syne',sans-serif;font-size:2rem;color:#f7c948;margin-bottom:0.25rem;">PowerToys — boîte à outils Windows</h2>
+                    <p style="color:#b89a30;">Suite d'outils gratuits de Microsoft pour aller plus vite au quotidien</p>
+                </div>
+            </div>
+            <div class="powertoys-inner-box">
+                <h3 style="color:#f7c948;margin-bottom:0.85rem;font-family:'Syne',sans-serif;">📦 Installation</h3>
+                <p style="color:#b89a30;margin-bottom:1rem;line-height:1.7;">PowerToys est disponible gratuitement sur tous les portables du Cégep Gérald-Godin.</p>
+                <div style="display:grid;gap:1rem;">
+                    <div>
+                        <strong style="color:#f7c948;">Option 1 : Centre logiciel du Cégep (Recommandé)</strong><br>
+                        <button class="btn" style="background:#b89a30;color:#1a1508;margin-top:0.5rem;font-weight:700;" onclick="window.location.href='softwarecenter:'">Ouvrir Centre logiciel</button>
+                    </div>
+                    <div>
+                        <strong style="color:#f7c948;">Option 2 : GitHub officiel Microsoft</strong><br>
+                        <a href="https://github.com/microsoft/PowerToys/releases" target="_blank" style="color:#b89a30;text-decoration:underline;font-weight:500;">Télécharger depuis GitHub →</a>
+                    </div>
+                </div>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;">
+                <div class="powertoys-tile">
+                    <div style="font-size:1.6rem;margin-bottom:0.5rem;">✨</div>
+                    <strong style="color:#f7c948;">Clics visuels</strong>
+                    <p style="font-size:0.85rem;color:#b89a30;margin-top:0.3rem;font-family:'JetBrains Mono',monospace;">Win + MAJ + H</p>
+                    <p style="font-size:0.88rem;margin-top:0.5rem;color:#a08828;">Cercles colorés lors des clics — parfait pour les démos et tutoriels vidéo.</p>
+                </div>
+                <div class="powertoys-tile">
+                    <div style="font-size:1.6rem;margin-bottom:0.5rem;">⭕</div>
+                    <strong style="color:#f7c948;">Localisateur souris</strong>
+                    <p style="font-size:0.85rem;color:#b89a30;margin-top:0.3rem;font-family:'JetBrains Mono',monospace;">Ctrl + Ctrl (double)</p>
+                    <p style="font-size:0.88rem;margin-top:0.5rem;color:#a08828;">Cercle blanc autour du curseur pour le retrouver sur grand écran.</p>
+                </div>
+                <div class="powertoys-tile">
+                    <div style="font-size:1.6rem;margin-bottom:0.5rem;">🔍</div>
+                    <strong style="color:#f7c948;">PowerToys Run</strong>
+                    <p style="font-size:0.85rem;color:#b89a30;margin-top:0.3rem;font-family:'JetBrains Mono',monospace;">Alt + Espace</p>
+                    <p style="font-size:0.88rem;margin-top:0.5rem;color:#a08828;">Lance n'importe quelle app ou fichier en tapant quelques lettres.</p>
+                </div>
+                <div class="powertoys-tile">
+                    <div style="font-size:1.6rem;margin-bottom:0.5rem;">🎨</div>
+                    <strong style="color:#f7c948;">Sélecteur de couleur</strong>
+                    <p style="font-size:0.85rem;color:#b89a30;margin-top:0.3rem;font-family:'JetBrains Mono',monospace;">Win + MAJ + C</p>
+                    <p style="font-size:0.88rem;margin-top:0.5rem;color:#a08828;">Identifie n'importe quelle couleur à l'écran (hex, RGB). Utile en design et arts.</p>
+                </div>
+                <div class="powertoys-tile">
+                    <div style="font-size:1.6rem;margin-bottom:0.5rem;">⏱️</div>
+                    <strong style="color:#f7c948;">Toujours visible</strong>
+                    <p style="font-size:0.85rem;color:#b89a30;margin-top:0.3rem;font-family:'JetBrains Mono',monospace;">Win + Ctrl + T</p>
+                    <p style="font-size:0.88rem;margin-top:0.5rem;color:#a08828;">Garde une fenêtre (minuteur, To Do) toujours au premier plan.</p>
+                </div>
+                <div class="powertoys-tile">
+                    <div style="font-size:1.6rem;margin-bottom:0.5rem;">🖼️</div>
+                    <strong style="color:#f7c948;">Redimensionneur d'images</strong>
+                    <p style="font-size:0.85rem;color:#b89a30;margin-top:0.3rem;">Clic droit sur plusieurs images</p>
+                    <p style="font-size:0.88rem;margin-top:0.5rem;color:#a08828;">Réduis le poids de plusieurs images en une seule fois pour tes travaux Moodle.</p>
+                </div>
+                <div class="powertoys-tile">
+                    <div style="font-size:1.6rem;margin-bottom:0.5rem;">✏️</div>
+                    <strong style="color:#f7c948;">PowerRename</strong>
+                    <p style="font-size:0.85rem;color:#b89a30;margin-top:0.3rem;">Clic droit sur une sélection</p>
+                    <p style="font-size:0.88rem;margin-top:0.5rem;color:#a08828;">Renomme des dizaines de fichiers en une seule opération — fin des fichiers «&nbsp;devoir_FINAL.docx&nbsp;».</p>
+                </div>
+                <div class="powertoys-tile">
+                    <div style="font-size:1.6rem;margin-bottom:0.5rem;">🔤</div>
+                    <strong style="color:#f7c948;">Text Extractor</strong>
+                    <p style="font-size:0.85rem;color:#b89a30;margin-top:0.3rem;font-family:'JetBrains Mono',monospace;">Win + MAJ + T</p>
+                    <p style="font-size:0.88rem;margin-top:0.5rem;color:#a08828;">Extrait le texte d'une image ou d'une zone d'écran — alias l'outil de capture de texte.</p>
+                </div>
+            </div>
+        </div>
+        <div class="back-to-toc"><a href="#toc">↑ Retour au menu</a></div>
+    </section>
+
+
+    <!-- ============================================
+         RACCOURCIS ESSENTIELS
+    ============================================= -->
+    <div id="shortcuts-section" class="tips-section">
+        <h2>⌨️ Raccourcis essentiels</h2>
+        <p style="color:var(--text-mid);margin-bottom:2rem;">Apprends ces raccourcis une fois — gagne des heures chaque session.</p>
+
+        <h3 class="tip-subhead">⭐ Indispensables</h3>
+        <div class="tip-item"><div class="tip-shortcut">Ctrl + Z</div><div class="tip-description">Annuler la dernière action — l'un des plus utiles</div></div>
+        <div class="tip-item"><div class="tip-shortcut">Ctrl + Y</div><div class="tip-description">Refaire (annuler l'annulation)</div></div>
+        <div class="tip-item"><div class="tip-shortcut">Ctrl + S</div><div class="tip-description">Sauvegarder rapidement</div></div>
+        <div class="tip-item"><div class="tip-shortcut">Ctrl + F</div><div class="tip-description">Chercher dans n'importe quelle page ou document</div></div>
+        <div class="tip-item"><div class="tip-shortcut">Ctrl + A</div><div class="tip-description">Sélectionner tout</div></div>
+        <div class="tip-item"><div class="tip-shortcut">Ctrl + K</div><div class="tip-description">Insérer un hyperlien sur le texte sélectionné</div></div>
+        <div class="tip-item"><div class="tip-shortcut">F2</div><div class="tip-description">Renommer le fichier sélectionné dans l'Explorateur</div></div>
+        <div class="tip-item"><div class="tip-shortcut">Alt + F4</div><div class="tip-description">Fermer l'application active</div></div>
+
+        <h3 class="tip-subhead">✍️ Rédaction et mise en forme</h3>
+        <div class="tip-item"><div class="tip-shortcut">Ctrl + G (ou B)</div><div class="tip-description">Mettre en gras</div></div>
+        <div class="tip-item"><div class="tip-shortcut">Ctrl + I</div><div class="tip-description">Mettre en italique</div></div>
+        <div class="tip-item"><div class="tip-shortcut">Ctrl + U</div><div class="tip-description">Souligner</div></div>
+        <div class="tip-item"><div class="tip-shortcut">Ctrl + ← / →</div><div class="tip-description">Déplacer le curseur d'un mot complet — bien plus rapide</div></div>
+        <div class="tip-item"><div class="tip-shortcut">Ctrl + Backspace</div><div class="tip-description">Supprimer le mot entier à gauche</div></div>
+        <div class="tip-item"><div class="tip-shortcut">Ctrl + Début / Fin</div><div class="tip-description">Aller au début ou à la fin du document</div></div>
+        <div class="tip-item"><div class="tip-shortcut">Ctrl + Alt + M</div><div class="tip-description">Insérer un commentaire dans Word</div></div>
+
+        <h3 class="tip-subhead">🪟 Windows &amp; Fenêtres</h3>
+        <div class="tip-item"><div class="tip-shortcut">Win + Z</div><div class="tip-description">Choisir une disposition de fenêtres</div></div>
+        <div class="tip-item"><div class="tip-shortcut">Win + ← / →</div><div class="tip-description">Ancrer la fenêtre à gauche ou à droite</div></div>
+        <div class="tip-item"><div class="tip-shortcut">Win + Tab</div><div class="tip-description">Vue des tâches et bureaux virtuels</div></div>
+        <div class="tip-item"><div class="tip-shortcut">Win + Ctrl + D</div><div class="tip-description">Créer un nouveau bureau virtuel</div></div>
+        <div class="tip-item"><div class="tip-shortcut">Win + Ctrl + ← / →</div><div class="tip-description">Naviguer entre les bureaux virtuels</div></div>
+        <div class="tip-item"><div class="tip-shortcut">Alt + Tab</div><div class="tip-description">Basculer entre les applications ouvertes</div></div>
+        <div class="tip-item"><div class="tip-shortcut">Win + D</div><div class="tip-description">Afficher / masquer le bureau</div></div>
+        <div class="tip-item"><div class="tip-shortcut">Win + L</div><div class="tip-description">Verrouiller l'écran (essentiel en labo)</div></div>
+
+        <h3 class="tip-subhead">📸 Captures &amp; Outils</h3>
+        <div class="tip-item"><div class="tip-shortcut">Win + MAJ + S</div><div class="tip-description">Capture d'écran d'une zone précise — le plus utile</div></div>
+        <div class="tip-item"><div class="tip-shortcut">Win + MAJ + T</div><div class="tip-description">Extraire du texte d'une image ou zone d'écran</div></div>
+        <div class="tip-item"><div class="tip-shortcut">Win + MAJ + R</div><div class="tip-description">Enregistrer l'écran en vidéo</div></div>
+        <div class="tip-item"><div class="tip-shortcut">Win + V</div><div class="tip-description">Historique du presse-papiers</div></div>
+        <div class="tip-item"><div class="tip-shortcut">Win + H</div><div class="tip-description">Dictée vocale</div></div>
+        <div class="tip-item"><div class="tip-shortcut">Win + . (point)</div><div class="tip-description">Panneau d'émojis et de symboles</div></div>
+        <div class="tip-item"><div class="tip-shortcut">Win + + / −</div><div class="tip-description">Loupe Windows — zoom avant / arrière</div></div>
+        <div class="tip-item"><div class="tip-shortcut">Ctrl + Win + L</div><div class="tip-description">Sous-titres en direct</div></div>
+
+        <h3 class="tip-subhead" style="border-left-color:#0078d4;"><img src="https://upload.wikimedia.org/wikipedia/commons/9/98/Microsoft_Edge_logo_%282019%29.svg" alt="Edge" style="width:1rem;height:1rem;vertical-align:middle;margin-right:4px;"> Navigateur Edge</h3>
+        <div class="tip-item"><div class="tip-shortcut">Ctrl + T</div><div class="tip-description">Nouvel onglet</div></div>
+        <div class="tip-item"><div class="tip-shortcut">Ctrl + W</div><div class="tip-description">Fermer l'onglet actif</div></div>
+        <div class="tip-item"><div class="tip-shortcut">Ctrl + MAJ + T</div><div class="tip-description">Rouvrir le dernier onglet fermé — sauve la mise!</div></div>
+        <div class="tip-item"><div class="tip-shortcut">Ctrl + Tab</div><div class="tip-description">Naviguer entre les onglets</div></div>
+        <div class="tip-item"><div class="tip-shortcut">F9</div><div class="tip-description">Lecteur immersif — vue épurée pour lire</div></div>
+        <div class="tip-item"><div class="tip-shortcut">F11</div><div class="tip-description">Mode plein écran</div></div>
+        <div class="tip-item"><div class="tip-shortcut">Ctrl + Roulette</div><div class="tip-description">Zoom dans le navigateur</div></div>
+
+        <h3 class="tip-subhead" style="border-left-color:#217346;"><img src="https://upload.wikimedia.org/wikipedia/commons/6/60/Microsoft_Office_Excel_%282025%E2%80%93present%29.svg" alt="Excel" style="width:1rem;height:1rem;vertical-align:middle;margin-right:4px;"> Excel</h3>
+        <div class="tip-item"><div class="tip-shortcut">Ctrl + MAJ + L</div><div class="tip-description">Activer / désactiver les filtres automatiques</div></div>
+        <div class="tip-item"><div class="tip-shortcut">Ctrl + Accueil</div><div class="tip-description">Aller à la cellule A1</div></div>
+        <div class="tip-item"><div class="tip-shortcut">Ctrl + Fin</div><div class="tip-description">Aller à la dernière cellule utilisée</div></div>
+        <div class="tip-item"><div class="tip-shortcut">Ctrl + MAJ + Roulette</div><div class="tip-description">Défilement horizontal dans Excel</div></div>
+
+        <h3 class="tip-subhead" style="border-left-color:#f7c948;">⚡ PowerToys</h3>
+        <div class="tip-item"><div class="tip-shortcut">Win + MAJ + H</div><div class="tip-description">Clics visuels — cercles colorés lors des clics</div></div>
+        <div class="tip-item"><div class="tip-shortcut">Ctrl + Ctrl</div><div class="tip-description">Localiser la souris — cercle autour du curseur</div></div>
+        <div class="tip-item"><div class="tip-shortcut">Alt + Espace</div><div class="tip-description">PowerToys Run — lancer une app rapidement</div></div>
+        <div class="tip-item"><div class="tip-shortcut">Win + MAJ + C</div><div class="tip-description">Sélecteur de couleur</div></div>
+        <div class="tip-item"><div class="tip-shortcut">Win + Ctrl + T</div><div class="tip-description">Fenêtre toujours au premier plan</div></div>
+        <div class="tip-item"><div class="tip-shortcut">Win + MAJ + T</div><div class="tip-description">Text Extractor — copier le texte d'une image</div></div>
+
+        <div class="back-to-toc"><a href="#toc">↑ Retour au menu</a></div>
+    </div>
+
+
+    <!-- ============================================
+         LIENS RAPIDES GG
+    ============================================= -->
+    <div id="quicklinks" class="links-block" style="scroll-margin-top:80px;margin-top:3rem;">
+        <h2>🔗 Liens rapides — Cégep Gérald-Godin</h2>
+        <p>Tous les services du Cégep sont accessibles via la même base d'URL. Ajoute simplement le nom du service :</p>
+        <div style="background:var(--surface);border:1.5px dashed var(--border);border-radius:10px;padding:0.85rem 1.2rem;margin-bottom:1.5rem;display:flex;align-items:center;gap:0.25rem;flex-wrap:wrap;">
+            <span style="color:var(--text-dim);font-family:'JetBrains Mono',monospace;font-size:0.95rem;">cgodin.qc.ca/</span>
+            <span style="background:var(--brand);color:white;padding:0.2rem 0.65rem;border-radius:6px;font-family:'JetBrains Mono',monospace;font-size:0.9rem;font-weight:700;">nom-du-service</span>
+            <span style="font-size:0.8rem;color:var(--text-dim);margin-left:0.5rem;">ex : cgodin.qc.ca/<strong>teams</strong>, cgodin.qc.ca/<strong>moodle</strong>…</span>
+        </div>
+        <div class="links-grid">
+            <a class="link-chip" href="https://cgodin.qc.ca/moodle" target="_blank">
+                <img src="https://www.google.com/s2/favicons?domain=moodle.org&sz=16" alt="Moodle" style="width:14px;height:14px;">
+                <span style="color:var(--text-dim);font-size:0.76rem;margin-right:1px;">cgodin.qc.ca/</span><strong>moodle</strong>
+            </a>
+            <a class="link-chip" href="https://cgodin.qc.ca/omnivox" target="_blank">
+                <img src="https://play-lh.googleusercontent.com/y2JS5BQN_8g3WAjpohJRX3cThSQW_kHxDjyyAD2DpeGM12vkOX75Ie31GrhVVPZZRjI=w240-h480-rw" alt="Omnivox" style="width:14px;height:14px;border-radius:3px;">
+                <span style="color:var(--text-dim);font-size:0.76rem;margin-right:1px;">cgodin.qc.ca/</span><strong>omnivox</strong>
+            </a>
+            <a class="link-chip" href="https://cgodin.qc.ca/teams" target="_blank">
+                <img src="https://upload.wikimedia.org/wikipedia/fr/6/66/Logo_Microsoft_Teams_%282025%29.svg" alt="Teams" style="width:14px;height:14px;">
+                <span style="color:var(--text-dim);font-size:0.76rem;margin-right:1px;">cgodin.qc.ca/</span><strong>teams</strong>
+            </a>
+            <a class="link-chip" href="https://cgodin.qc.ca/onedrive" target="_blank">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Microsoft_OneDrive_Icon_%282025_-_present%29.svg" alt="OneDrive" style="width:14px;height:14px;">
+                <span style="color:var(--text-dim);font-size:0.76rem;margin-right:1px;">cgodin.qc.ca/</span><strong>onedrive</strong>
+            </a>
+            <a class="link-chip" href="https://cgodin.qc.ca/onenote" target="_blank">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/3/34/Microsoft_OneNote_Icon_%282025_-_present%29.svg" alt="OneNote" style="width:14px;height:14px;">
+                <span style="color:var(--text-dim);font-size:0.76rem;margin-right:1px;">cgodin.qc.ca/</span><strong>onenote</strong>
+            </a>
+            <a class="link-chip" href="https://cgodin.qc.ca/word" target="_blank">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/e/e8/Microsoft_Office_Word_%282025%E2%80%93present%29.svg" alt="Word" style="width:14px;height:14px;">
+                <span style="color:var(--text-dim);font-size:0.76rem;margin-right:1px;">cgodin.qc.ca/</span><strong>word</strong>
+            </a>
+            <a class="link-chip" href="https://cgodin.qc.ca/excel" target="_blank">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/60/Microsoft_Office_Excel_%282025%E2%80%93present%29.svg" alt="Excel" style="width:14px;height:14px;">
+                <span style="color:var(--text-dim);font-size:0.76rem;margin-right:1px;">cgodin.qc.ca/</span><strong>excel</strong>
+            </a>
+            <a class="link-chip" href="https://cgodin.qc.ca/powerpoint" target="_blank">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/d/df/Microsoft_Office_PowerPoint_%282025%E2%80%93present%29.svg" alt="PPT" style="width:14px;height:14px;">
+                <span style="color:var(--text-dim);font-size:0.76rem;margin-right:1px;">cgodin.qc.ca/</span><strong>powerpoint</strong>
+            </a>
+            <a class="link-chip" href="https://cgodin.qc.ca/motdepasse" target="_blank">
+                🔑 <span style="color:var(--text-dim);font-size:0.76rem;margin-right:1px;">cgodin.qc.ca/</span><strong>motdepasse</strong>
+            </a>
+            <a class="link-chip" href="https://cgodin.qc.ca/koha" target="_blank">
+                📚 <span style="color:var(--text-dim);font-size:0.76rem;margin-right:1px;">cgodin.qc.ca/</span><strong>koha</strong>
+            </a>
+            <a class="link-chip" href="https://cgodin.qc.ca/octopus" target="_blank">
+                🔧 <span style="color:var(--text-dim);font-size:0.76rem;margin-right:1px;">cgodin.qc.ca/</span><strong>octopus</strong>
+            </a>
+            <a class="link-chip" href="https://m365.cloud.microsoft/chat/" target="_blank">
+                <img src="https://upload.wikimedia.org/wikipedia/fr/0/02/Microsoft_365_Copilot.svg" alt="Copilot" style="width:14px;height:14px;">
+                <span style="color:var(--text-dim);font-size:0.76rem;margin-right:1px;">cgodin.qc.ca/</span><strong>m365</strong>
+            </a>
+            <a class="link-chip" href="https://cgodin.qc.ca/imprimer" target="_blank">
+                🖨️ <span style="color:var(--text-dim);font-size:0.76rem;margin-right:1px;">cgodin.qc.ca/</span><strong>imprimer</strong>
+            </a>
+            <a class="link-chip" href="https://cgodin.qc.ca/QG" target="_blank">
+                🏫 <span style="color:var(--text-dim);font-size:0.76rem;margin-right:1px;">cgodin.qc.ca/</span><strong>QG</strong>
+            </a>
+        </div>
+        <div class="back-to-toc"><a href="#toc">↑ Retour au menu</a></div>
+    </div>
+
+
+    <!-- ============================================
+         SEMAINE TYPE
+    ============================================= -->
+    <div id="journee-section" class="workflow" style="margin-top:3rem;">
+        <h2>📅 Semaine type qui cartonne</h2>
+        <div class="workflow-steps">
+            <div class="workflow-step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h3>Dimanche soir — prépare ta semaine</h3>
+                    <p>Ouvre To Do et liste toutes les tâches de la semaine (lectures, devoirs, remises, examens). Assigne une date à chacune. Consulte Moodle et MIO pour les annonces récentes. 10 minutes — pas plus.</p>
+                </div>
+            </div>
+            <div class="workflow-step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h3>Avant chaque cours — 5 minutes</h3>
+                    <p>Consulte Moodle pour les nouveaux fichiers ou messages du prof. Ouvre OneDrive et OneNote pour avoir tes notes de la dernière fois. Active Ne Pas Déranger (Win + N) pendant le cours.</p>
+                </div>
+            </div>
+            <div class="workflow-step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h3>Pendant les travaux — blocs Pomodoro</h3>
+                    <p>Lance une session de concentration depuis l'Horloge Windows. Travaille en mode Focus dans Word. Utilise le presse-papiers étendu (Win + V) pour centraliser tes citations et références. Sauvegarde sur OneDrive dès que tu ouvres le fichier.</p>
+                </div>
+            </div>
+            <div class="workflow-step">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <h3>Avant de remettre — checklist</h3>
+                    <p>Passe Antidote ou le correcteur Word sur ton document. Vérifie ta bibliographie (Zotero si tu l'as). Sauvegarde une copie finale sur OneDrive avec la date dans le nom. Soumets dans Moodle avant la date limite — pas à la dernière minute!</p>
+                </div>
+            </div>
+        </div>
+        <div class="back-to-toc"><a href="#toc">↑ Retour au menu</a></div>
+    </div>
+
+
+    <!-- ============================================
+         FEEDBACK
+    ============================================= -->
+    <div class="feedback-section" style="margin-top:3rem;">
+        <div style="text-align:center;">
+            <div style="font-size:3rem;margin-bottom:1rem;">💬</div>
+            <h2 class="feedback-title">Une question? Un truc à ajouter?</h2>
+            <p class="feedback-text">Tu as découvert une astuce utile qui n'est pas dans cette trousse? Tu as une suggestion pour l'améliorer? Contacte le service du développement pédagogique — tes idées aident tous les étudiants qui viennent après toi.</p>
+            <button class="feedback-btn" onclick="sendFeedback()">
+                <span style="font-size:1.2rem;">📧</span>
+                Envoyer un commentaire
+            </button>
+        </div>
+    </div>
+
+</div><!-- /container -->
+
+
+<!-- KEYBOARD TOOLTIP -->
+<div id="kbd-tooltip" class="kbd-tooltip">
+    <canvas id="kbd-canvas" width="985" height="293"></canvas>
+    <div class="kbd-tooltip-label" id="kbd-label"></div>
+</div>
+
+<script>
+function sendFeedback() {
+    const subject = encodeURIComponent("Commentaires - Trousse techno Étudiants");
+    const body = encodeURIComponent("Bonjour,\n\nJe vous écris concernant la Trousse techno pour les étudiants du Cégep Gérald-Godin.\n\n[Partagez ici vos commentaires, suggestions ou astuces]\n");
+    window.location.href = "mailto:aidetechno@cgodin.qc.ca?subject=" + subject + "&body=" + body;
+}
+
+function toggleTheme() {
+    const body = document.body;
+    const icon = document.getElementById('theme-icon');
+    const txt  = document.getElementById('theme-text');
+    body.classList.toggle('light-mode');
+    if (body.classList.contains('light-mode')) {
+        icon.textContent = '🌙'; txt.textContent = 'Mode sombre';
+        localStorage.setItem('theme-etudiants', 'light');
+    } else {
+        icon.textContent = '☀️'; txt.textContent = 'Mode clair';
+        localStorage.setItem('theme-etudiants', 'dark');
+    }
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+    if (localStorage.getItem('theme-etudiants') === 'light') {
+        document.body.classList.add('light-mode');
+        document.getElementById('theme-icon').textContent = '🌙';
+        document.getElementById('theme-text').textContent = 'Mode sombre';
+    }
+});
+
+/* ── Keyboard Tooltip ── */
+const KBD_KEYS = {
+    'Esc':[29,26,42,42],'F1':[115,26,42,42],'F2':[157,26,43,42],'F3':[201,26,43,42],'F4':[244,26,44,42],
+    'F5':[309,26,43,42],'F6':[352,26,43,42],'F7':[395,26,43,42],'F8':[438,26,43,42],
+    'F9':[504,26,42,42],'F10':[546,26,43,42],'F11':[589,26,43,42],'F12':[633,26,44,42],
+    'PrtSc':[682,26,54,42],
+    '#':[29,91,42,42],'1':[71,91,43,42],'2':[114,91,43,42],'3':[157,91,43,42],'4':[201,91,44,42],
+    '5':[244,91,43,42],'6':[287,91,43,42],'7':[330,91,43,42],'8':[373,91,43,42],
+    '9':[417,91,44,42],'0':[460,91,43,42],'-':[503,91,43,42],'=':[546,91,43,42],'BS':[611,91,87,42],
+    'Tab':[39,133,63,43],
+    'Q':[93,133,44,43],'W':[136,133,43,43],'E':[179,133,43,43],'R':[222,133,43,43],
+    'T':[265,133,43,43],'Y':[309,133,44,43],'U':[352,133,43,43],'I':[395,133,43,43],
+    'O':[438,133,43,43],'P':[481,133,43,43],'[':[525,133,44,43],']':[568,133,43,43],
+    'Entree':[618,147,52,72],
+    'CapsLock':[39,176,63,43],
+    'A':[93,176,44,43],'S':[136,176,43,43],'D':[179,176,43,43],'F':[222,176,43,43],
+    'G':[265,176,43,43],'H':[309,176,44,43],'J':[352,176,43,43],'K':[395,176,43,43],
+    'L':[438,176,43,43],';':[481,176,43,43],"'":[525,176,44,43],'\\':[568,176,43,43],
+    'Shift_L':[35,219,54,43],
+    'Z':[126,219,43,43],'X':[170,219,44,43],'C':[213,219,43,43],'V':[256,219,43,43],
+    'B':[299,219,43,43],'N':[342,219,43,43],'M':[385,219,43,43],',':[429,219,44,43],
+    '.':[472,219,43,43],'Shift_R':[567,219,61,43],
+    'Ctrl_L':[35,263,54,44],'Win_L':[88,263,53,44],'Alt':[142,263,54,44],
+    'Space':[304,263,271,44],
+    'Win_R':[478,263,32,44],'Menu':[520,263,53,44],'Ctrl_R':[574,263,54,44],
+    'Insert':[682,91,54,42],'Home':[730,91,43,42],'PageUp':[773,91,43,42],
+    'Delete':[682,133,54,43],'End':[730,133,43,43],'PageDown':[773,133,43,43],
+    'Up':[730,219,43,43],
+    'Left':[682,263,54,44],'Down':[730,263,43,44],'Right':[773,263,43,44],
+};
+
+const KBD_SHORTCUTS = {
+    'Ctrl + Z':['Ctrl_L','Z'],'Ctrl + Y':['Ctrl_L','Y'],'Ctrl + S':['Ctrl_L','S'],
+    'Ctrl + F':['Ctrl_L','F'],'Ctrl + A':['Ctrl_L','A'],'Ctrl + K':['Ctrl_L','K'],
+    'Ctrl + G (ou B)':['Ctrl_L','G'],'Ctrl + I':['Ctrl_L','I'],'Ctrl + U':['Ctrl_L','U'],
+    'Ctrl + ← / →':['Ctrl_L','Left','Right'],'Ctrl + Backspace':['Ctrl_L','BS'],
+    'Ctrl + Début / Fin':['Ctrl_L','Home','End'],'Ctrl + Alt + M':['Ctrl_L','Alt','M'],
+    'Ctrl + Z / Y':['Ctrl_L','Z','Y'],
+    'Ctrl + MAJ + L':['Ctrl_L','Shift_L','L'],
+    'Ctrl + Accueil':['Ctrl_L','Home'],'Ctrl + Fin':['Ctrl_L','End'],
+    'Ctrl + MAJ + Roulette':['Ctrl_L','Shift_L'],
+    'Win + Z':['Win_L','Z'],'Win + ← / →':['Win_L','Left','Right'],
+    'Win + ↑':['Win_L','Up'],'Win + D':['Win_L','D'],
+    'Win + Tab':['Win_L','Tab'],'Win + Ctrl + D':['Win_L','Ctrl_L','D'],
+    'Win + Ctrl + ← / →':['Win_L','Ctrl_L','Left','Right'],
+    'Win + L':['Win_L','L'],'Win + N':['Win_L','N'],'Win + V':['Win_L','V'],
+    'Win + H':['Win_L','H'],'Win + . (point)':['Win_L','.'],'Win + + / −':['Win_L','='],
+    'Win + MAJ + S':['Win_L','Shift_L','S'],'Win + MAJ + T':['Win_L','Shift_L','T'],
+    'Win + MAJ + R':['Win_L','Shift_L','R'],'Win + MAJ + H':['Win_L','Shift_L','H'],
+    'Win + MAJ + C':['Win_L','Shift_L','C'],'Win + Ctrl + T':['Win_L','Ctrl_L','T'],
+    'Ctrl + Win + L':['Ctrl_L','Win_L','L'],
+    'Alt + Tab':['Alt','Tab'],'Alt + F4':['Alt','F4'],'Alt + Espace':['Alt','Space'],
+    'Alt + Impr. écran':['Alt','PrtSc'],
+    'F2':['F2'],'F9':['F9'],'F11':['F11'],
+    'Ctrl + T':['Ctrl_L','T'],'Ctrl + W':['Ctrl_L','W'],
+    'Ctrl + MAJ + T':['Ctrl_L','Shift_L','T'],'Ctrl + Tab':['Ctrl_L','Tab'],
+    'Ctrl + Roulette':['Ctrl_L'],'Ctrl + Ctrl':['Ctrl_L'],
+};
+
+const kbdImg = new Image();
+kbdImg.src = 'https://equipetechno.github.io/trousse-techno-productivite/clavier-fr-ca.png';
+
+const tooltip = document.getElementById('kbd-tooltip');
+const canvas  = document.getElementById('kbd-canvas');
+const ctx     = canvas.getContext('2d');
+const label   = document.getElementById('kbd-label');
+
+function drawKeyboard(keys) {
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    ctx.drawImage(kbdImg,0,0);
+    ctx.fillStyle='rgba(15,14,23,0.5)';
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+    keys.forEach(k=>{
+        const kd=KBD_KEYS[k]; if(!kd) return;
+        const [cx,cy,w,h]=kd, x=cx-w/2, y=cy-h/2;
+        ctx.save();
+        ctx.shadowColor='#6c3bff'; ctx.shadowBlur=20;
+        ctx.fillStyle='rgba(108,59,255,0.35)';
+        ctx.beginPath(); ctx.roundRect(x-3,y-3,w+6,h+6,5); ctx.fill();
+        ctx.shadowBlur=8;
+        ctx.fillStyle='rgba(200,180,255,0.55)';
+        ctx.beginPath(); ctx.roundRect(x,y,w,h,4); ctx.fill();
+        ctx.restore();
+    });
+}
+
+function showTooltip(el,text,keys){
+    if(!kbdImg.complete||keys.length===0) return;
+    drawKeyboard(keys); label.textContent=text;
+    tooltip.classList.add('visible'); positionTooltip(el);
+}
+function hideTooltip(){ tooltip.classList.remove('visible'); }
+function positionTooltip(el){
+    const rect=el.getBoundingClientRect();
+    const sy=window.scrollY||0, sx=window.scrollX||0, tw=300;
+    let left=rect.left+sx+rect.width/2-tw/2;
+    let top=rect.top+sy-185;
+    if(left<8) left=8;
+    if(left+tw>document.body.clientWidth-8) left=document.body.clientWidth-tw-8;
+    if(top<sy+8) top=rect.bottom+sy+8;
+    tooltip.style.left=left+'px'; tooltip.style.top=top+'px'; tooltip.style.width=tw+'px';
+}
+
+document.addEventListener('DOMContentLoaded',()=>{
+    document.querySelectorAll('.tip-shortcut,.shortcut-tag').forEach(el=>{
+        const raw=el.textContent.trim();
+        let keys=KBD_SHORTCUTS[raw];
+        if(!keys){
+            for(const [k,v] of Object.entries(KBD_SHORTCUTS)){
+                if(k.toLowerCase().replace(/\s/g,'')===raw.toLowerCase().replace(/\s/g,'')){keys=v;break;}
+            }
+        }
+        if(!keys) return;
+        el.style.cursor='default';
+        el.addEventListener('mouseenter',()=>showTooltip(el,raw,keys));
+        el.addEventListener('mouseleave',hideTooltip);
+    });
+});
+</script>
+
+</body>
+</html>
