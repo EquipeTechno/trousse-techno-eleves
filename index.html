@@ -61,10 +61,62 @@
         body.light-mode .hero { background: linear-gradient(135deg, #3d1fa8 0%, #6c3bff 60%, #9b59f7 100%); }
         body.light-mode .card { box-shadow: 0 2px 12px rgba(108,59,255,0.08); }
         body.light-mode .card:hover { box-shadow: 0 12px 32px rgba(108,59,255,0.18); }
+        body.light-mode .powertoys-tile,
+        body.light-mode .digitale-tile,
+        body.light-mode .inner-tile {
+            box-shadow: 0 2px 12px rgba(108,59,255,0.08);
+        }
+        body.light-mode .powertoys-tile:hover,
+        body.light-mode .digitale-tile:hover,
+        body.light-mode .inner-tile:hover {
+            box-shadow: 0 12px 32px rgba(108,59,255,0.18);
+        }
         body.light-mode .toc { border-color: var(--border); }
         body.light-mode .tips-section { background: #fff; border-color: var(--border); }
         body.light-mode .tip-item { background: var(--bg-card2); border-color: var(--border); }
         body.light-mode .section-block { border-color: var(--border-soft); }
+        body.light-mode .story-beat,
+        body.light-mode .hero-panel,
+        body.light-mode .hero-mini-card,
+        body.light-mode .hero-stat {
+            background: rgba(255,255,255,0.7);
+            border-color: rgba(108,59,255,0.16);
+            box-shadow: 0 16px 36px rgba(108,59,255,0.14);
+        }
+        body.light-mode .story-beat p,
+        body.light-mode .hero-panel p,
+        body.light-mode .hero-mini-card span,
+        body.light-mode .hero-stat-label {
+            color: rgba(26,22,48,0.74);
+        }
+        body.light-mode .hero-panel h2,
+        body.light-mode .story-beat h3 {
+            color: #1a1630;
+        }
+        body.light-mode .hero-panel-label {
+            color: rgba(26,22,48,0.7);
+        }
+        body.light-mode .hero-panel-badge {
+            background: rgba(108,59,255,0.12);
+            color: #2f2366;
+            border: 1px solid rgba(108,59,255,0.16);
+        }
+        body.light-mode .hero-mini-card strong,
+        body.light-mode .hero-stat-value {
+            color: #1a1630;
+        }
+        body.light-mode .toc-item.active-story {
+            color: #2b2357;
+        }
+        body.light-mode .collapsible-toggle:hover h2,
+        body.light-mode .collapsible-section.is-open .collapsible-heading h2,
+        body.light-mode .collapsible-section.is-open .section-header h2 {
+            color: #241b4d;
+        }
+        body.light-mode .collapsible-kicker,
+        body.light-mode .collapsible-meta {
+            color: #5a537f;
+        }
 
         /* ── THEME TOGGLE ── */
         .theme-toggle {
@@ -164,6 +216,46 @@
         }
         .toc-item:hover { background: var(--surface); border-color: var(--border); color: var(--brand-mid); }
 
+        .toc-toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            align-items: center;
+            justify-content: space-between;
+            margin: 0 0 1.35rem;
+        }
+        .toc-toolbar p {
+            color: var(--text-dim);
+            font-size: 0.86rem;
+            margin: 0;
+        }
+        .toc-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+        }
+        .toc-action-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            padding: 0.55rem 0.95rem;
+            border-radius: 999px;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--text);
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.82rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
+        }
+        .toc-action-btn:hover {
+            transform: translateY(-2px);
+            border-color: var(--brand-mid);
+            color: var(--brand-mid);
+            box-shadow: 0 10px 24px rgba(108,59,255,0.15);
+        }
+
         /* ── SECTION BLOCK ── */
         .section-block { margin-bottom: 4.5rem; scroll-margin-top: 80px; }
         .section-header {
@@ -186,6 +278,188 @@
             font-size: 2rem; font-weight: 800; color: var(--text);
         }
         .section-desc { font-size: 1rem; color: var(--text-mid); margin-bottom: 2rem; line-height: 1.75; }
+
+        /* ── COLLAPSIBLES ── */
+        .collapsible-section {
+            transition: border-color 0.28s ease, box-shadow 0.28s ease, transform 0.28s ease;
+        }
+        .collapsible-section:hover {
+            border-color: rgba(255,255,255,0.11);
+            box-shadow: 0 22px 48px rgba(7, 10, 26, 0.15);
+        }
+        .collapsible-section.is-open {
+            border-color: var(--border);
+            box-shadow: 0 26px 52px rgba(108,59,255,0.16);
+        }
+        .collapsible-toggle {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1.25rem;
+            background: none;
+            border: 0;
+            padding: 0;
+            color: inherit;
+            text-align: left;
+            cursor: pointer;
+            font: inherit;
+        }
+        .collapsible-toggle:focus-visible {
+            outline: 2px solid var(--brand-mid);
+            outline-offset: 10px;
+            border-radius: 16px;
+        }
+        .collapsible-toggle-main {
+            min-width: 0;
+            flex: 1;
+        }
+        .collapsible-toggle .section-header {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: 0;
+        }
+        .collapsible-toggle .section-icon {
+            transition: transform 0.35s cubic-bezier(.22,1,.36,1), box-shadow 0.35s ease, filter 0.35s ease;
+            transform-origin: center;
+        }
+        .collapsible-heading {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .collapsible-heading h2,
+        .collapsible-toggle .section-header h2 {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin: 0;
+            color: var(--text);
+            position: relative;
+            display: inline-block;
+            transition: color 0.2s ease, transform 0.28s cubic-bezier(.22,1,.36,1), letter-spacing 0.28s ease, text-shadow 0.28s ease;
+        }
+        .collapsible-heading h2::after,
+        .collapsible-toggle .section-header h2::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -0.22rem;
+            width: 100%;
+            height: 0.34rem;
+            border-radius: 999px;
+            background: linear-gradient(90deg, var(--accent2) 0%, var(--brand-mid) 52%, var(--accent) 100%);
+            opacity: 0;
+            transform: scaleX(0.22);
+            transform-origin: left center;
+            filter: blur(0.2px);
+            transition: transform 0.3s cubic-bezier(.22,1,.36,1), opacity 0.22s ease;
+        }
+        .collapsible-kicker {
+            margin-top: 0.45rem;
+            color: var(--text-dim);
+            font-size: 0.88rem;
+        }
+        .collapsible-meta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            margin-top: 0.75rem;
+            padding: 0.35rem 0.75rem;
+            border-radius: 999px;
+            border: 1px solid var(--border-soft);
+            background: rgba(255,255,255,0.04);
+            color: var(--text-mid);
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+        }
+        .collapsible-toggle:hover h2,
+        .collapsible-section.is-open .collapsible-heading h2,
+        .collapsible-section.is-open .section-header h2 {
+            color: #ffffff;
+            transform: translateX(4px) scale(1.015);
+            letter-spacing: 0.01em;
+            text-shadow: 0 10px 24px rgba(108,59,255,0.2);
+        }
+        .collapsible-toggle:hover .section-header h2::after,
+        .collapsible-toggle:hover .collapsible-heading h2::after,
+        .collapsible-section.is-open .section-header h2::after,
+        .collapsible-section.is-open .collapsible-heading h2::after {
+            opacity: 1;
+            transform: scaleX(1);
+        }
+        .collapsible-toggle:hover .section-icon,
+        .collapsible-section.is-open .section-icon {
+            transform: translateY(-4px) rotate(-8deg) scale(1.08);
+            box-shadow: 0 16px 28px rgba(108,59,255,0.22);
+            filter: saturate(1.08);
+        }
+        .collapsible-indicator {
+            width: 44px;
+            height: 44px;
+            flex-shrink: 0;
+            border-radius: 14px;
+            border: 1px solid var(--border);
+            background: linear-gradient(180deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 100%);
+            position: relative;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+            transition: transform 0.28s ease, border-color 0.28s ease, background 0.28s ease;
+        }
+        .collapsible-indicator::before,
+        .collapsible-indicator::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 14px;
+            height: 2px;
+            border-radius: 999px;
+            background: currentColor;
+            transform: translate(-50%, -50%);
+            transition: transform 0.25s ease, opacity 0.25s ease;
+        }
+        .collapsible-indicator::after {
+            transform: translate(-50%, -50%) rotate(90deg);
+        }
+        .collapsible-section.is-open .collapsible-indicator {
+            transform: rotate(180deg) scale(1.02);
+            border-color: var(--brand-mid);
+            background: linear-gradient(180deg, rgba(108,59,255,0.22) 0%, rgba(108,59,255,0.08) 100%);
+        }
+        .collapsible-section.is-open .collapsible-indicator::after {
+            opacity: 0;
+            transform: translate(-50%, -50%) rotate(90deg) scaleX(0.2);
+        }
+        .collapsible-toggle:hover .collapsible-indicator {
+            transform: translateY(-2px) scale(1.06);
+            box-shadow: 0 12px 24px rgba(108,59,255,0.18);
+        }
+        .collapsible-body {
+            display: grid;
+            grid-template-rows: 0fr;
+            opacity: 0;
+            transition: grid-template-rows 0.45s cubic-bezier(.22,1,.36,1), opacity 0.25s ease;
+        }
+        .collapsible-body-inner {
+            min-height: 0;
+            overflow: hidden;
+            padding-top: 0;
+            transition: padding-top 0.45s cubic-bezier(.22,1,.36,1);
+        }
+        .collapsible-section.is-open .collapsible-body {
+            grid-template-rows: 1fr;
+            opacity: 1;
+        }
+        .collapsible-section.is-open .collapsible-body-inner {
+            padding-top: 1.35rem;
+        }
+        .collapsible-section.is-open .powertoys-block {
+            margin-bottom: 0;
+        }
+        .collapsible-section.is-open .back-to-toc {
+            opacity: 1;
+        }
 
         /* Section colors */
         .s-essentiels .section-icon { background: linear-gradient(135deg, #6c3bff, #8f5fff); }
@@ -222,6 +496,21 @@
         .s-avance .section-header { border-bottom-color: rgba(255,107,53,0.3); }
         .s-avance .btn-primary { background: #ff6b35; }
         .s-avance .btn-primary:hover { background: #e55020; }
+
+        .s-antidote .section-icon { background: linear-gradient(135deg, #9c4dff, #c864ff); }
+        .s-antidote .section-header { border-bottom-color: rgba(200,100,255,0.3); }
+        .s-antidote .btn-primary { background: #b45dff; }
+        .s-antidote .btn-primary:hover { background: #9f49f0; }
+
+        .s-digitale .section-icon { background: linear-gradient(135deg, #00d4a8, #00b89a); }
+        .s-digitale .section-header { border-bottom-color: rgba(0,212,168,0.3); }
+        .s-digitale .btn-primary { background: #00b89a; }
+        .s-digitale .btn-primary:hover { background: #009e84; }
+
+        .s-powertoys .section-icon { background: linear-gradient(135deg, #f7c948, #d8a116); color: #1a1630; }
+        .s-powertoys .section-header { border-bottom-color: rgba(247,201,72,0.34); }
+        .s-powertoys .btn-primary { background: #d8a116; color: #1a1630; }
+        .s-powertoys .btn-primary:hover { background: #bf8d0c; color: #1a1630; }
 
         /* ── CARDS GRID ── */
         .cards-grid {
@@ -376,33 +665,39 @@
         .azure-block::before { background: #0078d4; }
         .azure-block h2 { font-family: 'Syne', sans-serif; font-size: 2rem; color: #4da6ff; margin-bottom: 0.5rem; }
 
-        /* ── ANTIDOTE BLOCK ── */
-        .antidote-block {
-            background: linear-gradient(135deg, #1a1220 0%, #221530 100%);
-            border-color: rgba(200,100,255,0.3);
+        /* ── SPECIAL SECTION TILES ── */
+        .antidote-block,
+        .digitale-block,
+        .powertoys-block {
+            scroll-margin-top: 80px;
         }
-        .antidote-block h2 { font-family: 'Syne', sans-serif; font-size: 2rem; color: #c864ff; margin-bottom: 0.5rem; }
-
-        /* ── DIGITALE BLOCK ── */
-        .digitale-block {
-            background: linear-gradient(135deg, #0a2020 0%, #0f2d2d 100%);
-            border-radius: 20px; padding: 2.5rem; margin-top: 3rem; margin-bottom: 3rem;
-            border: 1px solid rgba(0,212,168,0.3);
+        .compact-tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
         }
-        .digitale-block h2 { font-family: 'Syne', sans-serif; font-size: 2rem; color: var(--green); margin-bottom: 0.5rem; }
+        .antidote-block .inner-tile,
         .digitale-tile {
-            background: rgba(0,212,168,0.06); padding: 1.2rem;
-            border-radius: 10px; border: 1px solid rgba(0,212,168,0.15);
+            background: var(--bg-card2);
+            padding: 1.2rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-soft);
         }
+        .antidote-block .inner-tile strong,
+        .digitale-tile strong,
+        .powertoys-tile strong { color: var(--text); }
+        .antidote-block .inner-tile p,
+        .digitale-tile p,
+        .powertoys-tile p { color: var(--text-mid) !important; }
         .digitale-open-btn {
             display: inline-flex; align-items: center; justify-content: center;
             text-decoration: none; font-size: 1rem; line-height: 1;
             padding: 0.3rem 0.5rem; border-radius: 50%;
-            background: rgba(0,212,168,0.12); border: 1px solid rgba(0,212,168,0.3);
-            color: var(--green);
+            background: rgba(255,255,255,0.06); border: 1px solid var(--border-soft);
+            color: var(--text);
             transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
-        .digitale-open-btn:hover { transform: translateY(-2px); box-shadow: 0 5px 14px rgba(0,212,168,0.3); }
+        .digitale-open-btn:hover { transform: translateY(-2px); box-shadow: 0 5px 14px rgba(108,59,255,0.22); border-color: var(--border); }
         .digitale-name-link, .digitale-name-link:hover { text-decoration: none; color: inherit; }
 
         /* ── LINKS BLOCK ── */
@@ -455,8 +750,42 @@
             .cards-grid { grid-template-columns: 1fr; }
             .tip-item { flex-direction: column; align-items: flex-start; }
             .tip-shortcut { min-width: auto; }
-            .toc-grid { grid-template-columns: 1fr 1fr; }
             .section-header h2 { font-size: 1.5rem; }
+            .hero {
+                min-height: auto;
+                padding-top: 5.6rem;
+            }
+            .hero-layout,
+            .story-strip,
+            .hero-stats,
+            .hero-mini-grid,
+            .toc-grid {
+                grid-template-columns: 1fr;
+            }
+            .hero-copy,
+            .hero-stat,
+            .story-beat {
+                text-align: left;
+            }
+            .story-strip { margin-top: 1.5rem; }
+            .hero-actions { flex-direction: column; }
+            .hero-cta { width: 100%; }
+            .section-block {
+                padding: 1rem;
+                border-radius: 22px;
+            }
+            .intro,
+            .toc,
+            .tips-section,
+            .links-block,
+            .feedback-section,
+            .workflow,
+            .powertoys-block,
+            .digitale-block,
+            .highlight-block {
+                padding-left: 1.2rem;
+                padding-right: 1.2rem;
+            }
         }
 
         /* ── KEYBOARD TOOLTIP ── */
@@ -495,6 +824,7 @@
         /* hidden-by-filter: card is hidden but its parent grid stays */
         .card.hidden-filter,
         .highlight-block.hidden-filter,
+        .antidote-block.hidden-filter,
         .digitale-block.hidden-filter,
         .powertoys-block.hidden-filter,
         .workflow.hidden-filter,
@@ -514,23 +844,504 @@
         .section-block.all-hidden .filter-empty-msg { display: block; }
         /* ── POWERTOYS BLOCK ── */
         .powertoys-block {
-            background: linear-gradient(135deg, #1a1508 0%, #201c0a 100%);
-            border-radius: 20px; padding: 2.5rem; margin-bottom: 3rem;
-            border: 1px solid rgba(247,201,72,0.3);
-            box-shadow: 0 8px 24px rgba(247,201,72,0.06);
+            padding: 1.25rem 1.35rem 1.8rem;
         }
         .powertoys-tile {
-            background: rgba(247,201,72,0.05); padding: 1.25rem;
-            border-radius: 10px; border: 1px solid rgba(247,201,72,0.15);
+            background: var(--bg-card2);
+            padding: 1.25rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-soft);
         }
         .powertoys-inner-box {
-            background: rgba(0,0,0,0.3); border-radius: 12px;
-            padding: 1.5rem; margin-bottom: 1.5rem;
-            border: 1px solid rgba(247,201,72,0.15);
+            background: var(--bg-card2);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--border-soft);
+        }
+
+        /* ── IMMERSIVE UI LAYER ── */
+        html { scroll-behavior: smooth; }
+        body::before,
+        body::after {
+            content: '';
+            position: fixed;
+            width: 34rem;
+            height: 34rem;
+            border-radius: 50%;
+            filter: blur(90px);
+            opacity: 0.18;
+            pointer-events: none;
+            z-index: -2;
+        }
+        body::before {
+            top: -10rem;
+            left: -8rem;
+            background: radial-gradient(circle, rgba(77,166,255,0.6) 0%, rgba(77,166,255,0) 70%);
+        }
+        body::after {
+            right: -10rem;
+            top: 20rem;
+            background: radial-gradient(circle, rgba(255,107,53,0.45) 0%, rgba(255,107,53,0) 70%);
+        }
+        .reading-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            transform-origin: 0 50%;
+            transform: scaleX(0);
+            background: linear-gradient(90deg, #00d4a8 0%, #4da6ff 45%, #ff6b35 100%);
+            box-shadow: 0 0 18px rgba(77,166,255,0.45);
+            z-index: 1400;
+        }
+        .hero {
+            min-height: 92vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4.5rem 2rem 3rem;
+        }
+        .hero-content {
+            max-width: 1180px;
+            width: 100%;
+        }
+        .hero-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.85fr);
+            gap: 2rem;
+            align-items: center;
+        }
+        .hero-copy {
+            text-align: left;
+            position: relative;
+            z-index: 1;
+        }
+        .hero-subtitle-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.8rem;
+            margin: 1.5rem 0 0;
+        }
+        .hero-spotlight {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            padding: 0.55rem 0.9rem;
+            border-radius: 999px;
+            background: rgba(255,255,255,0.09);
+            border: 1px solid rgba(255,255,255,0.18);
+            font-size: 0.85rem;
+            font-weight: 600;
+            backdrop-filter: blur(12px);
+        }
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 0.85rem;
+            margin: 1.6rem 0 2rem;
+        }
+        .hero-stat {
+            padding: 1rem 1rem 0.95rem;
+            border-radius: 18px;
+            background: rgba(8, 10, 27, 0.28);
+            border: 1px solid rgba(255,255,255,0.13);
+            text-align: left;
+            backdrop-filter: blur(14px);
+            box-shadow: 0 12px 30px rgba(10,12,30,0.18);
+            transform: translateY(0);
+            transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+        }
+        .hero-stat:hover {
+            transform: translateY(-6px);
+            border-color: rgba(255,255,255,0.28);
+            box-shadow: 0 20px 44px rgba(10,12,30,0.28);
+        }
+        .hero-stat-value {
+            display: block;
+            font-family: 'Syne', sans-serif;
+            font-size: 1.8rem;
+            line-height: 1;
+            margin-bottom: 0.35rem;
+            color: #fff3b0;
+        }
+        .hero-stat-label {
+            font-size: 0.82rem;
+            color: rgba(255,255,255,0.74);
+        }
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.85rem;
+            margin-top: 1.75rem;
+        }
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            min-width: 170px;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-cta::after {
+            content: '';
+            position: absolute;
+            inset: -120% auto auto -30%;
+            width: 40%;
+            height: 320%;
+            transform: rotate(25deg);
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
+            transition: transform 0.7s ease;
+        }
+        .hero-cta:hover::after { transform: translateX(360%) rotate(25deg); }
+        .hero-side {
+            position: relative;
+            display: grid;
+            gap: 1rem;
+        }
+        .hero-panel,
+        .hero-mini-card,
+        .story-beat {
+            background: rgba(16, 18, 42, 0.45);
+            border: 1px solid rgba(255,255,255,0.14);
+            backdrop-filter: blur(18px);
+            box-shadow: 0 20px 50px rgba(5,8,25,0.24);
+        }
+        .hero-panel {
+            position: relative;
+            border-radius: 24px;
+            padding: 1.35rem;
+            overflow: hidden;
+        }
+        .hero-panel::before {
+            content: '';
+            position: absolute;
+            inset: auto -2rem -2rem auto;
+            width: 12rem;
+            height: 12rem;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0,212,168,0.25) 0%, rgba(0,212,168,0) 70%);
+        }
+        .hero-panel-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        .hero-panel-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: rgba(255,255,255,0.7);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+        .hero-panel-badge {
+            border-radius: 999px;
+            padding: 0.35rem 0.7rem;
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+            font-size: 0.74rem;
+            font-weight: 700;
+        }
+        .hero-pulse {
+            width: 0.7rem;
+            height: 0.7rem;
+            border-radius: 50%;
+            background: #00d4a8;
+            box-shadow: 0 0 0 0 rgba(0,212,168,0.6);
+            animation: pulseDot 2s infinite;
+        }
+        .hero-panel h2 {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.5rem;
+            line-height: 1.1;
+            margin-bottom: 0.55rem;
+        }
+        .hero-panel p {
+            color: rgba(255,255,255,0.76);
+            font-size: 0.92rem;
+            line-height: 1.65;
+            margin-bottom: 1rem;
+        }
+        .hero-mini-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 0.8rem;
+        }
+        .hero-mini-card {
+            border-radius: 18px;
+            padding: 1rem;
+        }
+        .hero-mini-card strong {
+            display: block;
+            font-size: 1rem;
+            margin-bottom: 0.3rem;
+        }
+        .hero-mini-card span {
+            display: block;
+            color: rgba(255,255,255,0.68);
+            font-size: 0.82rem;
+            line-height: 1.5;
+        }
+        .hero-scroll-cue {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.7rem;
+            margin-top: 1.75rem;
+            color: rgba(255,255,255,0.72);
+            font-size: 0.82rem;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+        .hero-scroll-icon {
+            width: 1.55rem;
+            height: 2.45rem;
+            border-radius: 999px;
+            border: 1.5px solid rgba(255,255,255,0.35);
+            position: relative;
+        }
+        .hero-scroll-icon::after {
+            content: '';
+            position: absolute;
+            top: 0.45rem;
+            left: 50%;
+            width: 0.32rem;
+            height: 0.5rem;
+            border-radius: 999px;
+            background: #fff;
+            transform: translateX(-50%);
+            animation: scrollCue 1.8s infinite;
+        }
+        .story-strip {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 1rem;
+            margin: -1.2rem auto 3rem;
+            position: relative;
+            z-index: 3;
+        }
+        .story-beat {
+            padding: 1.2rem;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+        .story-beat::before {
+            content: attr(data-step);
+            position: absolute;
+            top: 0.9rem;
+            right: 1rem;
+            font-family: 'Syne', sans-serif;
+            font-size: 2.3rem;
+            line-height: 1;
+            color: rgba(255,255,255,0.08);
+        }
+        .story-beat:hover {
+            transform: translateY(-6px);
+            border-color: rgba(255,255,255,0.26);
+        }
+        .story-beat-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 2.9rem;
+            height: 2.9rem;
+            border-radius: 14px;
+            margin-bottom: 0.9rem;
+            background: rgba(255,255,255,0.09);
+            font-size: 1.25rem;
+        }
+        .story-beat h3 {
+            font-size: 1rem;
+            margin-bottom: 0.35rem;
+        }
+        .story-beat p {
+            color: var(--text-mid);
+            font-size: 0.88rem;
+            line-height: 1.6;
+        }
+        .intro,
+        .toc,
+        .tips-section,
+        .links-block,
+        .feedback-section,
+        .workflow,
+        .powertoys-block,
+        .digitale-block,
+        .highlight-block {
+            position: relative;
+            overflow: hidden;
+            isolation: isolate;
+        }
+        .intro::before,
+        .toc::before,
+        .tips-section::before,
+        .links-block::before,
+        .feedback-section::before,
+        .workflow::before,
+        .powertoys-block::before,
+        .digitale-block::before,
+        .highlight-block::before {
+            content: '';
+            position: absolute;
+            inset: 0 auto auto 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
+            opacity: 0.28;
+            pointer-events: none;
+        }
+        .intro {
+            padding: 2rem;
+            border-radius: 24px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.04) 0%, rgba(108,59,255,0.08) 100%);
+            border: 1px solid var(--border-soft);
+            box-shadow: 0 18px 48px rgba(11, 10, 30, 0.18);
+        }
+        .toc { backdrop-filter: blur(14px); }
+        .toc-item {
+            position: relative;
+            overflow: hidden;
+        }
+        .toc-item::after {
+            content: '';
+            position: absolute;
+            inset: 0 auto 0 0;
+            width: 0.22rem;
+            background: linear-gradient(180deg, #00d4a8 0%, #4da6ff 100%);
+            opacity: 0;
+            transition: opacity 0.25s ease;
+        }
+        .toc-item.active-story {
+            background: linear-gradient(135deg, rgba(0,212,168,0.14) 0%, rgba(77,166,255,0.12) 100%);
+            border-color: rgba(77,166,255,0.3);
+            color: #dff9ff;
+            transform: translateY(-2px);
+        }
+        .toc-item.active-story::after { opacity: 1; }
+        .section-block {
+            padding: 1.25rem 1.35rem 1.8rem;
+            border-radius: 28px;
+            background: linear-gradient(180deg, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0.01) 100%);
+            border: 1px solid rgba(255,255,255,0.05);
+            box-shadow: 0 20px 45px rgba(7, 10, 26, 0.1);
+        }
+        .card {
+            transform: translateY(0);
+            box-shadow: 0 14px 34px rgba(8, 10, 28, 0.14);
+        }
+        .card,
+        .powertoys-tile,
+        .digitale-tile,
+        .inner-tile {
+            position: relative;
+            overflow: hidden;
+        }
+        .card::after,
+        .powertoys-tile::after,
+        .digitale-tile::after,
+        .inner-tile::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(255,255,255,0.16) 0%, rgba(255,255,255,0) 32%);
+            opacity: 0;
+            transition: opacity 0.35s ease;
+            pointer-events: none;
+        }
+        body.light-mode .card::after,
+        body.light-mode .powertoys-tile::after,
+        body.light-mode .digitale-tile::after,
+        body.light-mode .inner-tile::after {
+            background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(108,59,255,0.18) 0%, rgba(108,59,255,0.08) 18%, rgba(108,59,255,0) 42%);
+        }
+        .card:hover::after,
+        .powertoys-tile:hover::after,
+        .digitale-tile:hover::after,
+        .inner-tile:hover::after { opacity: 1; }
+        .btn {
+            position: relative;
+            overflow: hidden;
+        }
+        .btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(120deg, transparent 20%, rgba(255,255,255,0.18), transparent 80%);
+            transform: translateX(-130%);
+            transition: transform 0.55s ease;
+        }
+        .btn:hover::before { transform: translateX(130%); }
+        .tip-item,
+        .link-chip,
+        .workflow-step,
+        .powertoys-tile,
+        .digitale-tile,
+        .inner-tile,
+        .feedback-btn {
+            transition: transform 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease;
+        }
+        .tip-item:hover,
+        .link-chip:hover,
+        .workflow-step:hover,
+        .powertoys-tile:hover,
+        .digitale-tile:hover,
+        .inner-tile:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 14px 28px rgba(7, 10, 26, 0.16);
+        }
+        [data-reveal] {
+            opacity: 0;
+            transform: translateY(34px) scale(0.985);
+            transition: opacity 0.7s ease, transform 0.7s cubic-bezier(.22,1,.36,1), filter 0.7s ease;
+            transition-delay: var(--reveal-delay, 0ms);
+            filter: blur(8px);
+        }
+        [data-reveal].revealed {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            filter: blur(0);
+        }
+        [data-parallax] {
+            transform: translate3d(0, calc(var(--parallax-shift, 0px)), 0);
+            will-change: transform;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after {
+                animation: none !important;
+                transition: none !important;
+            }
+            [data-reveal] {
+                opacity: 1 !important;
+                transform: none !important;
+                filter: none !important;
+            }
+            .collapsible-body {
+                transition: none !important;
+            }
+        }
+        @keyframes pulseDot {
+            0% { box-shadow: 0 0 0 0 rgba(0,212,168,0.55); }
+            70% { box-shadow: 0 0 0 12px rgba(0,212,168,0); }
+            100% { box-shadow: 0 0 0 0 rgba(0,212,168,0); }
+        }
+        @keyframes scrollCue {
+            0% { opacity: 0; transform: translate(-50%, 0); }
+            25% { opacity: 1; }
+            100% { opacity: 0; transform: translate(-50%, 0.75rem); }
         }
     </style>
 </head>
 <body>
+
+<div class="reading-progress" id="reading-progress" aria-hidden="true"></div>
 
 <button class="theme-toggle" onclick="toggleTheme()">
     <span id="theme-icon">☀️</span>
@@ -540,22 +1351,86 @@
 <!-- HERO -->
 <div class="hero">
     <div class="hero-content">
-        <div class="hero-eyebrow">
-            <img src="https://upload.wikimedia.org/wikipedia/fr/7/73/Logo-C%C3%A9gep_G%C3%A9rald-Godin.svg"
-                 alt="Cégep Gérald-Godin" style="height:20px;filter:brightness(0) invert(1);">
-            Cégep Gérald-Godin
-        </div>
-        <h1>Trousse techno<br><span>pour les étudiants</span></h1>
-        <p class="subtitle">Des outils, raccourcis et astuces pour réussir ton cégep avec la tech — de zéro à avancé.</p>
-        <div class="hero-meta">Conçu par le service du développement pédagogique · Cégep Gérald-Godin</div>
+        <div class="hero-layout">
+            <div class="hero-copy" data-reveal>
+                <div class="hero-eyebrow">
+                    <img src="https://upload.wikimedia.org/wikipedia/fr/7/73/Logo-C%C3%A9gep_G%C3%A9rald-Godin.svg"
+                         alt="Cégep Gérald-Godin" style="height:20px;filter:brightness(0) invert(1);">
+                    Cégep Gérald-Godin
+                </div>
+                <h1>Trousse techno<br><span>pour les étudiants</span></h1>
+                <p class="subtitle" style="margin:0;">Des outils, raccourcis et astuces pour réussir ton cégep avec la tech — de zéro à avancé.</p>
+                <div class="hero-subtitle-row">
+                    <div class="hero-meta">Conçu par le service du développement pédagogique · Cégep Gérald-Godin</div>
+                    <div class="hero-spotlight">⚡ Version plus vivante, plus claire, plus pratique</div>
+                </div>
 
-        <div class="difficulty-legend" id="diff-filter">
-            <div class="diff-pill filter-all active-filter" onclick="filterDiff('all')" title="Tout afficher">✨ Tout afficher</div>
-            <div class="diff-pill base" onclick="filterDiff('base')" title="Afficher seulement les trucs de base">🟢 De base</div>
-            <div class="diff-pill inter" onclick="filterDiff('inter')" title="Afficher seulement les trucs intermédiaires">🟡 Intermédiaire</div>
-            <div class="diff-pill adv" onclick="filterDiff('adv')" title="Afficher seulement les trucs avancés">🔴 Avancé</div>
+                <div class="hero-stats">
+                    <div class="hero-stat" data-reveal style="--reveal-delay:120ms;">
+                        <span class="hero-stat-value">100+</span>
+                        <span class="hero-stat-label">astuces et outils à explorer</span>
+                    </div>
+                    <div class="hero-stat" data-reveal style="--reveal-delay:220ms;">
+                        <span class="hero-stat-value">3</span>
+                        <span class="hero-stat-label">niveaux pour avancer à ton rythme</span>
+                    </div>
+                    <div class="hero-stat" data-reveal style="--reveal-delay:320ms;">
+                        <span class="hero-stat-value">1</span>
+                        <span class="hero-stat-label">trousse pour mieux t'organiser toute la session</span>
+                    </div>
+                </div>
+
+                <div class="hero-actions">
+                    <a class="btn btn-primary hero-cta" href="#toc">Explorer la trousse</a>
+                    <a class="btn btn-secondary hero-cta" href="#journee-section">Voir la semaine type</a>
+                </div>
+
+                <div class="difficulty-legend" id="diff-filter">
+                    <div class="diff-pill filter-all active-filter" onclick="filterDiff('all')" title="Tout afficher">✨ Tout afficher</div>
+                    <div class="diff-pill base" onclick="filterDiff('base')" title="Afficher seulement les trucs de base">🟢 De base</div>
+                    <div class="diff-pill inter" onclick="filterDiff('inter')" title="Afficher seulement les trucs intermédiaires">🟡 Intermédiaire</div>
+                    <div class="diff-pill adv" onclick="filterDiff('adv')" title="Afficher seulement les trucs avancés">🔴 Avancé</div>
+                </div>
+                <p style="font-size:0.78rem;opacity:0.55;margin-top:0.75rem;text-align:left;">Clique sur un niveau pour filtrer les astuces</p>
+
+                <div class="hero-scroll-cue">
+                    <span class="hero-scroll-icon" aria-hidden="true"></span>
+                    Descends pour découvrir les sections
+                </div>
+            </div>
+
+            <div class="hero-side" data-parallax>
+                <div class="hero-panel" data-reveal style="--reveal-delay:180ms;">
+                    <div class="hero-panel-head">
+                        <div class="hero-panel-label">
+                            <span class="hero-pulse" aria-hidden="true"></span>
+                            En ce moment
+                        </div>
+                        <div class="hero-panel-badge">Parcours interactif</div>
+                    </div>
+                    <h2>Moins de chaos. Plus de flow.</h2>
+                    <p>Repère vite les outils utiles, saute à la bonne section et garde un rythme plus simple entre cours, travaux, captures, fichiers et remises.</p>
+                    <div class="hero-mini-grid">
+                        <div class="hero-mini-card">
+                            <strong>Focus</strong>
+                            <span>Fenêtres, tâches, routines, concentration</span>
+                        </div>
+                        <div class="hero-mini-card">
+                            <strong>Collabo</strong>
+                            <span>M365, Teams, OneDrive, coédition</span>
+                        </div>
+                        <div class="hero-mini-card">
+                            <strong>Raccourcis</strong>
+                            <span>Actions plus rapides au clavier</span>
+                        </div>
+                        <div class="hero-mini-card">
+                            <strong>Bonus</strong>
+                            <span>Outils avancés pour aller plus loin</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <p style="font-size:0.78rem;opacity:0.55;margin-top:0.75rem;text-align:center;">Clique sur un niveau pour filtrer les astuces</p>
     </div>
 </div>
 
@@ -565,6 +1440,29 @@
     <div class="intro">
         <h2>Travaille plus vite, <em>retiens mieux</em>, stresse moins</h2>
         <p>Cette trousse regroupe les meilleurs outils et trucs que tu peux utiliser dès aujourd'hui — que tu sois en première session ou en fin de programme. Chaque astuce est classée par niveau de difficulté. Commence où tu veux!</p>
+    </div>
+
+    <div class="story-strip">
+        <div class="story-beat" data-step="01" data-reveal>
+            <div class="story-beat-icon">🚀</div>
+            <h3>Démarre fort</h3>
+            <p>Choisis les essentiels qui te font gagner du temps dès cette semaine.</p>
+        </div>
+        <div class="story-beat" data-step="02" data-reveal style="--reveal-delay:80ms;">
+            <div class="story-beat-icon">🗂️</div>
+            <h3>Organise ton setup</h3>
+            <p>Classe, sauvegarde et retrouve tes fichiers sans stress inutile.</p>
+        </div>
+        <div class="story-beat" data-step="03" data-reveal style="--reveal-delay:160ms;">
+            <div class="story-beat-icon">🎯</div>
+            <h3>Reste dans ta zone</h3>
+            <p>Utilise les sections focus, raccourcis et workflow pour garder le rythme.</p>
+        </div>
+        <div class="story-beat" data-step="04" data-reveal style="--reveal-delay:240ms;">
+            <div class="story-beat-icon">✨</div>
+            <h3>Passe au niveau suivant</h3>
+            <p>Explore les outils avancés quand tu veux pousser un peu plus loin.</p>
+        </div>
     </div>
 
     <!-- TABLE DES MATIÈRES -->
@@ -887,30 +1785,35 @@
     <!-- ============================================
          ANTIDOTE BLOCK
     ============================================= -->
-    <div class="highlight-block antidote-block" style="margin-bottom:3rem;">
-        <div style="display:flex;align-items:center;gap:1.5rem;margin-bottom:1.5rem;flex-wrap:wrap;">
-            <img src="https://www.druide.com/user/themes/druide/build/images/accueil/fiole.png" alt="Antidote" style="width:60px;height:60px;object-fit:contain;" onerror="this.style.display='none'">
+    <section id="antidote-section" class="section-block s-antidote antidote-block">
+        <div class="section-header">
+            <div class="section-icon">
+                <img src="https://www.druide.com/user/themes/druide/build/images/accueil/fiole.png" alt="Antidote" style="width:2.15rem;height:2.15rem;object-fit:contain;" onerror="this.parentElement.textContent='🧪'">
+            </div>
             <div>
-                <h2 style="font-family:'Syne',sans-serif;font-size:2rem;color:#c864ff;margin-bottom:0.25rem;">Antidote — ton correcteur professionnel</h2>
-                <p style="color:#9b50cc;font-size:1.05rem;">Correcteur, dictionnaire et guide linguistique — disponible au Cégep</p>
+                <h2>Antidote — ton correcteur professionnel</h2>
             </div>
         </div>
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.25rem;margin-bottom:1.5rem;">
-            <div class="inner-tile" style="border-color:rgba(200,100,255,0.2);background:rgba(200,100,255,0.05);">
-                <strong style="color:#c864ff;display:block;margin-bottom:0.5rem;">✅ Correction intelligente</strong>
-                <p style="color:#9b50cc;font-size:0.92rem;line-height:1.6;">Antidote détecte les erreurs de grammaire, d'orthographe, de syntaxe et de ponctuation. Il explique <em>pourquoi</em> c'est une erreur — pas juste de souligner en rouge.</p>
+        <p class="section-desc">Correcteur, dictionnaire et guide linguistique disponible au Cégep pour améliorer tes travaux avec plus de précision.</p>
+        <div class="compact-tools-grid" style="margin-bottom:1.5rem;">
+            <div class="inner-tile">
+                <strong style="display:block;margin-bottom:0.5rem;">✅ Correction intelligente</strong>
+                <p>Antidote détecte les erreurs de grammaire, d'orthographe, de syntaxe et de ponctuation. Il explique <em>pourquoi</em> c'est une erreur, pas seulement où corriger.</p>
             </div>
-            <div class="inner-tile" style="border-color:rgba(200,100,255,0.2);background:rgba(200,100,255,0.05);">
-                <strong style="color:#c864ff;display:block;margin-bottom:0.5rem;">📖 Dictionnaire et synonymes</strong>
-                <p style="color:#9b50cc;font-size:0.92rem;line-height:1.6;">Cherche des synonymes, des définitions, des cooccurrences (quels mots vont souvent ensemble), et des exemples tirés de vrais textes. Idéal pour enrichir ton vocabulaire dans les dissertations.</p>
+            <div class="inner-tile">
+                <strong style="display:block;margin-bottom:0.5rem;">📖 Dictionnaire et synonymes</strong>
+                <p>Cherche des synonymes, des définitions, des cooccurrences et des exemples tirés de vrais textes. Très utile pour enrichir une dissertation ou réviser un texte.</p>
             </div>
-            <div class="inner-tile" style="border-color:rgba(200,100,255,0.2);background:rgba(200,100,255,0.05);">
-                <strong style="color:#c864ff;display:block;margin-bottom:0.5rem;">🔗 Intégration Word et navigateur</strong>
-                <p style="color:#9b50cc;font-size:0.92rem;line-height:1.6;">Antidote s'intègre directement dans Word, et une extension permet de corriger dans les navigateurs. Un clic depuis Word suffit à lancer la correction complète du document.</p>
+            <div class="inner-tile">
+                <strong style="display:block;margin-bottom:0.5rem;">🔗 Intégration Word et navigateur</strong>
+                <p>Antidote s'intègre directement dans Word, et une extension permet aussi de corriger dans les navigateurs. Un clic suffit pour lancer une révision complète.</p>
             </div>
         </div>
-        <button class="btn" style="background:rgba(200,100,255,0.2);color:#c864ff;border:1px solid rgba(200,100,255,0.3);font-weight:600;" onclick="alert('Antidote est disponible sur les ordinateurs des laboratoires et de la bibliothèque du Cégep.\n\nPour accéder à Antidote :\n• Utilise les postes de la bibliothèque ou des laboratoires pour les corrections importantes\n• Demande au comptoir de la bibliothèque si une licence étudiante est disponible\n\nDans Word avec Antidote installé :\nOnglet Antidote → Corriger (ou Shift+F7 si configuré ainsi)')">Où accéder à Antidote?</button>
-    </div>
+        <div class="card-actions">
+            <button class="btn btn-primary" onclick="alert('Antidote est disponible sur les ordinateurs des laboratoires et de la bibliothèque du Cégep.\n\nPour accéder à Antidote :\n• Utilise les postes de la bibliothèque ou des laboratoires pour les corrections importantes\n• Demande au comptoir de la bibliothèque si une licence étudiante est disponible\n\nDans Word avec Antidote installé :\nOnglet Antidote → Corriger (ou Shift+F7 si configuré ainsi)')">Où accéder à Antidote?</button>
+        </div>
+        <div class="back-to-toc"><a href="#toc">↑ Retour au menu</a></div>
+    </section>
 
 
     <!-- ============================================
@@ -1311,74 +2214,76 @@
     <!-- ============================================
          LA DIGITALE
     ============================================= -->
-    <div class="digitale-block" id="digitale-section" style="scroll-margin-top:80px;">
-        <div style="display:flex;align-items:center;gap:1.5rem;margin-bottom:1.5rem;flex-wrap:wrap;">
-            <img src="https://ladigitale.dev/blog/bl-themes/mediumish/img/logo.png" alt="La Digitale" style="width:3rem;height:3rem;">
+    <section id="digitale-section" class="section-block s-digitale digitale-block">
+        <div class="section-header">
+            <div class="section-icon">
+                <img src="https://ladigitale.dev/blog/bl-themes/mediumish/img/logo.png" alt="La Digitale" style="width:2.15rem;height:2.15rem;object-fit:contain;" onerror="this.parentElement.textContent='🟢'">
+            </div>
             <div>
                 <h2>La Digitale — outils libres pour l'école</h2>
-                <p style="color:#00b89a;font-size:1rem;"><a href="https://ladigitale.dev/" target="_blank" style="color:#00d4a8;font-weight:600;text-decoration:underline;">ladigitale.dev</a> — gratuit, sans compte, sans pub, conçu pour l'éducation.</p>
             </div>
         </div>
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem;">
+        <p class="section-desc"><a href="https://ladigitale.dev/" target="_blank" style="color:var(--green);font-weight:600;text-decoration:underline;">ladigitale.dev</a> propose des outils gratuits, sans compte et sans pub, pensés pour l'éducation.</p>
+        <div class="compact-tools-grid">
             <div class="digitale-tile">
                 <div style="display:flex;align-items:center;justify-content:space-between;gap:0.5rem;">
-                    <a href="https://ladigitale.dev/digirecord/" target="_blank" class="digitale-name-link"><strong style="color:#00d4a8;display:flex;align-items:center;gap:0.4rem;"><span style="font-size:1.4rem;">🎙️</span><span>Digirecord</span></strong></a>
+                    <a href="https://ladigitale.dev/digirecord/" target="_blank" class="digitale-name-link"><strong><span style="font-size:1.4rem;">🎙️</span><span>Digirecord</span></strong></a>
                     <a href="https://ladigitale.dev/digirecord/" target="_blank" class="digitale-open-btn">➚</a>
                 </div>
-                <p style="font-size:0.88rem;margin-top:0.4rem;color:#00b89a;">Enregistre et partage des fichiers audio — parfait pour les présentations orales.</p>
+                <p style="font-size:0.88rem;margin-top:0.4rem;">Enregistre et partage des fichiers audio, parfait pour les présentations orales.</p>
             </div>
             <div class="digitale-tile">
                 <div style="display:flex;align-items:center;justify-content:space-between;gap:0.5rem;">
-                    <a href="https://ladigitale.dev/digispeech/" target="_blank" class="digitale-name-link"><strong style="color:#00d4a8;display:flex;align-items:center;gap:0.4rem;"><span style="font-size:1.4rem;">🗣️</span><span>Digispeech</span></strong></a>
+                    <a href="https://ladigitale.dev/digispeech/" target="_blank" class="digitale-name-link"><strong><span style="font-size:1.4rem;">🗣️</span><span>Digispeech</span></strong></a>
                     <a href="https://ladigitale.dev/digispeech/" target="_blank" class="digitale-open-btn">➚</a>
                 </div>
-                <p style="font-size:0.88rem;margin-top:0.4rem;color:#00b89a;">Génère un fichier audio à partir d'un texte — utile pour réécouter tes notes.</p>
+                <p style="font-size:0.88rem;margin-top:0.4rem;">Génère un fichier audio à partir d'un texte, utile pour réécouter tes notes.</p>
             </div>
             <div class="digitale-tile">
                 <div style="display:flex;align-items:center;justify-content:space-between;gap:0.5rem;">
-                    <a href="https://ladigitale.dev/digicut/" target="_blank" class="digitale-name-link"><strong style="color:#00d4a8;display:flex;align-items:center;gap:0.4rem;"><span style="font-size:1.4rem;">✂️</span><span>Digicut</span></strong></a>
+                    <a href="https://ladigitale.dev/digicut/" target="_blank" class="digitale-name-link"><strong><span style="font-size:1.4rem;">✂️</span><span>Digicut</span></strong></a>
                     <a href="https://ladigitale.dev/digicut/" target="_blank" class="digitale-open-btn">➚</a>
                 </div>
-                <p style="font-size:0.88rem;margin-top:0.4rem;color:#00b89a;">Découpe un extrait d'une vidéo ou d'un fichier audio en quelques secondes.</p>
+                <p style="font-size:0.88rem;margin-top:0.4rem;">Découpe un extrait d'une vidéo ou d'un fichier audio en quelques secondes.</p>
             </div>
             <div class="digitale-tile">
                 <div style="display:flex;align-items:center;justify-content:space-between;gap:0.5rem;">
-                    <a href="https://digipdf.app/" target="_blank" class="digitale-name-link"><strong style="color:#00d4a8;display:flex;align-items:center;gap:0.4rem;"><span style="font-size:1.4rem;">📄</span><span>DigiPDF</span></strong></a>
+                    <a href="https://digipdf.app/" target="_blank" class="digitale-name-link"><strong><span style="font-size:1.4rem;">📄</span><span>DigiPDF</span></strong></a>
                     <a href="https://digipdf.app/" target="_blank" class="digitale-open-btn">➚</a>
                 </div>
-                <p style="font-size:0.88rem;margin-top:0.4rem;color:#00b89a;">Outils PDF gratuits : fusionner, diviser, compresser, convertir.</p>
+                <p style="font-size:0.88rem;margin-top:0.4rem;">Outils PDF gratuits : fusionner, diviser, compresser, convertir.</p>
             </div>
             <div class="digitale-tile">
                 <div style="display:flex;align-items:center;justify-content:space-between;gap:0.5rem;">
-                    <a href="https://ladigitale.dev/digiremovebg/" target="_blank" class="digitale-name-link"><strong style="color:#00d4a8;display:flex;align-items:center;gap:0.4rem;"><span style="font-size:1.4rem;">🖼️</span><span>DigiremoveBG</span></strong></a>
+                    <a href="https://ladigitale.dev/digiremovebg/" target="_blank" class="digitale-name-link"><strong><span style="font-size:1.4rem;">🖼️</span><span>DigiremoveBG</span></strong></a>
                     <a href="https://ladigitale.dev/digiremovebg/" target="_blank" class="digitale-open-btn">➚</a>
                 </div>
-                <p style="font-size:0.88rem;margin-top:0.4rem;color:#00b89a;">Supprime le fond d'une image — pour tes présentations et travaux visuels.</p>
+                <p style="font-size:0.88rem;margin-top:0.4rem;">Supprime le fond d'une image pour tes présentations et travaux visuels.</p>
             </div>
             <div class="digitale-tile">
                 <div style="display:flex;align-items:center;justify-content:space-between;gap:0.5rem;">
-                    <a href="https://ladigitale.dev/digidesign/" target="_blank" class="digitale-name-link"><strong style="color:#00d4a8;display:flex;align-items:center;gap:0.4rem;"><span style="font-size:1.4rem;">🎨</span><span>Digidesign</span></strong></a>
+                    <a href="https://ladigitale.dev/digidesign/" target="_blank" class="digitale-name-link"><strong><span style="font-size:1.4rem;">🎨</span><span>Digidesign</span></strong></a>
                     <a href="https://ladigitale.dev/digidesign/" target="_blank" class="digitale-open-btn">➚</a>
                 </div>
-                <p style="font-size:0.88rem;margin-top:0.4rem;color:#00b89a;">Crée des compositions graphiques — alternative à Canva, sans compte.</p>
+                <p style="font-size:0.88rem;margin-top:0.4rem;">Crée des compositions graphiques, une alternative à Canva sans compte.</p>
             </div>
             <div class="digitale-tile">
                 <div style="display:flex;align-items:center;justify-content:space-between;gap:0.5rem;">
-                    <a href="https://ladigitale.dev/digicode/" target="_blank" class="digitale-name-link"><strong style="color:#00d4a8;display:flex;align-items:center;gap:0.4rem;"><span style="font-size:1.4rem;">🧑‍💻</span><span>Digicode</span></strong></a>
+                    <a href="https://ladigitale.dev/digicode/" target="_blank" class="digitale-name-link"><strong><span style="font-size:1.4rem;">🧑‍💻</span><span>Digicode</span></strong></a>
                     <a href="https://ladigitale.dev/digicode/" target="_blank" class="digitale-open-btn">➚</a>
                 </div>
-                <p style="font-size:0.88rem;margin-top:0.4rem;color:#00b89a;">Crée des codes QR pour partager facilement des liens.</p>
+                <p style="font-size:0.88rem;margin-top:0.4rem;">Crée des codes QR pour partager facilement des liens.</p>
             </div>
             <div class="digitale-tile">
                 <div style="display:flex;align-items:center;justify-content:space-between;gap:0.5rem;">
-                    <a href="https://ladigitale.dev/digitranscode/" target="_blank" class="digitale-name-link"><strong style="color:#00d4a8;display:flex;align-items:center;gap:0.4rem;"><span style="font-size:1.4rem;">🔁</span><span>Digitranscode</span></strong></a>
+                    <a href="https://ladigitale.dev/digitranscode/" target="_blank" class="digitale-name-link"><strong><span style="font-size:1.4rem;">🔁</span><span>Digitranscode</span></strong></a>
                     <a href="https://ladigitale.dev/digitranscode/" target="_blank" class="digitale-open-btn">➚</a>
                 </div>
-                <p style="font-size:0.88rem;margin-top:0.4rem;color:#00b89a;">Convertit des fichiers audio et vidéo dans différents formats.</p>
+                <p style="font-size:0.88rem;margin-top:0.4rem;">Convertit des fichiers audio et vidéo dans différents formats.</p>
             </div>
         </div>
         <div class="back-to-toc" style="margin-top:1.5rem;"><a href="#toc">↑ Retour au menu</a></div>
-    </div>
+    </section>
 
 
     <!-- ============================================
@@ -1481,80 +2386,80 @@
     <!-- ============================================
          POWERTOYS BLOCK
     ============================================= -->
-    <section id="powertoys-section" style="scroll-margin-top:80px;margin-bottom:4rem;">
-        <div class="powertoys-block">
-            <div style="display:flex;align-items:center;gap:1.5rem;margin-bottom:1.5rem;">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/2/2b/2020_PowerToys_Icon.svg" alt="PowerToys" style="width:60px;height:60px;">
-                <div>
-                    <h2 style="font-family:'Syne',sans-serif;font-size:2rem;color:#f7c948;margin-bottom:0.25rem;">PowerToys — boîte à outils Windows</h2>
-                    <p style="color:#b89a30;">Suite d'outils gratuits de Microsoft pour aller plus vite au quotidien</p>
-                </div>
+    <section id="powertoys-section" class="section-block s-powertoys powertoys-block">
+        <div class="section-header">
+            <div class="section-icon">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/2/2b/2020_PowerToys_Icon.svg" alt="PowerToys" style="width:2.15rem;height:2.15rem;object-fit:contain;" onerror="this.parentElement.textContent='🧰'">
             </div>
+            <div>
+                <h2>PowerToys — boîte à outils Windows</h2>
+            </div>
+        </div>
+        <p class="section-desc">Suite d'outils gratuits de Microsoft pour aller plus vite au quotidien sur Windows.</p>
             <div class="powertoys-inner-box">
-                <h3 style="color:#f7c948;margin-bottom:0.85rem;font-family:'Syne',sans-serif;">📦 Installation</h3>
-                <p style="color:#b89a30;margin-bottom:1rem;line-height:1.7;">PowerToys est un outil gratuit de Microsoft, téléchargeable en quelques minutes.</p>
+                <h3 style="color:var(--text);margin-bottom:0.85rem;font-family:'Syne',sans-serif;">📦 Installation</h3>
+                <p style="color:var(--text-mid);margin-bottom:1rem;line-height:1.7;">PowerToys est un outil gratuit de Microsoft, téléchargeable en quelques minutes.</p>
                 <div style="display:grid;gap:1rem;">
                     <div>
-                        <strong style="color:#f7c948;">Option 1 : Centre logiciel du Cégep (Recommandé)</strong><br>
-                        <a href="https://github.com/microsoft/PowerToys/releases" target="_blank" class="btn" style="background:#b89a30;color:#1a1508;font-weight:700;text-decoration:none;">Télécharger depuis GitHub</a>
+                        <strong style="color:var(--text);">Option 1 : Centre logiciel du Cégep (Recommandé)</strong><br>
+                        <a href="https://github.com/microsoft/PowerToys/releases" target="_blank" class="btn btn-primary" style="font-weight:700;text-decoration:none;">Télécharger depuis GitHub</a>
                     </div>
                     <div>
-                        <strong style="color:#f7c948;">Option 2 : GitHub officiel Microsoft</strong><br>
-                        <a href="https://github.com/microsoft/PowerToys/releases" target="_blank" style="color:#b89a30;text-decoration:underline;font-weight:500;">Télécharger depuis GitHub →</a>
+                        <strong style="color:var(--text);">Option 2 : GitHub officiel Microsoft</strong><br>
+                        <a href="https://github.com/microsoft/PowerToys/releases" target="_blank" style="color:var(--amber);text-decoration:underline;font-weight:500;">Télécharger depuis GitHub →</a>
                     </div>
                 </div>
             </div>
-            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;">
+            <div class="compact-tools-grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr));">
                 <div class="powertoys-tile">
                     <div style="font-size:1.6rem;margin-bottom:0.5rem;">✨</div>
-                    <strong style="color:#f7c948;">Clics visuels</strong>
-                    <p style="font-size:0.85rem;color:#b89a30;margin-top:0.3rem;font-family:'JetBrains Mono',monospace;">Win + MAJ + H</p>
-                    <p style="font-size:0.88rem;margin-top:0.5rem;color:#a08828;">Cercles colorés lors des clics — parfait pour les démos et tutoriels vidéo.</p>
+                    <strong>Clics visuels</strong>
+                    <p style="font-size:0.85rem;margin-top:0.3rem;font-family:'JetBrains Mono',monospace;">Win + MAJ + H</p>
+                    <p style="font-size:0.88rem;margin-top:0.5rem;">Cercles colorés lors des clics, parfait pour les démos et tutoriels vidéo.</p>
                 </div>
                 <div class="powertoys-tile">
                     <div style="font-size:1.6rem;margin-bottom:0.5rem;">⭕</div>
-                    <strong style="color:#f7c948;">Localisateur souris</strong>
-                    <p style="font-size:0.85rem;color:#b89a30;margin-top:0.3rem;font-family:'JetBrains Mono',monospace;">Ctrl + Ctrl (double)</p>
-                    <p style="font-size:0.88rem;margin-top:0.5rem;color:#a08828;">Cercle blanc autour du curseur pour le retrouver sur grand écran.</p>
+                    <strong>Localisateur souris</strong>
+                    <p style="font-size:0.85rem;margin-top:0.3rem;font-family:'JetBrains Mono',monospace;">Ctrl + Ctrl (double)</p>
+                    <p style="font-size:0.88rem;margin-top:0.5rem;">Cercle blanc autour du curseur pour le retrouver sur grand écran.</p>
                 </div>
                 <div class="powertoys-tile">
                     <div style="font-size:1.6rem;margin-bottom:0.5rem;">🔍</div>
-                    <strong style="color:#f7c948;">PowerToys Run</strong>
-                    <p style="font-size:0.85rem;color:#b89a30;margin-top:0.3rem;font-family:'JetBrains Mono',monospace;">Alt + Espace</p>
-                    <p style="font-size:0.88rem;margin-top:0.5rem;color:#a08828;">Lance n'importe quelle app ou fichier en tapant quelques lettres.</p>
+                    <strong>PowerToys Run</strong>
+                    <p style="font-size:0.85rem;margin-top:0.3rem;font-family:'JetBrains Mono',monospace;">Alt + Espace</p>
+                    <p style="font-size:0.88rem;margin-top:0.5rem;">Lance n'importe quelle app ou fichier en tapant quelques lettres.</p>
                 </div>
                 <div class="powertoys-tile">
                     <div style="font-size:1.6rem;margin-bottom:0.5rem;">🎨</div>
-                    <strong style="color:#f7c948;">Sélecteur de couleur</strong>
-                    <p style="font-size:0.85rem;color:#b89a30;margin-top:0.3rem;font-family:'JetBrains Mono',monospace;">Win + MAJ + C</p>
-                    <p style="font-size:0.88rem;margin-top:0.5rem;color:#a08828;">Identifie n'importe quelle couleur à l'écran (hex, RGB). Utile en design et arts.</p>
+                    <strong>Sélecteur de couleur</strong>
+                    <p style="font-size:0.85rem;margin-top:0.3rem;font-family:'JetBrains Mono',monospace;">Win + MAJ + C</p>
+                    <p style="font-size:0.88rem;margin-top:0.5rem;">Identifie n'importe quelle couleur à l'écran (hex, RGB). Utile en design et arts.</p>
                 </div>
                 <div class="powertoys-tile">
                     <div style="font-size:1.6rem;margin-bottom:0.5rem;">⏱️</div>
-                    <strong style="color:#f7c948;">Toujours visible</strong>
-                    <p style="font-size:0.85rem;color:#b89a30;margin-top:0.3rem;font-family:'JetBrains Mono',monospace;">Win + Ctrl + T</p>
-                    <p style="font-size:0.88rem;margin-top:0.5rem;color:#a08828;">Garde une fenêtre (minuteur, To Do) toujours au premier plan.</p>
+                    <strong>Toujours visible</strong>
+                    <p style="font-size:0.85rem;margin-top:0.3rem;font-family:'JetBrains Mono',monospace;">Win + Ctrl + T</p>
+                    <p style="font-size:0.88rem;margin-top:0.5rem;">Garde une fenêtre (minuteur, To Do) toujours au premier plan.</p>
                 </div>
                 <div class="powertoys-tile">
                     <div style="font-size:1.6rem;margin-bottom:0.5rem;">🖼️</div>
-                    <strong style="color:#f7c948;">Redimensionneur d'images</strong>
-                    <p style="font-size:0.85rem;color:#b89a30;margin-top:0.3rem;">Clic droit sur plusieurs images</p>
-                    <p style="font-size:0.88rem;margin-top:0.5rem;color:#a08828;">Réduis le poids de plusieurs images en une seule fois pour tes travaux Moodle.</p>
+                    <strong>Redimensionneur d'images</strong>
+                    <p style="font-size:0.85rem;margin-top:0.3rem;">Clic droit sur plusieurs images</p>
+                    <p style="font-size:0.88rem;margin-top:0.5rem;">Réduis le poids de plusieurs images en une seule fois pour tes travaux Moodle.</p>
                 </div>
                 <div class="powertoys-tile">
                     <div style="font-size:1.6rem;margin-bottom:0.5rem;">✏️</div>
-                    <strong style="color:#f7c948;">PowerRename</strong>
-                    <p style="font-size:0.85rem;color:#b89a30;margin-top:0.3rem;">Clic droit sur une sélection</p>
-                    <p style="font-size:0.88rem;margin-top:0.5rem;color:#a08828;">Renomme des dizaines de fichiers en une seule opération — fin des fichiers «&nbsp;devoir_FINAL.docx&nbsp;».</p>
+                    <strong>PowerRename</strong>
+                    <p style="font-size:0.85rem;margin-top:0.3rem;">Clic droit sur une sélection</p>
+                    <p style="font-size:0.88rem;margin-top:0.5rem;">Renomme des dizaines de fichiers en une seule opération, fini les fichiers «&nbsp;devoir_FINAL.docx&nbsp;».</p>
                 </div>
                 <div class="powertoys-tile">
                     <div style="font-size:1.6rem;margin-bottom:0.5rem;">🔤</div>
-                    <strong style="color:#f7c948;">Text Extractor</strong>
-                    <p style="font-size:0.85rem;color:#b89a30;margin-top:0.3rem;font-family:'JetBrains Mono',monospace;">Win + MAJ + T</p>
-                    <p style="font-size:0.88rem;margin-top:0.5rem;color:#a08828;">Extrait le texte d'une image ou d'une zone d'écran — alias l'outil de capture de texte.</p>
+                    <strong>Text Extractor</strong>
+                    <p style="font-size:0.85rem;margin-top:0.3rem;font-family:'JetBrains Mono',monospace;">Win + MAJ + T</p>
+                    <p style="font-size:0.88rem;margin-top:0.5rem;">Extrait le texte d'une image ou d'une zone d'écran, alias l'outil de capture de texte.</p>
                 </div>
             </div>
-        </div>
         <div class="back-to-toc"><a href="#toc">↑ Retour au menu</a></div>
     </section>
 
@@ -1784,6 +2689,124 @@ function toggleTheme() {
     }
 }
 
+function setupReadingProgress() {
+    const progressBar = document.getElementById('reading-progress');
+    if (!progressBar) return;
+
+    const updateProgress = () => {
+        const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = scrollable > 0 ? Math.min(window.scrollY / scrollable, 1) : 0;
+        progressBar.style.transform = `scaleX(${progress})`;
+    };
+
+    updateProgress();
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    window.addEventListener('resize', updateProgress);
+}
+
+function setupRevealAnimations() {
+    const selectors = [
+        '.intro',
+        '.toc',
+        '.section-block',
+        '.card',
+        '.story-beat',
+        '.tips-section',
+        '.tip-item',
+        '.workflow',
+        '.workflow-step',
+        '.links-block',
+        '.link-chip',
+        '.feedback-section',
+        '.powertoys-block',
+        '.powertoys-tile',
+        '.digitale-block',
+        '.digitale-tile',
+        '.highlight-block',
+        '.inner-tile'
+    ];
+
+    document.querySelectorAll(selectors.join(',')).forEach((element, index) => {
+        if (!element.hasAttribute('data-reveal')) {
+            element.setAttribute('data-reveal', '');
+        }
+        if (!element.style.getPropertyValue('--reveal-delay') && element.matches('.card, .tip-item, .link-chip, .workflow-step, .powertoys-tile, .digitale-tile, .inner-tile')) {
+            element.style.setProperty('--reveal-delay', `${(index % 6) * 55}ms`);
+        }
+    });
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.querySelectorAll('[data-reveal]').forEach(element => element.classList.add('revealed'));
+        return;
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('revealed');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+
+    document.querySelectorAll('[data-reveal]').forEach(element => observer.observe(element));
+}
+
+function setupActiveStoryLinks() {
+    const tocLinks = Array.from(document.querySelectorAll('.toc-item[href^="#"]'));
+    const sectionMap = new Map(
+        tocLinks
+            .map(link => {
+                const target = document.querySelector(link.getAttribute('href'));
+                return target ? [target, link] : null;
+            })
+            .filter(Boolean)
+    );
+
+    if (!sectionMap.size) return;
+
+    const observer = new IntersectionObserver((entries) => {
+        entries
+            .filter(entry => entry.isIntersecting)
+            .sort((a, b) => b.intersectionRatio - a.intersectionRatio)
+            .forEach(entry => {
+                tocLinks.forEach(link => link.classList.remove('active-story'));
+                sectionMap.get(entry.target)?.classList.add('active-story');
+            });
+    }, { threshold: [0.2, 0.35, 0.55], rootMargin: '-18% 0px -55% 0px' });
+
+    sectionMap.forEach((_, section) => observer.observe(section));
+}
+
+function setupParallax() {
+    const items = Array.from(document.querySelectorAll('[data-parallax]'));
+    if (!items.length || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const updateParallax = () => {
+        items.forEach((item, index) => {
+            const rect = item.getBoundingClientRect();
+            const offset = (rect.top - window.innerHeight * 0.45) * -0.035 * (index + 1);
+            item.style.setProperty('--parallax-shift', `${Math.max(Math.min(offset, 18), -18)}px`);
+        });
+    };
+
+    updateParallax();
+    window.addEventListener('scroll', updateParallax, { passive: true });
+    window.addEventListener('resize', updateParallax);
+}
+
+function setupPointerGlow() {
+    document.querySelectorAll('.card, .hero-panel, .story-beat, .powertoys-tile, .digitale-tile, .inner-tile').forEach(element => {
+        element.addEventListener('mousemove', (event) => {
+            const rect = element.getBoundingClientRect();
+            const x = ((event.clientX - rect.left) / rect.width) * 100;
+            const y = ((event.clientY - rect.top) / rect.height) * 100;
+            element.style.setProperty('--mx', `${x}%`);
+            element.style.setProperty('--my', `${y}%`);
+        });
+    });
+}
+
 window.addEventListener('DOMContentLoaded', () => {
     if (localStorage.getItem('theme-etudiants') === 'light') {
         document.body.classList.add('light-mode');
@@ -1895,7 +2918,218 @@ function positionTooltip(el){
     tooltip.style.left=left+'px'; tooltip.style.top=top+'px'; tooltip.style.width=tw+'px';
 }
 
+function createCollapsibleMeta(count, label) {
+    const meta = document.createElement('span');
+    meta.className = 'collapsible-meta';
+    meta.textContent = `${count} ${label}`;
+    return meta;
+}
+
+function buildHeadingBlock(titleElement, subtitleText, count, label) {
+    const wrapper = document.createElement('div');
+    wrapper.className = 'collapsible-heading';
+
+    const textWrap = document.createElement('div');
+    const titleClone = titleElement.cloneNode(true);
+    textWrap.appendChild(titleClone);
+
+    if (subtitleText) {
+        const kicker = document.createElement('p');
+        kicker.className = 'collapsible-kicker';
+        kicker.textContent = subtitleText;
+        textWrap.appendChild(kicker);
+    }
+
+    if (count && label) {
+        textWrap.appendChild(createCollapsibleMeta(count, label));
+    }
+
+    wrapper.appendChild(textWrap);
+    return wrapper;
+}
+
+function makeCollapsible(section, options = {}) {
+    if (!section || section.dataset.collapsibleReady === 'true') return;
+
+    const {
+        mode = 'section-header',
+        defaultExpanded = false,
+        summarySelector = null,
+        countSelector = null,
+        countLabel = 'éléments'
+    } = options;
+
+    let headerNode = null;
+    let titleNode = null;
+    let subtitleText = '';
+    let nodesToMove = [];
+
+    if (mode === 'section-header') {
+        headerNode = section.querySelector(':scope > .section-header');
+        titleNode = headerNode?.querySelector('h2');
+        nodesToMove = Array.from(section.children).filter(child => child !== headerNode);
+    } else if (mode === 'simple-heading') {
+        titleNode = section.querySelector(':scope > h2');
+        if (!titleNode) return;
+        const firstSummary = summarySelector ? section.querySelector(summarySelector) : null;
+        subtitleText = firstSummary ? firstSummary.textContent.trim() : '';
+        nodesToMove = Array.from(section.children).filter(child => child !== titleNode);
+    } else if (mode === 'powertoys') {
+        headerNode = section.querySelector(':scope > div[style*="display:flex"]');
+        titleNode = headerNode?.querySelector('h2');
+        nodesToMove = Array.from(section.children).filter(child => child !== headerNode);
+    }
+
+    if ((!headerNode && !titleNode) || !nodesToMove.length) return;
+
+    const body = document.createElement('div');
+    body.className = 'collapsible-body';
+
+    const bodyInner = document.createElement('div');
+    bodyInner.className = 'collapsible-body-inner';
+    nodesToMove.forEach(node => bodyInner.appendChild(node));
+    body.appendChild(bodyInner);
+
+    const toggle = document.createElement('button');
+    toggle.type = 'button';
+    toggle.className = 'collapsible-toggle';
+
+    const main = document.createElement('div');
+    main.className = 'collapsible-toggle-main';
+
+    if (mode === 'section-header' || mode === 'powertoys') {
+        main.appendChild(headerNode);
+        const count = countSelector ? section.querySelectorAll(countSelector).length : 0;
+        if (count) {
+            const host = headerNode.querySelector('h2')?.parentElement || headerNode;
+            host.appendChild(createCollapsibleMeta(count, countLabel));
+        }
+    } else {
+        const count = countSelector ? section.querySelectorAll(countSelector).length : 0;
+        main.appendChild(buildHeadingBlock(titleNode, subtitleText, count, countLabel));
+        titleNode.remove();
+    }
+
+    const indicator = document.createElement('span');
+    indicator.className = 'collapsible-indicator';
+    indicator.setAttribute('aria-hidden', 'true');
+    toggle.append(main, indicator);
+
+    const bodyId = `${section.id || `collapse-${Math.random().toString(36).slice(2, 9)}`}-body`;
+    body.id = bodyId;
+    toggle.setAttribute('aria-controls', bodyId);
+
+    section.classList.add('collapsible-section');
+    section.prepend(toggle);
+    section.appendChild(body);
+    section.dataset.collapsibleReady = 'true';
+
+    const setExpanded = (expanded, { scroll = false } = {}) => {
+        section.classList.toggle('is-open', expanded);
+        toggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+
+        if (scroll && expanded) {
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            const top = section.getBoundingClientRect().top + window.scrollY - 84;
+            window.scrollTo({ top, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+        }
+
+        window.dispatchEvent(new Event('resize'));
+    };
+
+    toggle.addEventListener('click', () => {
+        const willExpand = !section.classList.contains('is-open');
+        setExpanded(willExpand, { scroll: willExpand });
+    });
+
+    section._setExpanded = setExpanded;
+    setExpanded(defaultExpanded);
+}
+
+function setupCollapsibles() {
+    const groups = [
+        ['#essentiels', { mode: 'section-header', countSelector: '.card', countLabel: 'astuces', defaultExpanded: true }],
+        ['#m365', { mode: 'section-header', countSelector: '.card', countLabel: 'outils' }],
+        ['#antidote-section', { mode: 'section-header', countSelector: '.inner-tile', countLabel: 'fonctions' }],
+        ['#moodle', { mode: 'section-header', countSelector: '.card', countLabel: 'repères' }],
+        ['#focus', { mode: 'section-header', countSelector: '.card', countLabel: 'astuces' }],
+        ['#securite', { mode: 'section-header', countSelector: '.card', countLabel: 'réflexes' }],
+        ['#logiciels', { mode: 'section-header', countSelector: '.card', countLabel: 'ressources' }],
+        ['#digitale-section', { mode: 'section-header', countSelector: '.digitale-tile', countLabel: 'outils' }],
+        ['#avance', { mode: 'section-header', countSelector: '.card', countLabel: 'leviers' }],
+        ['#powertoys-section', { mode: 'section-header', countSelector: '.powertoys-tile', countLabel: 'modules' }],
+        ['#shortcuts-section', { mode: 'simple-heading', summarySelector: ':scope > p', countSelector: '.tip-item', countLabel: 'raccourcis' }],
+        ['#quicklinks', { mode: 'simple-heading', summarySelector: ':scope > p', countSelector: '.link-chip', countLabel: 'liens' }],
+        ['#journee-section', { mode: 'simple-heading', countSelector: '.workflow-step', countLabel: 'étapes' }]
+    ];
+
+    groups.forEach(([selector, options]) => {
+        document.querySelectorAll(selector).forEach(section => makeCollapsible(section, options));
+    });
+
+    const collapsibles = Array.from(document.querySelectorAll('.collapsible-section'));
+    if (!collapsibles.length) return;
+
+    const toc = document.getElementById('toc');
+    if (toc && !toc.querySelector('.toc-toolbar')) {
+        const toolbar = document.createElement('div');
+        toolbar.className = 'toc-toolbar';
+        toolbar.innerHTML = `
+            <p>Sections compactes: ouvre seulement ce dont tu as besoin.</p>
+            <div class="toc-actions">
+                <button type="button" class="toc-action-btn" data-expand-all>Tout ouvrir</button>
+                <button type="button" class="toc-action-btn" data-collapse-all>Tout fermer</button>
+            </div>
+        `;
+        const grid = toc.querySelector('.toc-grid');
+        grid?.before(toolbar);
+
+        toolbar.querySelector('[data-expand-all]')?.addEventListener('click', () => {
+            collapsibles.forEach(section => section._setExpanded?.(true));
+        });
+
+        toolbar.querySelector('[data-collapse-all]')?.addEventListener('click', () => {
+            collapsibles.forEach(section => section._setExpanded?.(false));
+            document.getElementById('essentiels')?._setExpanded?.(true);
+        });
+    }
+
+    const openTargetSection = (target, { scroll = true } = {}) => {
+        if (!target) return;
+        const host = target.classList.contains('collapsible-section') ? target : target.closest('.collapsible-section');
+        host?._setExpanded?.(true, { scroll });
+    };
+
+    document.querySelectorAll('.toc-item[href^="#"]').forEach(link => {
+        link.addEventListener('click', event => {
+            const hash = link.getAttribute('href');
+            const target = document.querySelector(hash);
+            if (!target) return;
+            event.preventDefault();
+            history.pushState(null, '', hash);
+            openTargetSection(target, { scroll: true });
+        });
+    });
+
+    if (window.location.hash) {
+        const target = document.querySelector(window.location.hash);
+        if (target) openTargetSection(target, { scroll: false });
+    }
+
+    window.addEventListener('hashchange', () => {
+        const target = document.querySelector(window.location.hash);
+        if (target) openTargetSection(target, { scroll: false });
+    });
+}
+
 document.addEventListener('DOMContentLoaded',()=>{
+    setupReadingProgress();
+    setupRevealAnimations();
+    setupActiveStoryLinks();
+    setupParallax();
+    setupPointerGlow();
+    setupCollapsibles();
+
     document.querySelectorAll('.tip-shortcut,.shortcut-tag').forEach(el=>{
         const raw=el.textContent.trim();
         let keys=KBD_SHORTCUTS[raw];
@@ -1941,7 +3175,7 @@ function filterDiff(level) {
         document.querySelectorAll('.card[data-diff]').forEach(c => c.classList.remove('hidden-filter'));
         document.querySelectorAll('.section-block').forEach(s => s.classList.remove('all-hidden'));
         // Show all special blocks
-        document.querySelectorAll('.highlight-block, .digitale-block, .powertoys-block, .workflow, .tips-section, .links-block, .feedback-section').forEach(b => b.classList.remove('hidden-filter'));
+        document.querySelectorAll('.highlight-block, .antidote-block, .digitale-block, .powertoys-block, .workflow, .tips-section, .links-block, .feedback-section').forEach(b => b.classList.remove('hidden-filter'));
         return;
     }
 
